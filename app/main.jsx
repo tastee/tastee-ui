@@ -1,6 +1,7 @@
 import '../assets/less/main.less';
-import Hello from './components/Hello.jsx';
+
+import Home from './layout/Home.jsx';
 import ReactDOM from'react-dom';
 import React from 'react';
 
-ReactDOM.render(<Hello />, document.getElementById('content'));
+ReactDOM.render(<Home />, document.getElementById('content'));
