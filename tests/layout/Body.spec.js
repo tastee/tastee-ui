@@ -18,5 +18,14 @@ describe('Body', function () {
         expect(body.state.browserSelected).toBe('');
         expect(TestUtils.scryRenderedDOMComponentsWithTag(body, 'form').length).toBe(1);
     });
+    
+    it('set tasty code in state if user change code', function () {
+        const body = TestUtils.renderIntoDocument(<Body/>);
+        var expectCode = 'go to "tata"';
+        var textarea = TestUtils.findRenderedDOMComponentWithTag(body, 'textarea');
+        TestUtils.Simulate.change(textarea, { target: { value: txt } });
+        expect(body.state.tastyCode).toBe(expectCode);
 
+    });
+    
 });
