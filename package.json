@@ -43,7 +43,8 @@
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0",
-    "react-select": "^1.0.0-beta13"
+    "react-select": "^1.0.0-beta13",
+    "tasty-core": "file:///Users/luya/Workspace/tasty/tasty-core"
   },
   "devDependencies": {
     "babel": "^6.5.2",

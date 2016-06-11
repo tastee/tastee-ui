@@ -443,7 +443,7 @@
 
 	var _Body2 = _interopRequireDefault(_Body);
 
-	var _Footer = __webpack_require__(235);
+	var _Footer = __webpack_require__(236);
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
@@ -5162,6 +5162,10 @@
 
 	var _Select2 = _interopRequireDefault(_Select);
 
+	var _tastyCore = __webpack_require__(235);
+
+	var _tastyCore2 = _interopRequireDefault(_tastyCore);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5179,9 +5183,11 @@
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Body).call(this, props));
 
 	        _this.state = {
-	            browserSelected: ''
+	            browserSelected: '',
+	            tastyCode: 'go to "www.google.fr"'
 	        };
 	        _this.options = [{ value: 'chrome', label: 'Chrome' }, { value: 'firefox', label: 'Firefox' }];
+	        _tastyCore2.default.loadAnalyser('/tmp/common-instructions.conf.tty');
 	        return _this;
 	    }
 
@@ -5193,19 +5199,26 @@
 	            });
 	        }
 	    }, {
+	        key: 'scriptChange',
+	        value: function scriptChange(newValue) {
+	            this.setState({
+	                tastyCode: newValue.target.value
+	            });
+	        }
+	    }, {
 	        key: 'startDriver',
 	        value: function startDriver() {
-	            console.log('alert');
+	            _tastyCore2.default.init(this.state.browserSelected.value);
 	        }
 	    }, {
 	        key: 'execute',
 	        value: function execute() {
-	            console.log('alert');
+	            _tastyCore2.default.execute(this.state.tastyCode);
 	        }
 	    }, {
 	        key: 'stop',
 	        value: function stop() {
-	            console.log('alert');
+	            _tastyCore2.default.stop();
 	        }
 	    }, {
 	        key: 'render',
@@ -5226,7 +5239,7 @@
 	                        null,
 	                        '1 - Insert your script: '
 	                    ),
-	                    _react2.default.createElement(_FormControl2.default, { componentClass: 'textarea', placeholder: 'go to wwww.google.fr' })
+	                    _react2.default.createElement(_FormControl2.default, { componentClass: 'textarea', placeholder: 'go to wwww.google.fr', value: this.state.tastyCode, onChange: this.scriptChange.bind(this) })
 	                ),
 	                _react2.default.createElement(
 	                    _FormGroup2.default,
@@ -5254,8 +5267,8 @@
 	                    _react2.default.createElement(
 	                        _ButtonToolbar2.default,
 	                        null,
-	                        _react2.default.createElement(_ButtonAction2.default, { onClick: this.startDriver, glyph: 'play' }),
-	                        _react2.default.createElement(_ButtonAction2.default, { onClick: this.execute, glyph: 'flash' }),
+	                        _react2.default.createElement(_ButtonAction2.default, { onClick: this.startDriver.bind(this), glyph: 'play' }),
+	                        _react2.default.createElement(_ButtonAction2.default, { onClick: this.execute.bind(this), glyph: 'flash' }),
 	                        _react2.default.createElement(_ButtonAction2.default, { onClick: this.stop, glyph: 'stop' })
 	                    )
 	                )
@@ -24702,6 +24715,12 @@
 
 /***/ },
 /* 235 */
+/***/ function(module, exports) {
+
+	module.exports = Tasty;
+
+/***/ },
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

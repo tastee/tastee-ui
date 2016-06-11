@@ -18,9 +18,12 @@ module.exports = {
                 }
             },
             { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
-            //{ test: /\.svg$/, loader: 'file-loader', path: './assets/build/' },
             { test: /\.svg$/, loader: 'url-loader?limit=8192' }
         ]
+    },
+    externals: {
+        'tasty-core/app/tasty-core': 'Tasty',
+        'node_modules':'node_modules'
     },
     plugins: []
 }
