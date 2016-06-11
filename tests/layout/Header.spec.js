@@ -11,7 +11,7 @@ describe('Header', function () {
         const header = TestUtils.renderIntoDocument(<Header/>);
         const headerNode = ReactDOM.findDOMNode(header);
 
-        expect(headerNode.textContent).toEqual('Tasty Ui');
+        expect(headerNode.textContent).toEqual('Tasty  Ui');
 
     });
 });

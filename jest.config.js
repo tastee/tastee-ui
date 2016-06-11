@@ -1,4 +1,5 @@
 module.exports = {
+    collectCoverage: true,
     scriptPreprocessor: "node_modules/babel-jest",
     unmockedModulePathPatterns: [
         "node_modules/react",
@@ -13,6 +14,7 @@ module.exports = {
     ],
     moduleFileExtensions: [
         "js",
+        "jsx",
         "json",
         "react"
     ]

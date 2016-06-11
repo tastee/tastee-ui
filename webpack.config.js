@@ -14,11 +14,13 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel',
                 query: {
-                    presets: ['es2015','react']
+                    presets: ['es2015', 'react']
                 }
             },
-            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' }
+            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+            //{ test: /\.svg$/, loader: 'file-loader', path: './assets/build/' },
+            { test: /\.svg$/, loader: 'url-loader?limit=8192' }
         ]
     },
-    plugins:[]
+    plugins: []
 }
