@@ -23,7 +23,7 @@ describe('Body', function () {
         const body = TestUtils.renderIntoDocument(<Body/>);
         var expectCode = 'go to "tata"';
         var textarea = TestUtils.findRenderedDOMComponentWithTag(body, 'textarea');
-        TestUtils.Simulate.change(textarea, { target: { value: txt } });
+        TestUtils.Simulate.change(textarea, { target: { value: expectCode } });
         expect(body.state.tastyCode).toBe(expectCode);
 
     });
