@@ -19,7 +19,6 @@ export default class Body extends React.Component {
             { value: 'chrome', label: 'Chrome' },
             { value: 'firefox', label: 'Firefox' }
         ];
-        Tasty.loadAnalyser('/tmp/common-instructions.conf.tty')
     }
     browserChange(newValue) {
         this.setState({
@@ -28,10 +27,11 @@ export default class Body extends React.Component {
     }
     scriptChange(newValue) {
         this.setState({
-            tastyCode:  newValue.target.value
+            tastyCode: newValue.target.value
         });
     }
-    startDriver() {
+    startDriver() {       
+        Tasty.loadAnalyser('/tmp/common-instructions.conf.tty')
         Tasty.init(this.state.browserSelected.value);
     }
     execute() {

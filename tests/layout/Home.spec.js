@@ -1,3 +1,4 @@
+jest.unmock('tasty-core/app/tasty-core');
 jest.unmock('../../app/layout/Home.jsx');
 
 import React from 'react';

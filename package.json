@@ -44,7 +44,7 @@
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0",
     "react-select": "^1.0.0-beta13",
-    "tasty-core": "file:///Users/luya/Workspace/tasty/tasty-core"
+    "tasty-core": "git+https://github.com/stalina/tasty-core.git"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -63,6 +63,7 @@
     "jest-cli": "^12.1.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "mock-require": "^1.3.0",
     "react-addons-test-utils": "^15.1.0",
     "style-loader": "^0.13.1",
     "svg-loader": "0.0.2",
