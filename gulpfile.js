@@ -1,14 +1,13 @@
 'use strict';
 
-var gulp = require('gulp');
-var electron = require('electron-connect').server.create();
-var webpack = require("webpack");
-var gutil = require("gulp-util");
-
-var webpackConfig = require("./webpack.config.js");
-var jest = require('jest-cli');
-
-var jestConfig = require('./jest.config.js')
+const gulp = require('gulp');
+const electron = require('electron-connect').server.create();
+const webpack = require("webpack");
+const gutil = require("gulp-util");
+const webpackConfig = require("./webpack.config.js");
+const jest = require('jest-cli');
+const jestConfig = require('./jest.config.js')
+const codacy = require('gulp-codacy');
 
 gulp.task("webpack", function (callback) {
   var myConfig = Object.create(webpackConfig);
@@ -37,4 +36,13 @@ gulp.task('watch', function () {
   electron.start();
 });
 
+gulp.task('codacy', function sendToCodacy() {
+  return gulp
+    .src(['coverage/lcov.info'])
+    .pipe(codacy({
+      token: '3b1715aad08a4c4b95b3643b1652447f'
+    }));
+});
+
 gulp.task('serv', ['webpack', 'watch']);
+gulp.task('default', ['webpack','test','codacy']);

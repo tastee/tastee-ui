@@ -40,6 +40,7 @@
   "homepage": "https://github.com/stalina/tasty-ui#readme",
   "dependencies": {
     "electron-prebuilt": "^1.2.1",
+    "gulp-codacy": "^1.0.0",
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0",
