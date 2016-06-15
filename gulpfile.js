@@ -40,7 +40,7 @@ gulp.task('codacy', function sendToCodacy() {
   return gulp
     .src(['coverage/lcov.info'])
     .pipe(codacy({
-      token: '55d5d98c8df74a2dae69815fa7b5b8d1'
+      token: '8dd6eaedee324541939eb35e1a68db4a'
     }));
 });
 
