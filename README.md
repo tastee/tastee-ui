@@ -1,4 +1,5 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9426409c0d4641b4a3b89cc1a1926e7d)](https://www.codacy.com/app/antoine-stalin/tasty-ui?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stalina/tasty-ui&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8b089b0b8aba40c49bbd4e64b1f046bd)](https://www.codacy.com/app/antoine-stalin/tasty-ui?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tasty-it/tasty-ui&amp;utm_campaign=Badge_Grade)
+
 [![Build Status](https://travis-ci.org/stalina/tasty-ui.svg?branch=master)](https://travis-ci.org/stalina/tasty-ui)
 
 # tasty-ui
