@@ -4,6 +4,6 @@ import Image from 'react-bootstrap/lib/Image';
 
 export default class Header extends React.Component {
     render() {
-        return <PageHeader>Tasty <Image id="imgTasty" src="assets/images/tasty.png" /> Ui</PageHeader>
+        return <PageHeader>Tastee <Image id="imgTastee" src="assets/images/tastee.png" /> Ui</PageHeader>
     }
 }

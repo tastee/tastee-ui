@@ -1,7 +1,7 @@
 module.exports = {
     collectCoverage: true,
     scriptPreprocessor: "node_modules/babel-jest",
-    preprocessorIgnorePatterns: ["node_modules","tasty-core/app/tasty-core"],
+    preprocessorIgnorePatterns: ["node_modules","tastee-core/app/tastee-core"],
     unmockedModulePathPatterns: [
         "node_modules/react",
         "node_modules/react-dom",

@@ -5,7 +5,7 @@ import FormControl  from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import Select  from 'react-select/lib/Select';
-import Tasty from 'tasty-core/app/tasty-core';
+import Tastee from 'tastee-core/app/tastee-core';
 
 export default class Body extends React.Component {
 
@@ -13,7 +13,7 @@ export default class Body extends React.Component {
         super(props);
         this.state = {
             browserSelected: '',
-            tastyCode: 'go to "www.google.fr"'
+            tasteeCode: 'go to "www.google.fr"'
         };
         this.options = [
             { value: 'chrome', label: 'Chrome' },
@@ -27,26 +27,26 @@ export default class Body extends React.Component {
     }
     scriptChange(newValue) {
         this.setState({
-            tastyCode: newValue.target.value
+            tasteeCode: newValue.target.value
         });
     }
     startDriver() {       
-        Tasty.loadAnalyser('/tmp/common-instructions.conf.tty')
-        Tasty.init(this.state.browserSelected.value);
+        Tastee.loadAnalyser('/tmp/common-instructions.conf.tee')
+        Tastee.init(this.state.browserSelected.value);
     }
     execute() {
-        Tasty.execute(this.state.tastyCode);
+        Tastee.execute(this.state.tasteeCode);
     }
     stop() {
-        Tasty.stop();
+        Tastee.stop();
     }
     render() {
         return (
             <form>
-                <p class="lead">This interface allow to test your tasty script in live !</p>
+                <p class="lead">This interface allow to test your tastee script in live !</p>
                 <FormGroup>
                     <ControlLabel>1 - Insert your script: </ControlLabel>
-                    <FormControl componentClass="textarea" placeholder="go to wwww.google.fr" value={this.state.tastyCode} onChange={this.scriptChange.bind(this) } />
+                    <FormControl componentClass="textarea" placeholder="go to wwww.google.fr" value={this.state.tasteeCode} onChange={this.scriptChange.bind(this) } />
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>2 - Choose your browser: </ControlLabel>

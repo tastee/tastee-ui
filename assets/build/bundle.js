@@ -106,7 +106,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  background-color: white;\n}\ndiv.myDiv {\n  color: #f00;\n}\nfooter {\n  position: absolute;\n  bottom: 0;\n  height: 60px;\n}\n#imgTasty {\n  height: 50px;\n}\n", ""]);
+	exports.push([module.id, "body {\n  background-color: white;\n}\ndiv.myDiv {\n  color: #f00;\n}\nfooter {\n  position: absolute;\n  bottom: 0;\n  height: 60px;\n}\n#imgTastee {\n  height: 50px;\n}\n", ""]);
 
 	// exports
 
@@ -593,10 +593,30 @@
 
 	var process = module.exports = {};
 
-	// cached from whatever global is present so that test runners that stub it don't break things.
-	var cachedSetTimeout = setTimeout;
-	var cachedClearTimeout = clearTimeout;
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
 
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
+	    }
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
+	    }
+	  }
+	} ())
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -4683,8 +4703,8 @@
 	            return _react2.default.createElement(
 	                _PageHeader2.default,
 	                null,
-	                'Tasty ',
-	                _react2.default.createElement(_Image2.default, { id: 'imgTasty', src: 'assets/images/tasty.png' }),
+	                'Tastee ',
+	                _react2.default.createElement(_Image2.default, { id: 'imgTastee', src: 'assets/images/tastee.png' }),
 	                ' Ui'
 	            );
 	        }
@@ -5167,9 +5187,9 @@
 
 	var _Select2 = _interopRequireDefault(_Select);
 
-	var _tastyCore = __webpack_require__(235);
+	var _tasteeCore = __webpack_require__(235);
 
-	var _tastyCore2 = _interopRequireDefault(_tastyCore);
+	var _tasteeCore2 = _interopRequireDefault(_tasteeCore);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5189,7 +5209,7 @@
 
 	        _this.state = {
 	            browserSelected: '',
-	            tastyCode: 'go to "www.google.fr"'
+	            tasteeCode: 'go to "www.google.fr"'
 	        };
 	        _this.options = [{ value: 'chrome', label: 'Chrome' }, { value: 'firefox', label: 'Firefox' }];
 	        return _this;
@@ -5206,24 +5226,24 @@
 	        key: 'scriptChange',
 	        value: function scriptChange(newValue) {
 	            this.setState({
-	                tastyCode: newValue.target.value
+	                tasteeCode: newValue.target.value
 	            });
 	        }
 	    }, {
 	        key: 'startDriver',
 	        value: function startDriver() {
-	            _tastyCore2.default.loadAnalyser('/tmp/common-instructions.conf.tty');
-	            _tastyCore2.default.init(this.state.browserSelected.value);
+	            _tasteeCore2.default.loadAnalyser('/tmp/common-instructions.conf.tee');
+	            _tasteeCore2.default.init(this.state.browserSelected.value);
 	        }
 	    }, {
 	        key: 'execute',
 	        value: function execute() {
-	            _tastyCore2.default.execute(this.state.tastyCode);
+	            _tasteeCore2.default.execute(this.state.tasteeCode);
 	        }
 	    }, {
 	        key: 'stop',
 	        value: function stop() {
-	            _tastyCore2.default.stop();
+	            _tasteeCore2.default.stop();
 	        }
 	    }, {
 	        key: 'render',
@@ -5234,7 +5254,7 @@
 	                _react2.default.createElement(
 	                    'p',
 	                    { 'class': 'lead' },
-	                    'This interface allow to test your tasty script in live !'
+	                    'This interface allow to test your tastee script in live !'
 	                ),
 	                _react2.default.createElement(
 	                    _FormGroup2.default,
@@ -5244,7 +5264,7 @@
 	                        null,
 	                        '1 - Insert your script: '
 	                    ),
-	                    _react2.default.createElement(_FormControl2.default, { componentClass: 'textarea', placeholder: 'go to wwww.google.fr', value: this.state.tastyCode, onChange: this.scriptChange.bind(this) })
+	                    _react2.default.createElement(_FormControl2.default, { componentClass: 'textarea', placeholder: 'go to wwww.google.fr', value: this.state.tasteeCode, onChange: this.scriptChange.bind(this) })
 	                ),
 	                _react2.default.createElement(
 	                    _FormGroup2.default,
@@ -24722,7 +24742,7 @@
 /* 235 */
 /***/ function(module, exports) {
 
-	module.exports = Tasty;
+	module.exports = Tastee;
 
 /***/ },
 /* 236 */

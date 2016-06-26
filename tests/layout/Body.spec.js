@@ -1,4 +1,4 @@
-jest.unmock('tasty-core/app/tasty-core');
+jest.unmock('tastee-core/app/tastee-core');
 jest.unmock('../../app/layout/Body.jsx');
 
 import React from 'react';
@@ -14,17 +14,17 @@ describe('Body', function () {
 
         const bodyNode = ReactDOM.findDOMNode(body);
 
-        expect(body.state.tastyCode).toBe('go to "www.google.fr"');
+        expect(body.state.tasteeCode).toBe('go to "www.google.fr"');
         expect(body.state.browserSelected).toBe('');
         expect(TestUtils.scryRenderedDOMComponentsWithTag(body, 'form').length).toBe(1);
     });
     
-    it('set tasty code in state if user change code', function () {
+    it('set tastee code in state if user change code', function () {
         const body = TestUtils.renderIntoDocument(<Body/>);
         var expectCode = 'go to "tata"';
         var textarea = TestUtils.findRenderedDOMComponentWithTag(body, 'textarea');
         TestUtils.Simulate.change(textarea, { target: { value: expectCode } });
-        expect(body.state.tastyCode).toBe(expectCode);
+        expect(body.state.tasteeCode).toBe(expectCode);
 
     });
     

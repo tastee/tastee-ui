@@ -1,7 +1,7 @@
 {
-  "name": "tasty-ui",
+  "name": "tastee-ui",
   "version": "1.0.0",
-  "description": "Ui for Tasty It ",
+  "description": "Toast your Application with Simple Tests End to End - Ui for Tastee ",
   "main": "main.js",
   "scripts": {
     "start": "./node_modules/electron-prebuilt/dist/Electron.app/Contents/MacOS/Electron .",
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stalina/tasty-ui.git"
+    "url": "git+https://github.com/tastee/tastee-ui.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stalina/tasty-ui/issues"
+    "url": "https://github.com/tastee/tastee-ui/issues"
   },
   "jest": {
     "scriptPreprocessor": "node_modules/babel-jest",
@@ -37,15 +37,14 @@
       "react"
     ]
   },
-  "homepage": "https://github.com/stalina/tasty-ui#readme",
+  "homepage": "https://github.com/tastee/tastee-ui#readme",
   "dependencies": {
     "electron-prebuilt": "^1.2.1",
-    "gulp-codacy": "^1.0.0",
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0",
     "react-select": "^1.0.0-beta13",
-    "tasty-core": "git+https://github.com/stalina/tasty-core.git"
+    "tastee-core": "git+https://github.com/tastee/tastee-core.git"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -60,6 +59,7 @@
     "fbjs": "^0.8.3",
     "file-loader": "^0.8.5",
     "gulp": "^3.9.1",
+    "gulp-codacy": "^1.0.0",
     "jest": "^12.1.1",
     "jest-cli": "^12.1.1",
     "less": "^2.7.1",

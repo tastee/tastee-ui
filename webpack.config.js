@@ -22,7 +22,7 @@ module.exports = {
         ]
     },
     externals: {
-        'tasty-core/app/tasty-core': 'Tasty',
+        'tastee-core/app/tastee-core': 'Tastee',
         'node_modules':'node_modules'
     },
     plugins: []
