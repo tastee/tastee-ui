@@ -1,25 +1,12 @@
 <div class="window">
+  <app-header></app-header>
   <div class="window-content">
-    <nav class="nav-group">
-
-      <h5 class="nav-group-title">Favoritesss</h5>
-
-      <a class="nav-group-item active" routerLink="/home" routerLinkActive="active">
-        <span class="icon icon-home"></span>
-        home
-      </a>
-
-      <a class="nav-group-item" routerLink="/chat" routerLinkActive="active">
-        <span class="icon icon-chat"></span>
-        chat
-      </a>
-
-      <a class="nav-group-item" routerLink="/news" routerLinkActive="active">
-        <span class="icon icon-rss"></span>
-        news
-      </a>
-
-    </nav>
+    <div class="pane-sm sidebar">
+      <app-menu></app-menu>
+    </div>
+    <div class="pane-sm">
+      <app-file></app-file>
+    </div>
     <div class="pane">
 
       <router-outlet></router-outlet>
@@ -27,5 +14,8 @@
     </div>
 
   </div>
+  <footer class="toolbar toolbar-footer">
+ 
+  </footer>
 </div>
 

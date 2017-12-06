@@ -12,11 +12,17 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ElectronService } from './providers/electron.service';
+import {HeaderComponent} from './components/header/header.component';
+import {MenuComponent} from './components/menu/menu.component';
+import {FileComponent} from './components/file/file.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    MenuComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,
