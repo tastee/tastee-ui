@@ -27,35 +27,35 @@ const postcssPlugins = function () {
   // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193
   const importantCommentRe = /@preserve|@license|[@#]\s*source(?:Mapping)?URL|^!/i;
   const minimizeOptions = {
-      autoprefixer: false,
-      safe: true,
-      mergeLonghand: false,
-      discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
+    autoprefixer: false,
+    safe: true,
+    mergeLonghand: false,
+    discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
   };
   return [
-      postcssUrl({
-          url: (obj) => {
-            if (!obj.url.startsWith('/') || obj.url.startsWith('//')) {
-              return obj.url;
-            }
-            if (deployUrl.match(/:\/\//)) {
-              // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
-              return `${deployUrl.replace(/\/$/, '')}${obj.url}`;
-            }
-            else if (baseHref.match(/:\/\//)) {
-              // If baseHref contains a scheme, include it as is.
-              return baseHref.replace(/\/$/, '') +
-                `/${deployUrl}/${obj.url}`.replace(/\/\/+/g, '/');
-            }
-            else {
-              // Join together base-href, deploy-url and the original URL.
-              // Also dedupe multiple slashes into single ones.
-              return `/${baseHref}/${deployUrl}/${obj.url}`.replace(/\/\/+/g, '/');
-            }
-          }
-      }),
-      autoprefixer(),
-      customProperties({ preserve: true })
+    postcssUrl({
+      url: (obj) => {
+        if (!obj.url.startsWith('/') || obj.url.startsWith('//')) {
+          return obj.url;
+        }
+        if (deployUrl.match(/:\/\//)) {
+          // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
+          return `${deployUrl.replace(/\/$/, '')}${obj.url}`;
+        }
+        else if (baseHref.match(/:\/\//)) {
+          // If baseHref contains a scheme, include it as is.
+          return baseHref.replace(/\/$/, '') +
+            `/${deployUrl}/${obj.url}`.replace(/\/\/+/g, '/');
+        }
+        else {
+          // Join together base-href, deploy-url and the original URL.
+          // Also dedupe multiple slashes into single ones.
+          return `/${baseHref}/${deployUrl}/${obj.url}`.replace(/\/\/+/g, '/');
+        }
+      }
+    }),
+    autoprefixer(),
+    customProperties({ preserve: true })
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
 
@@ -116,11 +116,11 @@ function getPlugins() {
       }
     }
   ], {
-    "ignore": [
-      ".gitkeep"
-    ],
-    "debug": "warning"
-  }));
+      "ignore": [
+        ".gitkeep"
+      ],
+      "debug": "warning"
+    }));
 
   plugins.push(new ProgressPlugin());
 
@@ -174,11 +174,11 @@ function getPlugins() {
       "vendor"
     ],
     "minChunks": (module) => {
-              return module.resource
-                  && (module.resource.startsWith(nodeModules)
-                      || module.resource.startsWith(genDirNodeModules)
-                      || module.resource.startsWith(realNodeModules));
-          },
+      return module.resource
+        && (module.resource.startsWith(nodeModules)
+          || module.resource.startsWith(genDirNodeModules)
+          || module.resource.startsWith(realNodeModules));
+    },
     "chunks": [
       "main"
     ]
@@ -260,7 +260,8 @@ module.exports = {
     "string_decoder": "require('string_decoder')",
     "url": "require('url')",
     "util": "require('util')",
-    "zlib": "require('zlib')"
+    "zlib": "require('zlib')",
+    "selenium-webdriver": "require('selenium-webdriver')"
   },
   "resolve": {
     "extensions": [
@@ -468,7 +469,7 @@ module.exports = {
         ]
       },
       {
-        "include":style_paths,
+        "include": style_paths,
         "test": /\.less$/,
         "use": [
           "style-loader",
