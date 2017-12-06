@@ -1,6 +1,6 @@
 <div class="window">
   <app-header></app-header>
-  <div class="window-content">
+  <div class="window-content" *ngIf="workspace">
     <div class="pane-sm sidebar">
       <app-menu></app-menu>
     </div>
@@ -15,7 +15,6 @@
 
   </div>
   <footer class="toolbar toolbar-footer">
- 
+
   </footer>
 </div>
-

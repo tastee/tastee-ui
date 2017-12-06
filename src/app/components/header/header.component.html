@@ -3,30 +3,24 @@
 
   <div class="toolbar-actions">
     <div class="btn-group">
-      <button class="btn btn-default">
+      <button class="btn btn-default" [disabled]="workspaceIsSelected">
         <span class="icon icon-home"></span>
       </button>
-      <button class="btn btn-default">
+      <button class="btn btn-default" (click)="fileBtn.click()">
         <span class="icon icon-folder"></span>
-      </button>
-      <button class="btn btn-default active">
-        <span class="icon icon-cloud"></span>
-      </button>
-      <button class="btn btn-default">
-        <span class="icon icon-popup"></span>
-      </button>
-      <button class="btn btn-default">
-        <span class="icon icon-shuffle"></span>
+        <input #fileBtn id="fileBtn" type="file" webkitdirectory directory (change)="openWorkspace($event.target.files)">
       </button>
     </div>
 
-    <button class="btn btn-default" (click)="runTastee()">
-      <span class="icon icon-play icon-text"></span>
-      Run Tastee
-    </button>
 
-    <button class="btn btn-default btn-dropdown pull-right">
-      <span class="icon icon-megaphone"></span>
-    </button>
+    <div class="btn-group  pull-right">
+      <button class="btn btn-default" (click)="runTastee()" [disabled]="workspaceIsSelected">
+        <span class="icon icon-play"></span>
+      </button>
+      <button class="btn btn-default" (click)="stopTastee()" [disabled]="workspaceIsSelected">
+        <span class="icon icon-stop"></span>
+      </button>
+    </div>
+
   </div>
 </header>

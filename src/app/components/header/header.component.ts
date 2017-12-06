@@ -1,13 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { TasteeService } from '../../services/tastee.service';
+import { WorkspaceService } from 'app/services/workspace.service';
+import { Workspace } from 'app/models/workspace';
+import { Subscription } from 'rxjs/Subscription';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
   providers: [TasteeService]
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private tasteeService: TasteeService) { }
+  private subscription: Subscription;
+  public workspaceIsSelected: boolean = false;
+  constructor(private tasteeService: TasteeService, private workspaceService: WorkspaceService) {
+    this.workspaceIsSelected = this.workspaceService.getWorkspace() == null;
+    this.subscription = this.workspaceService.workspaceChange().subscribe(workspace => this.workspaceIsSelected = workspace === null);
+  }
 
   ngOnInit() {
   }
@@ -16,4 +26,15 @@ export class HeaderComponent implements OnInit {
     this.tasteeService.runTastee();
   }
 
+  stopTastee() {
+    this.tasteeService.stopTastee();
+  }
+
+  openWorkspace(files: FileList) {
+    this.workspaceService.new(files[0].path)
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

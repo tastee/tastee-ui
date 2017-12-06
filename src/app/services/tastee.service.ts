@@ -13,10 +13,14 @@ export class TasteeService {
   }
 
   runTastee() {
-    this.core.init(new TasteeEngine("chrome"))    
-    this.core.execute(" driver.get('https://www.google.fr')","toto").then(function (instructions) {
+    this.core.init(new TasteeEngine("chrome"))
+    this.core.execute(" driver.get('https://www.google.fr')", "toto").then(function (instructions) {
       this.core.stop();
     });;
+  }
+
+  stopTastee() {
+    this.core.stop();
   }
 
 }

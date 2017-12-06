@@ -12,9 +12,10 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ElectronService } from './providers/electron.service';
-import {HeaderComponent} from './components/header/header.component';
-import {MenuComponent} from './components/menu/menu.component';
-import {FileComponent} from './components/file/file.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { FileComponent } from './components/file/file.component';
+import { WorkspaceService } from 'app/services/workspace.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import {FileComponent} from './components/file/file.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ElectronService],
+  providers: [ElectronService, WorkspaceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
