@@ -1,16 +1,26 @@
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FileComponent } from 'app/components/file/file.component';
+import { WelcomeComponent } from 'app/components/welcome/welcome.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
-    }
+        component: WelcomeComponent
+    },
+    {
+        path: 'home',
+        component: WelcomeComponent
+    },
+    {
+        path: 'files',
+        component: FileComponent
+    },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {useHash: true})],
+    imports: [RouterModule.forRoot(routes, { useHash: true })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

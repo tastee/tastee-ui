@@ -1,17 +1,7 @@
 <div class="tab-group">
-  <div class="tab-item">
-    <span class="icon icon-cancel icon-close-tab"></span>
-    Tab
-  </div>
-  <div class="tab-item active">
-    <span class="icon icon-cancel icon-close-tab"></span>
-    Tab active
-  </div>
-  <div class="tab-item">
-    <span class="icon icon-cancel icon-close-tab"></span>
-    Tab
-  </div>
-  <div class="tab-item tab-item-fixed">
-    <span class="icon icon-plus"></span>
+  <div class="tab-item" *ngFor="let file of files;let i = index" (click)="selectFile(i)">
+    <span class="icon icon-cancel icon-close-tab" (click)="removeFile(i)"></span>
+    {{file}}
   </div>
 </div>
+<app-content-file></app-content-file>

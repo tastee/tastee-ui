@@ -1,0 +1,6 @@
+<div *ngIf="fileName">
+  <div class="form-group">
+    <label>{{fileName}}</label>
+    <textarea class="form-control" rows="3" (focusout)="saveData()" [(ngModel)]='data'></textarea>
+  </div>
+</div>

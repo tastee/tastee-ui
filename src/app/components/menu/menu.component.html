@@ -1,27 +1,11 @@
 <nav class="nav-group">
   <h5 class="nav-group-title">Actions</h5>
-  <a class="nav-group-item active">
+  <a class="nav-group-item" [ngClass]="{'active': menuSelected=='home'}" (click)="goto('home')">
     <span class="icon icon-home"></span>
     Accueil
   </a>
-  <span class="nav-group-item">
+  <span class="nav-group-item" [ngClass]="{'active': menuSelected=='files'}" (click)="goto('files')">
     <span class="icon icon-folder"></span>
     Fichiers
-  </span>
-  <span class="nav-group-item">
-    <span class="icon icon-download"></span>
-    Configuration
-  </span>
-  <span class="nav-group-item">
-    <span class="icon icon-print"></span>
-    Rapports
-  </span>
-  <span class="nav-group-item">
-    <span class="icon icon-cloud"></span>
-    Paramètres
-  </span>
-  <span class="nav-group-item">
-    <span class="icon icon-signal"></span>
-    AirPlay
   </span>
 </nav>

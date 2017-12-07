@@ -16,6 +16,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { FileComponent } from './components/file/file.component';
 import { WorkspaceService } from 'app/services/workspace.service';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ContentFileComponent } from './components/content-file/content-file.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { WorkspaceService } from 'app/services/workspace.service';
     HomeComponent,
     HeaderComponent,
     MenuComponent,
-    FileComponent
+    FileComponent,
+    WelcomeComponent,
+    ContentFileComponent
   ],
   imports: [
     BrowserModule,

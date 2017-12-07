@@ -1,27 +1,20 @@
-<table class="table-striped">
-  <thead>
-  <tr>
-    <th>Nom</th>
-    <th>Type</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>photon.css</td>
-    <td>Script</td>
-  </tr>
-  <tr>
-    <td>photon.css</td>
-    <td>Configuration</td>
-  </tr>
-  <tr>
-    <td>photon.css</td>
-    <td>Parametre</td>
-  </tr>
-  ...
-  <tr>
-    <td>photon.css</td>
-    <td>Script</td>
-  </tr>
-  </tbody>
-</table>
+<div class="pane-group">
+
+  <div class="pane-sm sidebar">
+    <table class="table-striped">
+      <thead>
+        <tr>
+          <th>Nom</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of files">
+          <td (dblclick)="displayFile(file)">{{file}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pane">
+    <app-home></app-home>
+  </div>
+</div>

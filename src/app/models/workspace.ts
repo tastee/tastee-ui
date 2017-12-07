@@ -1,3 +1,3 @@
 export class Workspace {
-    constructor(private path: String){}
+    constructor(public path: String){}
 }
