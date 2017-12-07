@@ -1,7 +1,7 @@
 <div class="tab-group">
   <div class="tab-item" *ngFor="let file of files;let i = index" (click)="selectFile(i)">
     <span class="icon icon-cancel icon-close-tab" (click)="removeFile(i)"></span>
-    {{file}}
+    {{file.name}}
   </div>
 </div>
 <app-content-file></app-content-file>

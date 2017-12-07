@@ -262,7 +262,8 @@ module.exports = {
     "util": "require('util')",
     "zlib": "require('zlib')",
     "selenium-webdriver": "require('selenium-webdriver')",
-    "rxjs": "require('rxjs')"
+    "rxjs": "require('rxjs')",
+    "directory-tree" : "require('directory-tree')"
   },
   "resolve": {
     "extensions": [

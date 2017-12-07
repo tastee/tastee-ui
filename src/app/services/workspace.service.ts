@@ -3,7 +3,7 @@ import { Workspace } from 'app/models/workspace';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
-const fs = require('fs')
+import { File } from 'app/models/file';
 
 @Injectable()
 export class WorkspaceService {
@@ -12,9 +12,9 @@ export class WorkspaceService {
 
   private currentWorkspace = new Subject<Workspace>();
 
-  private openFiles = new Subject<String>();
+  private openFiles = new Subject<File>();
 
-  private selectedFileSubject = new Subject<String>();
+  private selectedFileSubject = new Subject<File>();
 
   new(path: string) {
     let workspace = new Workspace(path);
@@ -30,23 +30,18 @@ export class WorkspaceService {
     return JSON.parse(localStorage.getItem("tastee_workspace"));
   }
 
-  getFilesInWorkspace() {
-    return fs.readdirSync(this.getWorkspace().path);
-  }
-
-  pushFileInOpenFileView(file: string) {
+  pushFileInOpenFileView(file: File) {
     this.openFiles.next(file);
-
   }
 
-  selectThisFile(file: String) {
+  selectThisFile(file: File) {
     this.selectedFileSubject.next(file);
   }
-  observeFilesToDisplay(): Observable<String> {
+  observeFilesToDisplay(): Observable<File> {
     return this.openFiles.asObservable();
   }
 
-  observeSelectedFile(): Observable<String> {
+  observeSelectedFile(): Observable<File> {
     return this.selectedFileSubject.asObservable();
   }
 

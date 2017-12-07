@@ -1,7 +1,7 @@
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FileComponent } from 'app/components/file/file.component';
+import { TreeComponent } from 'app/components/tree/tree.component';
 import { WelcomeComponent } from 'app/components/welcome/welcome.component';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
     },
     {
         path: 'files',
-        component: FileComponent
+        component: TreeComponent
     },
 ];
 

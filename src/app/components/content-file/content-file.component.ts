@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
+import { File } from 'app/models/file';
 
 @Component({
   selector: 'app-content-file',
@@ -22,11 +23,10 @@ export class ContentFileComponent implements OnDestroy {
     this.subscription = this.workspaceService.observeSelectedFile().subscribe(file => this.openFile(file));
   }
 
-  openFile(file: String) {
+  openFile(file: File) {
     if (file !== null) {
-      this.fileName = file;
-      this.data = this.fileService.readFile(this.workspaceService.getWorkspace(), this.fileName);
-      console.log(this.data.toString());
+      this.fileName = file.name;
+      this.data = this.fileService.readFile(file.path);
     } else {
       this.fileName = null;
       this.data = null;

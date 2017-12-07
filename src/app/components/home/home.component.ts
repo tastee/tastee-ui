@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { Subscription } from 'rxjs/Subscription';
+import { File } from 'app/models/file';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class HomeComponent implements OnDestroy {
 
-  public files: Array<String>;
+  public files: Array<File>;
   private subscription: Subscription;
 
   constructor(private workspaceService: WorkspaceService) {
