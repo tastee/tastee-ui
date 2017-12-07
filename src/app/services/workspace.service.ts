@@ -14,7 +14,7 @@ export class WorkspaceService {
 
   private openFiles = new Subject<String>();
 
-  private selectedFile = new Subject<String>();
+  private selectedFileSubject = new Subject<String>();
 
   new(path: string) {
     let workspace = new Workspace(path);
@@ -36,17 +36,18 @@ export class WorkspaceService {
 
   pushFileInOpenFileView(file: string) {
     this.openFiles.next(file);
+
   }
 
   selectThisFile(file: String) {
-    this.selectedFile.next(file);
+    this.selectedFileSubject.next(file);
   }
   observeFilesToDisplay(): Observable<String> {
     return this.openFiles.asObservable();
   }
-  
+
   observeSelectedFile(): Observable<String> {
-    return this.selectedFile.asObservable();
+    return this.selectedFileSubject.asObservable();
   }
 
 }

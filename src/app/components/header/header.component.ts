@@ -3,18 +3,21 @@ import { TasteeService } from '../../services/tastee.service';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { Workspace } from 'app/models/workspace';
 import { Subscription } from 'rxjs/Subscription';
+import { FileService } from 'app/services/file.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  providers: [TasteeService]
+  providers: [TasteeService, FileService]
 })
 export class HeaderComponent implements OnInit {
 
   private subscription: Subscription;
   public workspaceIsSelected: boolean = false;
-  constructor(private tasteeService: TasteeService, private workspaceService: WorkspaceService) {
+  constructor(
+    private tasteeService: TasteeService,
+    private workspaceService: WorkspaceService) {
     this.workspaceIsSelected = this.workspaceService.getWorkspace() == null;
     this.subscription = this.workspaceService.workspaceChange().subscribe(workspace => this.workspaceIsSelected = workspace === null);
   }
@@ -23,7 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   runTastee() {
-    this.tasteeService.runTastee();
+    this.tasteeService.runTastee(this.workspaceService.getWorkspace());
   }
 
   stopTastee() {

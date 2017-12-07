@@ -14,4 +14,11 @@ export class FileService {
   saveFile(workspace: Workspace, file: String, data: String) {
     fs.writeFileSync(path.join(workspace.path, file), data);
   }
+
+  getAllConfigFile(workspace: Workspace) {
+
+  }
+  getAllTasteeFile(workspace: Workspace) {
+
+  }
 }
