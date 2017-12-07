@@ -26,7 +26,7 @@ export class ContentFileComponent implements OnDestroy {
   openFile(file: File) {
     if (file !== null) {
       this.fileName = file.name;
-      this.data = this.fileService.readFile(file.path);
+      this.data = this.fileService.readFile(file.path.toString());
     } else {
       this.fileName = null;
       this.data = null;
@@ -34,8 +34,13 @@ export class ContentFileComponent implements OnDestroy {
   }
   saveData() {
     console.log(this.data);
-    this.fileService.saveFile(this.workspaceService.getWorkspace(), this.fileName, this.data);
+    this.fileService.saveFile(this.workspaceService.getWorkspace(), this.fileName.toString(), this.data);
   }
+
+  displayActionsIfTasteeFile(): boolean {
+    return this.fileService.isTasteeFile(this.fileName.toString());
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

@@ -4,6 +4,7 @@ import { WorkspaceService } from 'app/services/workspace.service';
 import { Workspace } from 'app/models/workspace';
 import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
+import { TreeService } from 'app/services/tree.service';
 
 @Component({
   selector: 'app-header',
@@ -13,13 +14,17 @@ import { FileService } from 'app/services/file.service';
 })
 export class HeaderComponent implements OnInit {
 
-  private subscription: Subscription;
+  private subWorkspaceEvent: Subscription;
+  private subTreeActionEvent: Subscription;
   public workspaceIsSelected: boolean = false;
+  public displayTreeAction: boolean = false;
   constructor(
     private tasteeService: TasteeService,
-    private workspaceService: WorkspaceService) {
+    private workspaceService: WorkspaceService,
+    private treeService: TreeService) {
     this.workspaceIsSelected = this.workspaceService.getWorkspace() == null;
-    this.subscription = this.workspaceService.workspaceChange().subscribe(workspace => this.workspaceIsSelected = workspace === null);
+    this.subWorkspaceEvent = this.workspaceService.workspaceChange().subscribe(workspace => this.workspaceIsSelected = workspace === null);
+    this.subTreeActionEvent = this.treeService.observeSelectedFile().subscribe(file => this.displayTreeAction = true);
   }
 
   ngOnInit() {
@@ -38,6 +43,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subWorkspaceEvent.unsubscribe();
+    this.subTreeActionEvent.unsubscribe();
+
   }
 }

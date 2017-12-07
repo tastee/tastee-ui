@@ -1,6 +1,15 @@
-<div *ngIf="fileName">
-  <div class="form-group">
-    <label>{{fileName}}</label>
-    <textarea class="form-control" rows="3" (focusout)="saveData()" [(ngModel)]='data'></textarea>
+<form *ngIf="fileName">
+  <div class="form-group"  *ngIf="displayActionsIfTasteeFile()">
+    <button class="btn btn-large btn-positive">Run Tastee</button>
+    <button class="btn btn-large btn-warning">Debug Tastee</button>
   </div>
-</div>
+
+  <div class="form-group">
+    <label>File Name</label>
+    <input id="fileName" name="fileName" class="form-control" [(ngModel)]="fileName">
+  </div>
+  <div class="form-group">
+    <label>Content File</label>
+    <textarea class="form-control" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='data'></textarea>
+  </div>
+</form>

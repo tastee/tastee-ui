@@ -19,6 +19,7 @@ import { WorkspaceService } from 'app/services/workspace.service';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ContentFileComponent } from './components/content-file/content-file.component';
 import { EntryComponent } from './components/tree/entry/entry.component';
+import { TreeService } from 'app/services/tree.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { EntryComponent } from './components/tree/entry/entry.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ElectronService, WorkspaceService],
+  providers: [ElectronService, WorkspaceService, TreeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,4 +18,14 @@ export class TreeService {
   observeSelectedFile(): Observable<File> {
     return this.selectedFile.asObservable();
   }
+
+  addFile() {
+
+  }
+  updateTree() {
+
+  }
+  deleteTree() {
+
+  }
 }

@@ -1,21 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Workspace } from 'app/models/workspace';
-const fs = require('fs');
-const path = require('path');
-const tree = require('directory-tree');
-;
+import * as fs from 'fs';
+import * as path from 'path';
+import * as tree from 'directory-tree';
+
+
 @Injectable()
 export class FileService {
 
   constructor() { }
 
-  readFile(file: String): String {
-    return fs.readFileSync(file);
-  }
-  saveFile(workspace: Workspace, file: String, data: String) {
-    fs.writeFileSync(path.join(workspace.path, file), data);
+  readFile(file: string): string {
+    return fs.readFileSync(file).toString();
   }
 
+  isTasteeFile(file: string) {
+    return path.extname(file) === ".tee";
+  }
+
+  saveFile(workspace: Workspace, file: string, data: String) {
+    fs.writeFileSync(path.join(workspace.path, file), data);
+  }
+  createFile(file: string) {
+    fs.writeFileSync(file, '');
+  }
+  deleteFile(file: string) {
+    fs.unlinkSync(file);
+  }
   getFilesInWorkspace(workspace: Workspace) {
     return tree(workspace.path)
   }

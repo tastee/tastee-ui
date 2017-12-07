@@ -7,8 +7,9 @@ import { TasteeAnalyser } from 'tastee-core/transpiled/src/app/tastee-analyser';
 import { Workspace } from 'app/models/workspace';
 import { FileService } from 'app/services/file.service';
 import * as  glob from 'glob';
-const path = require('path')
-const fs = require('fs')
+import * as fs from 'fs';
+import * as path from 'path';
+
 
 @Injectable()
 export class TasteeService {
