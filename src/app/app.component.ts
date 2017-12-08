@@ -28,7 +28,9 @@ export class AppComponent implements OnDestroy {
     this.workspace = this.workspaceService.getWorkspace();
     this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => this.workspace = workspace);
   }
-
+  openDocumentation(){
+    window.open('https://github.com/tastee/tastee-doc');
+  }
   ngOnDestroy() {
     this.subWorkspaceUpdated.unsubscribe();
   }
