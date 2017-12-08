@@ -25,14 +25,7 @@ export class TabsComponent implements OnDestroy {
   }
 
   removeFile(file) {
-    let workspace = this.workspaceService.getWorkspace();
-    let index = workspace.openedFiles.findIndex(fileToRemove => fileToRemove.path === file.path);
-    workspace.openedFiles = workspace.openedFiles.filter(fileToRemove => fileToRemove.path !== file.path);
-    if (index >= workspace.openedFiles.length) {
-      --index;
-    }
-    workspace.displayedFile = workspace.openedFiles[index];
-    workspace.selectedFileInTree = workspace.openedFiles[index];
+    let workspace = this.workspaceService.removeFileInWorkspace(file);
     this.workspaceService.updateWorkspace(workspace);
   }
 
@@ -45,8 +38,11 @@ export class TabsComponent implements OnDestroy {
 
   selectFile(file) {
     let workspace = this.workspaceService.getWorkspace();
+    console.log(file);
+    if (file.path) {
+      workspace.selectedFileInTree = file;
+    }
     workspace.displayedFile = file;
-    workspace.selectedFileInTree = file;
     this.workspaceService.updateWorkspace(workspace);
   }
 

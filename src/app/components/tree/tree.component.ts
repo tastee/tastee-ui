@@ -20,6 +20,7 @@ export class TreeComponent implements OnInit, OnDestroy {
     private workspaceService: WorkspaceService,
     private fileService: FileService) {
     this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
+      workspace.treeDisplayed = this.fileService.getFilesInWorkspace(workspace);
       if (JSON.stringify(this.tree) !== JSON.stringify(workspace.treeDisplayed)) {
         if (!workspace.treeDisplayed) {
           this.getFilesFromFs();

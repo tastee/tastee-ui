@@ -5,6 +5,7 @@ import { Workspace } from 'app/models/workspace';
 import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
 import { Router } from '@angular/router';
+import { File } from 'app/models/file';
 
 @Component({
   selector: 'app-header',
@@ -56,12 +57,19 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy() {
     this.subWorkspaceUpdated.unsubscribe();
   }
-  //deleteSelectedTreeFile() {
-  //  let fileToDelete = this.workspaceService.getWorkspace().selectedFileInTree;
-  //  this.fileService.deleteFile(fileToDelete);
-  //  this.workspaceService.deleteFileInWorkspace(fileToDelete);
-  //}
 
+  createNewFileInWorkspace() {
+    let workspace = this.workspaceService.getWorkspace();
+    let idxNewFile = workspace.openedFiles.findIndex(file => !file.path)
+    if (idxNewFile === -1) {
+      let file = new File(null, "New File", "file");;
+      workspace.displayedFile = file;
+      workspace.openedFiles.push(file);
+    } else {
+      workspace.displayedFile = workspace.openedFiles[idxNewFile];
+    }
+    this.workspaceService.updateWorkspace(workspace);
+  }
   updateTreeInWorkspace() {
     this.workspaceService.updateWorkspace(this.workspaceService.getWorkspace());
   }

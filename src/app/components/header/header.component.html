@@ -13,10 +13,7 @@
     </div>
 
     <div class="btn-group" *ngIf="displayTreeAction">
-      <!--<button class="btn btn-default" (click)="deleteSelectedTreeFile()">
-        <span class="icon icon-trash"></span>
-      </button>-->
-      <button class="btn btn-default">
+      <button class="btn btn-default" (click)="createNewFileInWorkspace()">
         <span class="icon icon-plus"></span>
       </button>
       <button class="btn btn-default" (click)="updateTreeInWorkspace()">
