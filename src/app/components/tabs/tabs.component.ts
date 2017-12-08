@@ -37,6 +37,12 @@ export class TabsComponent implements OnDestroy {
     }
   }
 
+  activeThisTab(file) {
+    if (this.workspaceService.getWorkspace().displayedFile) {
+      return file.path === this.workspaceService.getWorkspace().displayedFile.path;
+    }
+    return false;
+  }
   selectFile(file) {
     this.workspaceService.displayThisFile(file);
   }

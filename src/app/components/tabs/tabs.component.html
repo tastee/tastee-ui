@@ -1,5 +1,5 @@
 <div class="tab-group">
-  <div class="tab-item" *ngFor="let file of files" (click)="selectFile(file)">
+  <div class="tab-item active" *ngFor="let file of files" (click)="selectFile(file)" [ngClass]="{'active': activeThisTab(file) }">
     <span class="icon icon-cancel icon-close-tab" (click)="removeFile(file)"></span>
     {{file.name}}
   </div>
