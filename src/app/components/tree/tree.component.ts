@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { FileService } from 'app/services/file.service';
-import { TreeService } from 'app/services/tree.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -13,11 +12,10 @@ import { Subscription } from 'rxjs/Subscription';
 export class TreeComponent implements OnInit {
 
   public tree: any;
-  
+
   constructor(
     private workspaceService: WorkspaceService,
-    private fileService: FileService,
-    private treeService: TreeService) { }
+    private fileService: FileService) { }
 
   ngOnInit() {
     this.tree = this.fileService.getFilesInWorkspace(this.workspaceService.getWorkspace());

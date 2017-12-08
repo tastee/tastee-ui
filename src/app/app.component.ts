@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class AppComponent implements OnDestroy {
 
-  private subscription: Subscription;
+  private subChangedWorkspace: Subscription;
   public workspace: Workspace;
 
   constructor(public electronService: ElectronService, public workspaceService: WorkspaceService) {
@@ -26,10 +26,10 @@ export class AppComponent implements OnDestroy {
       console.log('Mode web');
     }
     this.workspace = this.workspaceService.getWorkspace();
-    this.subscription = this.workspaceService.workspaceChange().subscribe(workspace => this.workspace = workspace);
+    this.subChangedWorkspace = this.workspaceService.obsChangedWorkspace().subscribe(workspace => this.workspace = workspace);
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subChangedWorkspace.unsubscribe();
   }
 }

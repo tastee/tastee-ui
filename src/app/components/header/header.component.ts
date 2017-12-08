@@ -4,7 +4,6 @@ import { WorkspaceService } from 'app/services/workspace.service';
 import { Workspace } from 'app/models/workspace';
 import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
-import { TreeService } from 'app/services/tree.service';
 
 @Component({
   selector: 'app-header',
@@ -14,17 +13,16 @@ import { TreeService } from 'app/services/tree.service';
 })
 export class HeaderComponent implements OnInit {
 
-  private subWorkspaceEvent: Subscription;
+  private subChangedWorkspace: Subscription;
   private subTreeActionEvent: Subscription;
   public workspaceIsSelected: boolean = false;
   public displayTreeAction: boolean = false;
   constructor(
     private tasteeService: TasteeService,
-    private workspaceService: WorkspaceService,
-    private treeService: TreeService) {
-    this.workspaceIsSelected = this.workspaceService.getWorkspace() == null;
-    this.subWorkspaceEvent = this.workspaceService.workspaceChange().subscribe(workspace => this.workspaceIsSelected = workspace === null);
-    this.subTreeActionEvent = this.treeService.observeSelectedFile().subscribe(file => this.displayTreeAction = true);
+    private workspaceService: WorkspaceService) {
+    this.workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
+    this.subChangedWorkspace = this.workspaceService.obsChangedWorkspace().subscribe(workspace => this.workspaceIsSelected = workspace !== null);
+    this.subTreeActionEvent = this.workspaceService.obsSelectedTreeFile().subscribe(file => this.displayTreeAction = true);
   }
 
   ngOnInit() {
@@ -39,11 +37,14 @@ export class HeaderComponent implements OnInit {
   }
 
   openWorkspace(files: FileList) {
-    this.workspaceService.new(files[0].path)
+    this.workspaceService.createNewWorkspace(files[0].path);
   }
 
+  saveWorkspace() {
+    this.workspaceService.saveWorkspace();
+  }
   ngOnDestroy() {
-    this.subWorkspaceEvent.unsubscribe();
+    this.subChangedWorkspace.unsubscribe();
     this.subTreeActionEvent.unsubscribe();
 
   }

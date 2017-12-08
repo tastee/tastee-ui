@@ -1,7 +1,7 @@
 import { Component, OnDestroy, Input } from '@angular/core';
 import { WorkspaceService } from 'app/services/workspace.service';
-import { TreeService } from 'app/services/tree.service';
 import { Subscription } from 'rxjs/Subscription';
+import { File } from 'app/models/file';
 
 @Component({
   selector: 'app-entry',
@@ -16,8 +16,8 @@ export class EntryComponent implements OnDestroy {
   private subscription: Subscription;
 
   public childIsSelected: boolean = false;
-  constructor(private workspaceService: WorkspaceService, private treeService: TreeService) {
-    this.subscription = this.treeService.observeSelectedFile().subscribe(childSelected => {
+  constructor(private workspaceService: WorkspaceService) {
+    this.subscription = this.workspaceService.obsSelectedTreeFile().subscribe(childSelected => {
       if (this.child.path === childSelected.path) {
         this.childIsSelected = true;
       } else {
@@ -29,12 +29,12 @@ export class EntryComponent implements OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  selectedFile(child) {
-    this.treeService.selectedThisFile(child);
+  selectedTreeFile(file: File) {
+    this.workspaceService.selectedTreeFile(file);
   }
 
-  displayFile(child) {
-    this.workspaceService.pushFileInOpenFileView(child);
-    this.workspaceService.selectThisFile(child);
+  displayFileInWorkspace(file: File) {
+    this.workspaceService.openNewFile(file);
+    this.workspaceService.displayThisFile(file);
   }
 }

@@ -19,7 +19,7 @@ export class FileService {
   }
 
   saveFile(workspace: Workspace, file: string, data: String) {
-    fs.writeFileSync(path.join(workspace.path, file), data);
+    fs.writeFileSync(path.join(workspace.workspacePath, file), data);
   }
   createFile(file: string) {
     fs.writeFileSync(file, '');
@@ -28,6 +28,6 @@ export class FileService {
     fs.unlinkSync(file);
   }
   getFilesInWorkspace(workspace: Workspace) {
-    return tree(workspace.path)
+    return tree(workspace.workspacePath)
   }
 }

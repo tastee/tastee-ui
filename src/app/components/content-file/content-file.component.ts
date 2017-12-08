@@ -13,14 +13,18 @@ import { File } from 'app/models/file';
 export class ContentFileComponent implements OnDestroy {
 
   constructor(private workspaceService: WorkspaceService,
-    private fileService: FileService) { }
+    private fileService: FileService) {
+    if (workspaceService.getWorkspace().displayedFile !== null) {
+      this.openFile(workspaceService.getWorkspace().displayedFile);
+    }
+  }
 
   public fileName: String;
   public data: String;
-  private subscription: Subscription;
+  private subSelectedFile: Subscription;
 
   ngOnInit() {
-    this.subscription = this.workspaceService.observeSelectedFile().subscribe(file => this.openFile(file));
+    this.subSelectedFile = this.workspaceService.obsDisplayedFile().subscribe(file => this.openFile(file));
   }
 
   openFile(file: File) {
@@ -42,6 +46,6 @@ export class ContentFileComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subSelectedFile.unsubscribe();
   }
 }

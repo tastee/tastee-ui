@@ -3,12 +3,12 @@
 
   <div class="toolbar-actions">
     <div class="btn-group">
-      <button class="btn btn-default" [disabled]="workspaceIsSelected">
-        <span class="icon icon-home"></span>
-      </button>
       <button class="btn btn-default" (click)="fileBtn.click()">
         <span class="icon icon-folder"></span>
         <input #fileBtn id="fileBtn" type="file" webkitdirectory directory (change)="openWorkspace($event.target.files)">
+      </button>
+      <button class="btn btn-default" *ngIf="workspaceIsSelected" (click)="saveWorkspace()">
+        <span class="icon icon-download"></span>
       </button>
     </div>
 
@@ -25,11 +25,11 @@
     </div>
 
 
-    <div class="btn-group  pull-right">
-      <button class="btn btn-default" (click)="runTastee()" [disabled]="workspaceIsSelected">
+    <div class="btn-group  pull-right" *ngIf="workspaceIsSelected">
+      <button class="btn btn-default" (click)="runTastee()">
         <span class="icon icon-play"></span>
       </button>
-      <button class="btn btn-default" (click)="stopTastee()" [disabled]="workspaceIsSelected">
+      <button class="btn btn-default" (click)="stopTastee()">
         <span class="icon icon-stop"></span>
       </button>
     </div>

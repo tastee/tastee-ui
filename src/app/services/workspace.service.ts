@@ -8,41 +8,64 @@ import { File } from 'app/models/file';
 @Injectable()
 export class WorkspaceService {
 
-  constructor() { }
+  private workspace: Workspace;
 
-  private currentWorkspace = new Subject<Workspace>();
-
-  private openFiles = new Subject<File>();
-
-  private selectedFileSubject = new Subject<File>();
-
-  new(path: string) {
-    let workspace = new Workspace(path);
-    this.currentWorkspace.next(workspace);
-    localStorage.setItem("tastee_workspace", JSON.stringify(workspace));
+  constructor() {
+    this.workspace = JSON.parse(localStorage.getItem("tastee_workspace"));
   }
 
-  workspaceChange(): Observable<Workspace> {
+  private currentWorkspace = new Subject<Workspace>();
+  private selectedFileInTree = new Subject<File>();
+  private openFiles = new Subject<File>();
+  private displayedFile = new Subject<File>();
+
+
+  createNewWorkspace(path: string) {
+    this.workspace = new Workspace();
+    this.workspace.workspacePath = path;
+    this.currentWorkspace.next(this.workspace);
+    localStorage.setItem("tastee_workspace", JSON.stringify(this.workspace));
+  }
+
+  obsChangedWorkspace(): Observable<Workspace> {
     return this.currentWorkspace.asObservable();
   }
 
   getWorkspace() {
-    return JSON.parse(localStorage.getItem("tastee_workspace"));
+    return this.workspace;
   }
 
-  pushFileInOpenFileView(file: File) {
-    this.openFiles.next(file);
+  saveWorkspace() {
+    localStorage.setItem("tastee_workspace", JSON.stringify(this.workspace));
   }
 
-  selectThisFile(file: File) {
-    this.selectedFileSubject.next(file);
+  openNewFile(file: File) {
+    if (this.workspace.openedFiles.filter(pathInArray => pathInArray.path == file.path).length === 0) {
+      this.openFiles.next(file);
+      this.workspace.openedFiles.push(file);
+    }
   }
-  observeFilesToDisplay(): Observable<File> {
+
+  displayThisFile(file: File) {
+    this.workspace.displayedFile = file;
+    this.displayedFile.next(file);
+  }
+
+  obsFilesToOpen(): Observable<File> {
     return this.openFiles.asObservable();
   }
 
-  observeSelectedFile(): Observable<File> {
-    return this.selectedFileSubject.asObservable();
+  obsDisplayedFile(): Observable<File> {
+    return this.displayedFile.asObservable();
+  }
+
+  selectedTreeFile(file: File) {
+    this.workspace.selectedFileInTree = file;
+    this.selectedFileInTree.next(file);
+  }
+
+  obsSelectedTreeFile(): Observable<File> {
+    return this.selectedFileInTree.asObservable();
   }
 
 }

@@ -24,8 +24,8 @@ export class TasteeService {
       this.core.init(new TasteeEngine("chrome"))
       var tastee: TasteeService = this;
 
-      glob(path.join(workspace.path, "**", "+(*.conf|*.param).tee"), { absolute: true }, this.recordingOfConfigurationFilesCb(this.core));
-      glob(path.join(workspace.path, "**", "!(*.conf|*.param).tee"), { absolute: true }, this.recordingTasteeFilesCb(tastee));
+      glob(path.join(workspace.workspacePath, "**", "+(*.conf|*.param).tee"), { absolute: true }, this.recordingOfConfigurationFilesCb(this.core));
+      glob(path.join(workspace.workspacePath, "**", "!(*.conf|*.param).tee"), { absolute: true }, this.recordingTasteeFilesCb(tastee));
     }
   }
 
