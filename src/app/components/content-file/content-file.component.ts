@@ -14,7 +14,7 @@ export class ContentFileComponent implements OnDestroy {
 
   constructor(private workspaceService: WorkspaceService,
     private fileService: FileService) {
-    if (workspaceService.getWorkspace().displayedFile !== null) {
+    if (workspaceService.getWorkspace().displayedFile) {
       this.openFile(workspaceService.getWorkspace().displayedFile);
     }
   }

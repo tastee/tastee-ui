@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   public displayTreeAction: boolean = false;
   constructor(
     private tasteeService: TasteeService,
+    private fileService: FileService,
     private workspaceService: WorkspaceService) {
     this.workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
     this.subChangedWorkspace = this.workspaceService.obsChangedWorkspace().subscribe(workspace => this.workspaceIsSelected = workspace !== null);
@@ -38,6 +39,7 @@ export class HeaderComponent implements OnInit {
 
   openWorkspace(files: FileList) {
     this.workspaceService.createNewWorkspace(files[0].path);
+    this.workspaceService.updateTreeInWorkspace();
   }
 
   saveWorkspace() {
@@ -46,6 +48,14 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy() {
     this.subChangedWorkspace.unsubscribe();
     this.subTreeActionEvent.unsubscribe();
+  }
+  deleteSelectedTreeFile() {
+    let fileToDelete = this.workspaceService.getWorkspace().selectedFileInTree;
+    this.fileService.deleteFile(fileToDelete);
+    this.workspaceService.deleteFileInWorkspace(fileToDelete);
+  }
 
+  updateTreeInWorkspace() {
+    this.workspaceService.updateTreeInWorkspace();
   }
 }

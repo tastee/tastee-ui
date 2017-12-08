@@ -3,6 +3,7 @@ import { Workspace } from 'app/models/workspace';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as tree from 'directory-tree';
+import { File } from 'app/models/file';
 
 
 @Injectable()
@@ -24,8 +25,8 @@ export class FileService {
   createFile(file: string) {
     fs.writeFileSync(file, '');
   }
-  deleteFile(file: string) {
-    fs.unlinkSync(file);
+  deleteFile(file: File) {
+    fs.unlinkSync(file.path.toString());
   }
   getFilesInWorkspace(workspace: Workspace) {
     return tree(workspace.workspacePath)

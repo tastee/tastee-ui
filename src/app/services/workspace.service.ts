@@ -18,7 +18,8 @@ export class WorkspaceService {
   private selectedFileInTree = new Subject<File>();
   private openFiles = new Subject<File>();
   private displayedFile = new Subject<File>();
-
+  private deleteFileInTree = new Subject<File>();
+  private updateTree = new Subject<Boolean>();
 
   createNewWorkspace(path: string) {
     this.workspace = new Workspace();
@@ -68,4 +69,17 @@ export class WorkspaceService {
     return this.selectedFileInTree.asObservable();
   }
 
+  obsDeleteFileInTree(): Observable<File> {
+    return this.deleteFileInTree.asObservable();
+  }
+  obsUpdateTreeInWorkspace(): Observable<Boolean> {
+    return this.updateTree.asObservable();
+  }
+  deleteFileInWorkspace(file: File) {
+    this.workspace.displayedFile = null;
+    this.deleteFileInTree.next(file);
+  }
+  updateTreeInWorkspace() {
+    this.updateTree.next(true);
+  }
 }
