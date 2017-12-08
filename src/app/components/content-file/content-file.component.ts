@@ -37,7 +37,6 @@ export class ContentFileComponent implements OnDestroy {
     }
   }
   saveData() {
-    console.log(this.data);
     this.fileService.saveFile(this.workspaceService.getWorkspace(), this.fileName.toString(), this.data);
   }
 

@@ -16,9 +16,6 @@ export class TabsComponent implements OnDestroy {
   constructor(private workspaceService: WorkspaceService) {
     this.workspaceService.getWorkspace().openedFiles.forEach(file => this.files.push(file));
     this.subFilesToDisplay = this.workspaceService.obsFilesToOpen().subscribe(file => {
-      console.log(this.files);
-      console.log(file);
-      console.log(this.files);
       this.files.push(file)
     });
   }
