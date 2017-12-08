@@ -17,18 +17,18 @@ export class ContentFileComponent implements OnDestroy {
     if (workspaceService.getWorkspace().displayedFile) {
       this.openFile(workspaceService.getWorkspace().displayedFile);
     }
+    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => this.openFile(workspace.displayedFile));    
   }
 
   public fileName: String;
   public data: String;
-  private subSelectedFile: Subscription;
+  private subWorkspaceUpdated: Subscription;
 
   ngOnInit() {
-    this.subSelectedFile = this.workspaceService.obsDisplayedFile().subscribe(file => this.openFile(file));
   }
 
   openFile(file: File) {
-    if (file !== null) {
+    if (file) {
       this.fileName = file.name;
       this.data = this.fileService.readFile(file.path.toString());
     } else {
@@ -45,6 +45,6 @@ export class ContentFileComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subSelectedFile.unsubscribe();
+    this.subWorkspaceUpdated.unsubscribe();
   }
 }

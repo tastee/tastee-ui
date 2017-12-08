@@ -2,39 +2,57 @@ import { Component, OnDestroy, Input } from '@angular/core';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { Subscription } from 'rxjs/Subscription';
 import { File } from 'app/models/file';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss']
 })
-export class EntryComponent implements OnDestroy {
+export class EntryComponent implements OnDestroy, OnInit {
 
   @Input() child: any;
   @Input() openSubTree: boolean = false;
 
-  private subscription: Subscription;
+  private subWorkspaceUpdated: Subscription;
 
   public childIsSelected: boolean = false;
   constructor(private workspaceService: WorkspaceService) {
-    this.subscription = this.workspaceService.obsSelectedTreeFile().subscribe(childSelected => {
-      if (this.child.path === childSelected.path) {
+    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
+      if (workspace.selectedFileInTree && this.child.path === workspace.selectedFileInTree.path) {
         this.childIsSelected = true;
       } else {
         this.childIsSelected = false;
       }
     })
   }
+  ngOnInit() {
+    let workspace = this.workspaceService.getWorkspace();
+    if (workspace.selectedFileInTree) {
+      if (workspace.selectedFileInTree && this.child.path === workspace.selectedFileInTree.path) {
+        this.childIsSelected = true;
+      } else {
+        this.childIsSelected = false;
+      }
+    }
+  }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subWorkspaceUpdated.unsubscribe();
   }
+
   selectedTreeFile(file: File) {
-    this.workspaceService.selectedTreeFile(file);
+    let workspace = this.workspaceService.getWorkspace();
+    workspace.selectedFileInTree = file;
+    this.workspaceService.updateWorkspace(workspace);
   }
 
   displayFileInWorkspace(file: File) {
-    this.workspaceService.openNewFile(file);
-    this.workspaceService.displayThisFile(file);
+    let workspace = this.workspaceService.getWorkspace();
+    workspace.displayedFile = file;
+    if (workspace.openedFiles.filter(pathInArray => pathInArray.path == file.path).length === 0) {
+      workspace.openedFiles.push(file);
+    }
+    this.workspaceService.updateWorkspace(workspace);
   }
 }

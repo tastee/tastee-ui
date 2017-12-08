@@ -4,6 +4,7 @@ import { WorkspaceService } from 'app/services/workspace.service';
 import { Workspace } from 'app/models/workspace';
 import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,20 +14,26 @@ import { FileService } from 'app/services/file.service';
 })
 export class HeaderComponent implements OnInit {
 
-  private subChangedWorkspace: Subscription;
-  private subTreeActionEvent: Subscription;
+  private subWorkspaceUpdated: Subscription;
+
+
   public workspaceIsSelected: boolean = false;
   public displayTreeAction: boolean = false;
   constructor(
     private tasteeService: TasteeService,
     private fileService: FileService,
-    private workspaceService: WorkspaceService) {
-    this.workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
-    this.subChangedWorkspace = this.workspaceService.obsChangedWorkspace().subscribe(workspace => this.workspaceIsSelected = workspace !== null);
-    this.subTreeActionEvent = this.workspaceService.obsSelectedTreeFile().subscribe(file => this.displayTreeAction = true);
+    private workspaceService: WorkspaceService,
+    private router: Router) {
   }
 
   ngOnInit() {
+    this.workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
+    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
+      this.workspaceIsSelected = workspace !== null;
+      if (workspace.selectedFileInTree) {
+        this.displayTreeAction = true
+      }
+    });
   }
 
   runTastee() {
@@ -39,23 +46,23 @@ export class HeaderComponent implements OnInit {
 
   openWorkspace(files: FileList) {
     this.workspaceService.createNewWorkspace(files[0].path);
-    this.workspaceService.updateTreeInWorkspace();
+    this.router.navigate(['files']);
   }
 
   saveWorkspace() {
-    this.workspaceService.saveWorkspace();
-  }
-  ngOnDestroy() {
-    this.subChangedWorkspace.unsubscribe();
-    this.subTreeActionEvent.unsubscribe();
-  }
-  deleteSelectedTreeFile() {
-    let fileToDelete = this.workspaceService.getWorkspace().selectedFileInTree;
-    this.fileService.deleteFile(fileToDelete);
-    this.workspaceService.deleteFileInWorkspace(fileToDelete);
+    this.workspaceService.saveWorkspace(this.workspaceService.getWorkspace());
   }
 
+  ngOnDestroy() {
+    this.subWorkspaceUpdated.unsubscribe();
+  }
+  //deleteSelectedTreeFile() {
+  //  let fileToDelete = this.workspaceService.getWorkspace().selectedFileInTree;
+  //  this.fileService.deleteFile(fileToDelete);
+  //  this.workspaceService.deleteFileInWorkspace(fileToDelete);
+  //}
+
   updateTreeInWorkspace() {
-    this.workspaceService.updateTreeInWorkspace();
+    this.workspaceService.updateWorkspace(this.workspaceService.getWorkspace());
   }
 }

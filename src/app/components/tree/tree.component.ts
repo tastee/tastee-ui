@@ -3,6 +3,7 @@ import { WorkspaceService } from 'app/services/workspace.service';
 import { FileService } from 'app/services/file.service';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Workspace } from 'app/models/workspace';
 
 @Component({
   selector: 'app-tree',
@@ -13,28 +14,34 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 export class TreeComponent implements OnInit, OnDestroy {
 
   public tree: any;
-  private subDeleteFileInTree: Subscription;
-  private subUpdateTreeInWorkspace: Subscription;
+  private subWorkspaceUpdated: Subscription;
 
   constructor(
     private workspaceService: WorkspaceService,
-    private fileService: FileService) { }
+    private fileService: FileService) {
+    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
+      if (JSON.stringify(this.tree) !== JSON.stringify(workspace.treeDisplayed)) {
+        if (!workspace.treeDisplayed) {
+          this.getFilesFromFs();
+        } else {
+          this.tree = workspace.treeDisplayed;
+        }
+      }
+    });
+    this.getFilesFromFs();
+  }
 
   ngOnInit() {
-    this.tree = this.getFilesFromFs();
-    this.subDeleteFileInTree = this.workspaceService.obsDeleteFileInTree().subscribe(file => {
-      this.tree = this.getFilesFromFs();
-    });
-    this.subUpdateTreeInWorkspace = this.workspaceService.obsUpdateTreeInWorkspace().subscribe(_ => {
-      this.tree = this.getFilesFromFs();
-    });
+
   }
 
   getFilesFromFs() {
-    return this.fileService.getFilesInWorkspace(this.workspaceService.getWorkspace());
+    let workspace = this.workspaceService.getWorkspace();
+    let tree = this.fileService.getFilesInWorkspace(workspace);
+    workspace.treeDisplayed = tree;
+    this.workspaceService.updateWorkspace(workspace);
   }
   ngOnDestroy() {
-    this.subDeleteFileInTree.unsubscribe();
-    this.subUpdateTreeInWorkspace.unsubscribe();
+    this.subWorkspaceUpdated.unsubscribe();
   }
 }

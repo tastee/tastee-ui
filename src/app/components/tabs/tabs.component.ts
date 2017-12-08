@@ -11,30 +11,29 @@ import { File } from 'app/models/file';
 export class TabsComponent implements OnDestroy {
 
   public files: Array<File> = [];
-  private subFilesToDisplay: Subscription;
+  private subWorkspaceUpdated: Subscription;
 
   constructor(private workspaceService: WorkspaceService) {
     this.workspaceService.getWorkspace().openedFiles.forEach(file => this.files.push(file));
-    this.subFilesToDisplay = this.workspaceService.obsFilesToOpen().subscribe(file => {
-      this.files.push(file)
+    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
+      this.files = workspace.openedFiles;
     });
   }
 
   ngOnDestroy() {
-    this.subFilesToDisplay.unsubscribe();
+    this.subWorkspaceUpdated.unsubscribe();
   }
 
   removeFile(file) {
-    let indexOfFile = this.files.indexOf(file);
-    this.files.splice(indexOfFile, 1);
-    this.workspaceService.getWorkspace().openedFiles.splice(this.workspaceService.getWorkspace().openedFiles.indexOf(file), 1);
-    if (indexOfFile > 0) {
-      this.workspaceService.displayThisFile(this.files[--indexOfFile]);
-    } else if (this.files.length > 0) {
-      this.workspaceService.displayThisFile(this.files[indexOfFile]);
-    } else {
-      this.workspaceService.displayThisFile(null);
+    let workspace = this.workspaceService.getWorkspace();
+    let index = workspace.openedFiles.findIndex(fileToRemove => fileToRemove.path === file.path);
+    workspace.openedFiles = workspace.openedFiles.filter(fileToRemove => fileToRemove.path !== file.path);
+    if (index >= workspace.openedFiles.length) {
+      --index;
     }
+    workspace.displayedFile = workspace.openedFiles[index];
+    workspace.selectedFileInTree = workspace.openedFiles[index];
+    this.workspaceService.updateWorkspace(workspace);
   }
 
   activeThisTab(file) {
@@ -43,8 +42,12 @@ export class TabsComponent implements OnDestroy {
     }
     return false;
   }
+
   selectFile(file) {
-    this.workspaceService.displayThisFile(file);
+    let workspace = this.workspaceService.getWorkspace();
+    workspace.displayedFile = file;
+    workspace.selectedFileInTree = file;
+    this.workspaceService.updateWorkspace(workspace);
   }
 
 }
