@@ -32,7 +32,6 @@ export class ContentFileComponent implements OnDestroy {
     if (workspace.displayedFile) {
       this.file = new File(workspace.displayedFile.path, workspace.displayedFile.name, workspace.displayedFile.type);
       if (workspace.selectedFileInTree) {
-        console.log(workspace.selectedFileInTree);
         this.file.directory = this.fileService.getParentDirectory(workspace.selectedFileInTree);
       } else {
         this.file.directory = workspace.treeDisplayed.path;

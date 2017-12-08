@@ -38,7 +38,6 @@ export class TabsComponent implements OnDestroy {
 
   selectFile(file) {
     let workspace = this.workspaceService.getWorkspace();
-    console.log(file);
     if (file.path) {
       workspace.selectedFileInTree = file;
     }
