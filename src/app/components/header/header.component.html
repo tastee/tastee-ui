@@ -8,7 +8,7 @@
         <input #fileBtn id="fileBtn" type="file" webkitdirectory directory (change)="openWorkspace($event.target.files)">
       </button>
       <button class="btn btn-default" *ngIf="workspaceIsSelected" (click)="saveWorkspace()">
-        <span class="icon icon-download"></span>
+        <span class="icon icon-floppy"></span>
       </button>
     </div>
 
