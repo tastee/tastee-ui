@@ -9,6 +9,7 @@ import { FileService } from 'app/services/file.service';
 import * as  glob from 'glob';
 import * as fs from 'fs';
 import * as path from 'path';
+import { File } from 'app/models/file';
 
 
 @Injectable()
@@ -19,13 +20,46 @@ export class TasteeService {
     this.core = new TasteeCore(new TasteeAnalyser());
   }
 
-  runTastee(workspace: Workspace) {
+  runFileWithTastee(file: File):Promise<any> {
+    if (file) {
+      this.core.init(new TasteeEngine("chrome"))
+      try {
+        var tastee: TasteeService = this;
+        let data = fs.readFileSync(file.path, "utf8");
+        let regex = /\/\/savor\ (.*.yaml)/g
+        let match;
+        while (match = regex.exec(data)) {
+          if (path.isAbsolute(match[1])) {
+            console.log(path);
+            this.core.addPluginFile(path)
+          } else {
+            let pathOfFile = path.join(path.dirname(file.path), match[1]);
+            if (fs.existsSync(pathOfFile)) {
+              console.log(pathOfFile);
+              this.core.addPluginFile(pathOfFile)
+            }
+          }
+        }
+        return this.core.execute(data, path.basename(file.name, ".tee"))
+        .then(
+          instructions => { 
+            this.core.stop();
+            return instructions 
+          });
+      } catch (error) {
+        console.log(error.message)
+        this.core.stop();
+      }
+    }
+  }
+
+  runWorkspaceWithTastee(workspace: Workspace) {
     if (workspace) {
       this.core.init(new TasteeEngine("chrome"))
       var tastee: TasteeService = this;
 
-      glob(path.join(workspace.workspacePath, "**", "+(*.conf|*.param).tee"), { absolute: true }, this.recordingOfConfigurationFilesCb(this.core));
-      glob(path.join(workspace.workspacePath, "**", "!(*.conf|*.param).tee"), { absolute: true }, this.recordingTasteeFilesCb(tastee));
+      glob(path.join(workspace.workspacePath, "**", "+(*.yaml|*.param.tee)"), { absolute: true }, this.recordingOfConfigurationFilesCb(this.core));
+      glob(path.join(workspace.workspacePath, "**", "!(*.yaml|*.param.tee)"), { absolute: true }, this.recordingTasteeFilesCb(tastee));
     }
   }
 

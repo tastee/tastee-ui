@@ -4,17 +4,19 @@ import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
 import { File } from 'app/models/file';
 import { Workspace } from 'app/models/workspace';
+import { TasteeService } from 'app/services/tastee.service';
 
 @Component({
   selector: 'app-content-file',
   templateUrl: './content-file.component.html',
   styleUrls: ['./content-file.component.scss'],
-  providers: [FileService]
+  providers: [FileService, TasteeService]
 })
 export class ContentFileComponent implements OnDestroy {
 
   constructor(private workspaceService: WorkspaceService,
-    private fileService: FileService) {
+    private fileService: FileService,
+    private tasteeService: TasteeService) {
     if (workspaceService.getWorkspace().displayedFile) {
       this.openFile(workspaceService.getWorkspace());
     }
@@ -24,11 +26,13 @@ export class ContentFileComponent implements OnDestroy {
   public file: File;
   public data: String;
   private subWorkspaceUpdated: Subscription;
+  private instructions: Array<any>;
 
   ngOnInit() {
   }
 
   openFile(workspace: Workspace) {
+    this.instructions=[];
     if (workspace.displayedFile) {
       this.file = new File(workspace.displayedFile.path, workspace.displayedFile.name, workspace.displayedFile.type);
       if (workspace.selectedFileInTree) {
@@ -74,5 +78,12 @@ export class ContentFileComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.subWorkspaceUpdated.unsubscribe();
+  }
+
+  runTastee() {
+    this.instructions = [];
+    this.tasteeService.runFileWithTastee(this.file).then(instructions => {
+      this.instructions = instructions;
+    })
   }
 }

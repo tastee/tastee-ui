@@ -3,7 +3,7 @@
   <div class="form-group">
     <button class="btn btn-large btn-positive" (click)="saveFile()">Save File</button>
     <button class="btn btn-large btn-negative" (click)="deleteFile()">Delete File</button>
-    <button class="btn btn-large btn-default" *ngIf="displayActionsIfTasteeFile()">Run Tastee</button>
+    <button class="btn btn-large btn-default" *ngIf="displayActionsIfTasteeFile()" (click)="runTastee()">Run Tastee</button>
     <button class="btn btn-large btn-primary" *ngIf="displayActionsIfTasteeFile()">Debug Tastee</button>
   </div>
   <div class="form-group">
@@ -18,4 +18,13 @@
     <label>Content File</label>
     <textarea class="form-control" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
   </div>
+  <div class="form-group" *ngIf="instructions">
+    <h3> Result of this Tastee File</h3>
+    <div *ngFor="let instruction of instructions">
+      <label [ngStyle]="{'color': instruction.valid?'green':'red'}">{{instruction.tasteeLine}}</label>
+      <br/>
+      <label *ngIf="instruction.errorMessage" [ngStyle]="{'color':'red'}">Cause : {{instruction.errorMessage}}</label>
+    </div>
+  </div>
+
 </form>
