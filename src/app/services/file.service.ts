@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as tree from 'directory-tree';
 import * as mkdirp from 'mkdirp';
+import * as yaml from 'js-yaml';
 
 import { File } from 'app/models/file';
 
@@ -17,8 +18,13 @@ export class FileService {
     return fs.readFileSync(file).toString();
   }
 
-  isTasteeFile(file: string) {
-    return path.extname(file) === ".tee";
+  isTasteeFile(file: File) {
+    return path.extname(file.name) === ".tee";
+  }
+
+
+  isConfigFile(file: File) {
+    return path.extname(file.name) === ".yaml";
   }
 
   saveFile(file: File): File {
@@ -47,5 +53,13 @@ export class FileService {
 
   getParentDirectory(file: File): string {
     return path.dirname(file.path.toString());
+  }
+
+  validateYaml(file: File): string {
+    try {
+      yaml.safeLoad(file.data);
+    } catch (e) {
+      return e;
+    }
   }
 }

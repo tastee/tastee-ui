@@ -3,6 +3,7 @@ import { WorkspaceService } from 'app/services/workspace.service';
 import { Subscription } from 'rxjs/Subscription';
 import { File } from 'app/models/file';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { FileService } from 'app/services/file.service';
 
 @Component({
   selector: 'app-entry',
@@ -17,7 +18,8 @@ export class EntryComponent implements OnDestroy, OnInit {
   private subWorkspaceUpdated: Subscription;
 
   public childIsSelected: boolean = false;
-  constructor(private workspaceService: WorkspaceService) {
+  constructor(private workspaceService: WorkspaceService,
+    private fileService: FileService) {
     this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
       if (workspace.selectedFileInTree && this.child.path === workspace.selectedFileInTree.path) {
         this.childIsSelected = true;
@@ -54,5 +56,13 @@ export class EntryComponent implements OnDestroy, OnInit {
       workspace.openedFiles.push(file);
     }
     this.workspaceService.updateWorkspace(workspace);
+  }
+
+  isCodeFile() {
+    return this.fileService.isTasteeFile(this.child);
+  }
+
+  isYamlFile() {
+    return this.fileService.isConfigFile(this.child);
   }
 }

@@ -20,6 +20,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ContentFileComponent } from './components/content-file/content-file.component';
 import { EntryComponent } from './components/tree/entry/entry.component';
 import { WysiwygComponent } from './components/wysiwyg/wysiwyg.component';
+import { YamlFileComponent } from './components/content-file/yaml-file/yaml-file.component';
+import { TasteeFileComponent } from './components/content-file/tastee-file/tastee-file.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { WysiwygComponent } from './components/wysiwyg/wysiwyg.component';
     WelcomeComponent,
     ContentFileComponent,
     EntryComponent,
-    WysiwygComponent
+    WysiwygComponent,
+    YamlFileComponent,
+    TasteeFileComponent
   ],
   imports: [
     BrowserModule,

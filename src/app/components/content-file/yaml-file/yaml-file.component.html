@@ -1,0 +1,34 @@
+<form *ngIf="file">
+
+  <div class="form-group">
+    <button class="btn btn-large btn-positive" (click)="saveFile()">Save File</button>
+    <button class="btn btn-large btn-negative" (click)="deleteFile()">Delete File</button>
+  </div>
+  <div class="form-group">
+    <label>Directory</label>
+    <input id="directory" name="directory" class="form-control" [(ngModel)]="file.directory">
+  </div>
+  <div class="form-group">
+    <label>File Name</label>
+    <input id="fileName" name="fileName" class="form-control" [(ngModel)]="file.name">
+  </div>
+  <div class="form-group">
+    <div *ngIf="errorMessage;else goodFile">
+      <label class="badFile">
+        <span class="icon icon-cancel"></span> Your file contains errors !
+      </label>
+      <label class="badFile">{{errorMessage}}</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Content File</label>
+    <textarea class="form-control" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
+  </div>
+
+</form>
+
+<ng-template #goodFile>
+  <label class="goodFile">
+    <span class="icon icon-check"></span> Your file is good !
+  </label>
+</ng-template>

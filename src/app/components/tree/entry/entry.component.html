@@ -2,7 +2,7 @@
   <div *ngIf="child.type==='file'" [ngClass]="{'open': openSubTree }">
     <li class="tree-item view" [ngClass]="{'selected': childIsSelected===true }" (dblclick)="displayFileInWorkspace(child)" (click)="selectedTreeFile(child)">
       <a [ngClass]="{'selected': childIsSelected===true }">
-        <i class="icon icon-code" [ngClass]="{'selected': childIsSelected===true }"></i>{{child.name}}</a>
+        <i class="icon" [ngClass]="{'selected': childIsSelected===true,'icon-code':isCodeFile(),'icon-cog':isYamlFile() }"></i>{{child.name}}</a>
     </li>
   </div>
   <div *ngIf="child.type==='directory'">

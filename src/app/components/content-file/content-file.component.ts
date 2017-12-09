@@ -14,6 +14,7 @@ import { TasteeService } from 'app/services/tastee.service';
 })
 export class ContentFileComponent implements OnDestroy {
 
+
   constructor(private workspaceService: WorkspaceService,
     private fileService: FileService,
     private tasteeService: TasteeService) {
@@ -24,17 +25,19 @@ export class ContentFileComponent implements OnDestroy {
   }
 
   public file: File;
-  public data: String;
+  
   private subWorkspaceUpdated: Subscription;
-  private instructions: Array<any>;
+  private isTasteeFile: boolean = false;
+  private isConfigFile: boolean = false;
 
   ngOnInit() {
   }
 
   openFile(workspace: Workspace) {
-    this.instructions=[];
     if (workspace.displayedFile) {
       this.file = new File(workspace.displayedFile.path, workspace.displayedFile.name, workspace.displayedFile.type);
+      this.isTasteeFile=this.fileService.isTasteeFile(this.file);
+      this.isConfigFile=this.fileService.isConfigFile(this.file);
       if (workspace.selectedFileInTree) {
         this.file.directory = this.fileService.getParentDirectory(workspace.selectedFileInTree);
       } else {
@@ -47,43 +50,10 @@ export class ContentFileComponent implements OnDestroy {
       this.file = null;
     }
   }
-  saveData() {
-    if (this.file.path) {
-      this.fileService.saveFile(this.file);
-    }
-  }
-
-  displayActionsIfTasteeFile(): boolean {
-    if (this.file.path) {
-      return this.fileService.isTasteeFile(this.file.name.toString());
-    }
-    return false;
-  }
-
-  saveFile() {
-    this.file = this.fileService.saveFile(this.file);
-    let workspace = this.workspaceService.getWorkspace();
-    workspace.displayedFile = this.file;
-    workspace.selectedFileInTree = this.file;
-    let idx = workspace.openedFiles.findIndex(file => !file.path);
-    workspace.openedFiles[idx] = this.file;
-    this.workspaceService.updateWorkspace(workspace);
-  }
-
-  deleteFile() {
-    this.fileService.deleteFile(this.file);
-    let workspace = this.workspaceService.removeFileInWorkspace(this.file);
-    this.workspaceService.updateWorkspace(workspace);
-  }
+ 
 
   ngOnDestroy() {
     this.subWorkspaceUpdated.unsubscribe();
   }
-
-  runTastee() {
-    this.instructions = [];
-    this.tasteeService.runFileWithTastee(this.file).then(instructions => {
-      this.instructions = instructions;
-    })
-  }
+  
 }

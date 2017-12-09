@@ -1,31 +1,9 @@
-<form *ngIf="file">
-
-  <div class="form-group">
-    <button class="btn btn-large btn-positive" (click)="saveFile()">Save File</button>
-    <button class="btn btn-large btn-negative" (click)="deleteFile()">Delete File</button>
-    <button class="btn btn-large btn-default" *ngIf="displayActionsIfTasteeFile()" (click)="runTastee()">Run Tastee</button>
-    <button class="btn btn-large btn-primary" *ngIf="displayActionsIfTasteeFile()">Debug Tastee</button>
-  </div>
-  <div class="form-group">
-    <label>Directory</label>
-    <input id="directory" name="directory" class="form-control" [(ngModel)]="file.directory">
-  </div>
-  <div class="form-group">
-    <label>File Name</label>
-    <input id="fileName" name="fileName" class="form-control" [(ngModel)]="file.name">
-  </div>
-  <app-wysiwyg [data]="file.data"></app-wysiwyg>
-  <div class="form-group">
-    <label>Content File</label>
-    <textarea class="form-control" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
-  </div>
-  <div class="form-group" *ngIf="instructions">
-    <h3> Result of this Tastee File</h3>
-    <div *ngFor="let instruction of instructions">
-      <label [ngStyle]="{'color': instruction.valid?'green':'red'}">{{instruction.tasteeLine}}</label>
-      <br/>
-      <label *ngIf="instruction.errorMessage" [ngStyle]="{'color':'red'}">Cause : {{instruction.errorMessage}}</label>
-    </div>
-  </div>
-
-</form>
+<div *ngIf="isTasteeFile">
+  <app-tastee-file [file]=file ></app-tastee-file>
+</div>
+<div *ngIf="isConfigFile">
+  <app-yaml-file [file]=file ></app-yaml-file>
+</div>
+<div *ngIf="!isOtherFile && !isConfigFile">
+  <h1>Not working in Tastee ...</h1>
+</div>
