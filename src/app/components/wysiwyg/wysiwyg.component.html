@@ -1,0 +1,45 @@
+<div id="editparent">
+  <div class="toolbar-actions" id='editControls' style='text-align:center; padding:5px;'>
+    <div class="btn-group">
+      <button class="btn btn-default" (click)="formatWrite('undo')">
+        <span class="icon icon-ccw"></span>
+      </button>
+      <button class="btn btn-default" (click)="formatWrite('redo')">
+        <span class="icon icon-cw"></span>
+      </button>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-default" (click)="formatWrite('bold')">
+        <B>Bold</B>
+      </button>
+      <button class="btn btn-default" (click)="formatWrite('italic')">
+        <em>Italic</em>
+      </button>
+      <button class="btn btn-default" (click)="formatWrite('underline')">
+        <u>
+          <b>U</b>
+        </u>
+      </button>
+      <button class="btn btn-default" (click)="formatWrite('strikeThrough')">
+        <s>abc</s>
+      </button>
+    </div>
+    <div class='btn-group'>
+      <button class="btn btn-default" (click)="formatWrite('h1')">
+        h
+        <sup>1</sup>
+      </button>
+      <button class="btn btn-default" (click)="formatWrite('h2')">h
+        <sup>2</sup>
+      </button>
+      <button class="btn btn-default" (click)="formatWrite('p')">p</button>
+    </div>
+
+    <div class='btn-group'>
+        <button class="btn btn-default" (click)="formatWrite('pre')">
+          Tastee
+        </button>
+      </div>
+  </div>
+  <div id="editor" contenteditable="true">{{data}}</div>
+</div>

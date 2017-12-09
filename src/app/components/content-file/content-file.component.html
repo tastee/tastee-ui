@@ -14,6 +14,7 @@
     <label>File Name</label>
     <input id="fileName" name="fileName" class="form-control" [(ngModel)]="file.name">
   </div>
+  <app-wysiwyg [data]="file.data"></app-wysiwyg>
   <div class="form-group">
     <label>Content File</label>
     <textarea class="form-control" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
