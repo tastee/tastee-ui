@@ -45,7 +45,7 @@
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
     "@angular/router": "5.0.3",
-    "chromedriver": "^2.33.2",
+    "chromedriver": "2.31.0",
     "core-js": "2.4.1",
     "enhanced-resolve": "3.3.0",
     "geckodriver": "^1.10.0",
