@@ -21,9 +21,11 @@ export class WysiwygComponent implements OnInit {
     switch (role) {
       case 'h1':
       case 'h2':
-      case 'pre':
       case 'p':
         document.execCommand('formatBlock', false, role);
+        break;
+      case 'pre':
+        this._formatTasteeCode();
         break;
       default:
         document.execCommand(role, false, null);
@@ -31,4 +33,8 @@ export class WysiwygComponent implements OnInit {
     }
   }
 
+  private _formatTasteeCode() {
+    document.execCommand('formatBlock', false, 'pre');
+    document.querySelector('#editor pre:not(.tastee)').className += ' tastee';
+  }
 }
