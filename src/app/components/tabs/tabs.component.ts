@@ -7,7 +7,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss']
 })
