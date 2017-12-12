@@ -20,7 +20,10 @@ export class FileService {
   }
 
   isTasteeFile(file: File) {
-    return path.extname(file.name) === environment.tastee_file_ext;
+    if (file) {
+      return path.extname(file.name) === environment.tastee_file_ext;
+    }
+    return false;
   }
 
 

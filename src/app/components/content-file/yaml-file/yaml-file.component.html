@@ -1,15 +1,2 @@
+<app-information-line-bar class="information" [data]="file.data"></app-information-line-bar>
 <textarea *ngIf="file" class="content" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
-
-<div *ngIf="file" class="form-group">
-  <div *ngIf="errorMessage;else goodFile">
-    <label class="badFile">
-      <span class="icon icon-cancel"></span> Your file contains errors !
-    </label>
-    <label class="badFile">{{errorMessage}}</label>
-  </div>
-</div>
-<ng-template #goodFile>
-  <label class="goodFile">
-    <span class="icon icon-check"></span> Your file is good !
-  </label>
-</ng-template>

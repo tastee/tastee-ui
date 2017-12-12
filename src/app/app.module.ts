@@ -28,6 +28,7 @@ import { FileService } from './services/file.service';
 import { TasteeService } from './services/tastee.service';
 import { WysiwygToolbarComponent } from './components/wysiwyg/wysiwyg-toolbar/wysiwyg-toolbar.component';
 import { ContentComponent } from './components/content/content.component';
+import { InformationLineBarComponent } from './components/content-file/information-line-bar/information-line-bar.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ContentComponent } from './components/content/content.component';
     TasteeFileComponent,
     ParametersComponent,
     WysiwygToolbarComponent,
-    ContentComponent
+    ContentComponent,
+    InformationLineBarComponent
   ],
   imports: [
     BrowserModule,
