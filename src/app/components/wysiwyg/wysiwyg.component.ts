@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ElementRef } from '@angular/core';
+import {WorkspaceService} from '../../services/workspace.service';
 
 @Component({
   selector: 'app-wysiwyg',
@@ -10,11 +11,13 @@ export class WysiwygComponent implements OnInit {
 
   @Input() data: String;
 
-  constructor() { }
+  constructor(private _workspaceService: WorkspaceService) { }
 
   ngOnInit() {
+    this._workspaceService.onWysiwygAction().subscribe(action => this.formatWrite(action))
   }
-  formatWrite(role) {
+
+  private formatWrite(role) {
     switch (role) {
       case 'h1':
       case 'h2':

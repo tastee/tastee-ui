@@ -24,6 +24,9 @@ import { YamlFileComponent } from './components/content-file/yaml-file/yaml-file
 import { TasteeFileComponent } from './components/content-file/tastee-file/tastee-file.component';
 import { ParametersComponent } from './components/parameters/parameters.component';
 import { SessionService } from 'app/services/session.service';
+import {FileService} from './services/file.service';
+import {TasteeService} from './services/tastee.service';
+import {WysiwygToolbarComponent} from './components/wysiwyg/wysiwyg-toolbar/wysiwyg-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { SessionService } from 'app/services/session.service';
     WysiwygComponent,
     YamlFileComponent,
     TasteeFileComponent,
-    ParametersComponent
+    ParametersComponent,
+    WysiwygToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,13 @@ import { SessionService } from 'app/services/session.service';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ElectronService, WorkspaceService, SessionService],
+  providers: [
+    ElectronService,
+    WorkspaceService,
+    SessionService,
+    FileService,
+    TasteeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

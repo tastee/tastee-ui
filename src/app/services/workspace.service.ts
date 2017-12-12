@@ -5,11 +5,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { File } from 'app/models/file';
 import { environment } from '../../environments';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class WorkspaceService {
 
   private workspace = new Subject<Workspace>();
+  private _wysiwigActions = new Subject<string>();
 
 
   constructor() {
@@ -37,6 +39,14 @@ export class WorkspaceService {
 
   saveWorkspace(workspace: Workspace) {
     localStorage.setItem(environment.local_storage_worskpace_name, JSON.stringify(workspace));
+  }
+
+  launchWysiwygAction(action: string) {
+    this._wysiwigActions.next(action)
+  }
+
+  onWysiwygAction(): Observable<string> {
+    return this._wysiwigActions.asObservable();
   }
 
 
