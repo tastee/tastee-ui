@@ -1,3 +1,3 @@
 <div id="editparent">
-  <div id="editor" contenteditable="true">{{data}}</div>
+  <div id="editor" contenteditable="true"  (input)="dataChanged($event.srcElement.innerHTML)" [innerHTML]="data"></div>
 </div>

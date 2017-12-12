@@ -13,7 +13,6 @@ export class TasteeFileComponent implements OnInit {
 
   @Input() file: File;
   private instructions: Array<any>;
-  public data: String;
 
   constructor(private workspaceService: WorkspaceService,
     private fileService: FileService,
@@ -23,9 +22,9 @@ export class TasteeFileComponent implements OnInit {
     this.instructions = [];
   }
 
-  saveData() {
+  saveData(event) {
     if (this.file.path) {
-      this.fileService.saveFile(this.file);
+      this.fileService.saveFile(this.file, event);
     }
   }
 
@@ -38,7 +37,7 @@ export class TasteeFileComponent implements OnInit {
 
   saveFile() {
     const newFile = this.file.path === null;
-    this.file = this.fileService.saveFile(this.file);
+    this.file = this.fileService.saveFile(this.file, this.file.data);
     const workspace = this.workspaceService.getWorkspace();
     workspace.displayedFile = this.file;
     workspace.selectedFileInTree = this.file;

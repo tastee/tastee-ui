@@ -27,13 +27,13 @@ export class YamlFileComponent implements OnInit {
   saveData() {
     this.validateFile();
     if (this.file.path) {
-      this.fileService.saveFile(this.file);
+      this.fileService.saveFile(this.file, this.file.data);
     }
   }
 
   saveFile() {
     const newFile = this.file.path === null;
-    this.file = this.fileService.saveFile(this.file);
+    this.file = this.fileService.saveFile(this.file, this.file.data);
     const workspace = this.workspaceService.getWorkspace();
     workspace.displayedFile = this.file;
     workspace.selectedFileInTree = this.file;

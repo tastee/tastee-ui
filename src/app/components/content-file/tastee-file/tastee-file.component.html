@@ -1,4 +1,4 @@
 <div *ngIf="file" class="tasteeFile">
-  <app-wysiwyg [data]="file.data"></app-wysiwyg>
+  <app-wysiwyg [data]="file.data" (onChange)="saveData($event)"></app-wysiwyg>
 </div>
 

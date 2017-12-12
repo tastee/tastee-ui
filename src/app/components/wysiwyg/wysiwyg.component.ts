@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { ElementRef } from '@angular/core';
 import {WorkspaceService} from '../../services/workspace.service';
 
@@ -10,6 +10,7 @@ import {WorkspaceService} from '../../services/workspace.service';
 export class WysiwygComponent implements OnInit {
 
   @Input() data: String;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   constructor(private _workspaceService: WorkspaceService) { }
 
@@ -36,5 +37,9 @@ export class WysiwygComponent implements OnInit {
   private _formatTasteeCode() {
     document.execCommand('formatBlock', false, 'pre');
     document.querySelector('#editor pre:not(.tastee)').className += ' tastee';
+  }
+
+  dataChanged(innerHTML: string) {
+    this.onChange.emit(innerHTML);
   }
 }

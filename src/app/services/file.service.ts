@@ -28,12 +28,12 @@ export class FileService {
     return path.extname(file.name) === environment.tastee_config_file_ext;
   }
 
-  saveFile(file: File): File {
+  saveFile(file: File, data: string): File {
     if (!file.path) {
       file.path = path.join(file.directory, file.name);
       mkdirp.sync(file.directory);
     }
-    fs.writeFileSync(path.join(file.directory, file.name), file.data);
+    fs.writeFileSync(path.join(file.directory, file.name), data);
     return file;
   }
 
