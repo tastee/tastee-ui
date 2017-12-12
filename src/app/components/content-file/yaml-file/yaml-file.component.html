@@ -1,6 +1,6 @@
-<textarea class="content" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
+<textarea *ngIf="file" class="content" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
 
-<div class="form-group">
+<div *ngIf="file" class="form-group">
   <div *ngIf="errorMessage;else goodFile">
     <label class="badFile">
       <span class="icon icon-cancel"></span> Your file contains errors !

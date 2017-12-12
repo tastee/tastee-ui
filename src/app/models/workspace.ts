@@ -6,6 +6,7 @@ export class Workspace {
     public displayedFile: File;
     public openedFiles: Array<File> = [];
     public treeDisplayed: any;
+    public menu: string;
 
     static copy(wsToCopy: Workspace): Workspace {
         const workspace = new Workspace();
@@ -14,6 +15,7 @@ export class Workspace {
         workspace.displayedFile = wsToCopy.displayedFile;
         workspace.openedFiles = wsToCopy.openedFiles;
         workspace.treeDisplayed = wsToCopy.treeDisplayed;
+        workspace.menu = wsToCopy.menu;
         return workspace;
     }
 }

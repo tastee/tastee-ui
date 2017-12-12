@@ -1,32 +1,24 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { Workspace } from 'app/models/workspace';
-import { WorkspaceService } from 'app/services/workspace.service';
 import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html'
+  selector: 'app-content',
+  templateUrl: './content.component.html',
+  styleUrls: ['./content.component.scss']
 })
-export class MenuComponent implements OnChanges {
-
-  public menuSelected: string = 'home';
+export class ContentComponent implements OnChanges {
 
   @Input() public workspace: Workspace;
+  public menuSelected: string = 'home';
 
-  constructor(private workspaceService: WorkspaceService) { }
+  constructor() { }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     if (this.workspace && this.workspace.menu) {
       this.menuSelected = this.workspace.menu;
     }
-  }
-
-  goto(name: string) {
-    const ws = Workspace.copy(this.workspace);
-    ws.menu = name;
-    this.workspaceService.updateWorkspace(ws);
   }
 
 }

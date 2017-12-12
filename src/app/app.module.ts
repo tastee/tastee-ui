@@ -27,6 +27,7 @@ import { SessionService } from 'app/services/session.service';
 import { FileService } from './services/file.service';
 import { TasteeService } from './services/tastee.service';
 import { WysiwygToolbarComponent } from './components/wysiwyg/wysiwyg-toolbar/wysiwyg-toolbar.component';
+import { ContentComponent } from './components/content/content.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { WysiwygToolbarComponent } from './components/wysiwyg/wysiwyg-toolbar/wy
     YamlFileComponent,
     TasteeFileComponent,
     ParametersComponent,
-    WysiwygToolbarComponent
+    WysiwygToolbarComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
