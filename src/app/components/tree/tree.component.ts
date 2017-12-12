@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { FileService } from 'app/services/file.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -11,7 +11,7 @@ import { Workspace } from 'app/models/workspace';
   styleUrls: ['./tree.component.scss'],
   providers: [FileService]
 })
-export class TreeComponent implements OnInit, OnDestroy {
+export class TreeComponent implements OnDestroy {
 
   public tree: any;
   private subWorkspaceUpdated: Subscription;
@@ -32,14 +32,9 @@ export class TreeComponent implements OnInit, OnDestroy {
     this.getFilesFromFs();
   }
 
-  ngOnInit() {
-
-  }
-
   getFilesFromFs() {
-    let workspace = this.workspaceService.getWorkspace();
-    let tree = this.fileService.getFilesInWorkspace(workspace);
-    workspace.treeDisplayed = tree;
+    const workspace = this.workspaceService.getWorkspace();
+    workspace.treeDisplayed = this.fileService.getFilesInWorkspace(workspace);
     this.workspaceService.updateWorkspace(workspace);
   }
   ngOnDestroy() {

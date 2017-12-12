@@ -7,6 +7,7 @@ import * as mkdirp from 'mkdirp';
 import * as yaml from 'js-yaml';
 
 import { File } from 'app/models/file';
+import { environment } from '../../environments';
 
 
 @Injectable()
@@ -19,12 +20,12 @@ export class FileService {
   }
 
   isTasteeFile(file: File) {
-    return path.extname(file.name) === ".tee";
+    return path.extname(file.name) === environment.tastee_file_ext;
   }
 
 
   isConfigFile(file: File) {
-    return path.extname(file.name) === ".yaml";
+    return path.extname(file.name) === environment.tastee_config_file_ext;
   }
 
   saveFile(file: File): File {
@@ -42,7 +43,7 @@ export class FileService {
 
   deleteFile(file: File) {
     fs.unlinkSync(file.path.toString());
-    let files = fs.readdirSync(file.directory);
+    const files = fs.readdirSync(file.directory);
     if (files.length === 0) {
       fs.rmdirSync(file.directory);
     }
@@ -59,6 +60,7 @@ export class FileService {
     try {
       yaml.safeLoad(file.data);
     } catch (e) {
+      console.log(e);
       return e;
     }
   }

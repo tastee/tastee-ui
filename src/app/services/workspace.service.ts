@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { File } from 'app/models/file';
+import { environment } from '../../environments';
 
 @Injectable()
 export class WorkspaceService {
@@ -12,12 +13,12 @@ export class WorkspaceService {
 
 
   constructor() {
-    this.workspace.next(JSON.parse(localStorage.getItem("tastee_workspace")));
+    this.workspace.next(JSON.parse(localStorage.getItem(environment.local_storage_worskpace_name)));
     this.workspaceUpdated().subscribe(workspace => this.saveWorkspace(workspace));
   }
 
   createNewWorkspace(path: string) {
-    let workspace = new Workspace();
+    const workspace = new Workspace();
     workspace.workspacePath = path;
     this.workspace.next(workspace);
   }
@@ -31,16 +32,16 @@ export class WorkspaceService {
   }
 
   getWorkspace(): Workspace {
-    return JSON.parse(localStorage.getItem("tastee_workspace"));
+    return JSON.parse(localStorage.getItem(environment.local_storage_worskpace_name));
   }
 
   saveWorkspace(workspace: Workspace) {
-    localStorage.setItem("tastee_workspace", JSON.stringify(workspace));
+    localStorage.setItem(environment.local_storage_worskpace_name, JSON.stringify(workspace));
   }
 
 
   public removeFileInWorkspace(file: File): Workspace {
-    let workspace = this.getWorkspace();
+    const workspace = this.getWorkspace();
     let index = workspace.openedFiles.findIndex(fileToRemove => fileToRemove.path === file.path);
     workspace.openedFiles = workspace.openedFiles.filter(fileToRemove => fileToRemove.path !== file.path);
     if (index >= workspace.openedFiles.length) {

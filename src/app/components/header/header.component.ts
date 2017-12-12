@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
 import { Router } from '@angular/router';
 import { File } from 'app/models/file';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-header',
@@ -13,13 +14,14 @@ import { File } from 'app/models/file';
   styleUrls: ['./header.component.scss'],
   providers: [TasteeService, FileService]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   private subWorkspaceUpdated: Subscription;
 
 
-  public workspaceIsSelected: boolean = false;
-  public displayTreeAction: boolean = false;
+  public workspaceIsSelected: Boolean = false;
+  public displayTreeAction: Boolean = false;
+
   constructor(
     private tasteeService: TasteeService,
     private fileService: FileService,
@@ -36,7 +38,9 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-
+  ngOnDestroy() {
+    this.subWorkspaceUpdated.unsubscribe();
+  }
   runTastee() {
     this.tasteeService.runTasteeInWorkspace(this.workspaceService.getWorkspace()).then(result => this.tasteeService.stopTastee());
   }
@@ -54,15 +58,11 @@ export class HeaderComponent implements OnInit {
     this.workspaceService.saveWorkspace(this.workspaceService.getWorkspace());
   }
 
-  ngOnDestroy() {
-    this.subWorkspaceUpdated.unsubscribe();
-  }
-
   createNewFileInWorkspace() {
-    let workspace = this.workspaceService.getWorkspace();
-    let idxNewFile = workspace.openedFiles.findIndex(file => !file.path)
+    const workspace = this.workspaceService.getWorkspace();
+    const idxNewFile = workspace.openedFiles.findIndex(file => !file.path);
     if (idxNewFile === -1) {
-      let file = new File(null, "New File", "file");;
+      const file = new File(null, 'New File', 'file');
       workspace.displayedFile = file;
       workspace.openedFiles.push(file);
     } else {

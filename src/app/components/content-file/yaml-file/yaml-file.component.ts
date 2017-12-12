@@ -12,7 +12,7 @@ import { WorkspaceService } from 'app/services/workspace.service';
 export class YamlFileComponent implements OnInit {
   @Input() file: File;
 
-  public isValidYamlFile: boolean = false;
+  public isValidYamlFile: Boolean = false;
   public errorMessage: string;
   constructor(private workspaceService: WorkspaceService,
     private fileService: FileService) { }
@@ -32,12 +32,12 @@ export class YamlFileComponent implements OnInit {
   }
 
   saveFile() {
-    let newFile = this.file.path === null;
+    const newFile = this.file.path === null;
     this.file = this.fileService.saveFile(this.file);
-    let workspace = this.workspaceService.getWorkspace();
+    const workspace = this.workspaceService.getWorkspace();
     workspace.displayedFile = this.file;
     workspace.selectedFileInTree = this.file;
-    let idx = workspace.openedFiles.findIndex(file => !file.path);
+    const idx = workspace.openedFiles.findIndex(file => !file.path);
     workspace.openedFiles[idx] = this.file;
     if (newFile) {
       this.workspaceService.updateWorkspace(workspace);
@@ -46,7 +46,6 @@ export class YamlFileComponent implements OnInit {
 
   deleteFile() {
     this.fileService.deleteFile(this.file);
-    let workspace = this.workspaceService.removeFileInWorkspace(this.file);
-    this.workspaceService.updateWorkspace(workspace);
+    this.workspaceService.updateWorkspace(this.workspaceService.removeFileInWorkspace(this.file));
   }
 }

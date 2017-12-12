@@ -25,7 +25,7 @@ export class TabsComponent implements OnDestroy {
   }
 
   removeFile(file) {
-    let workspace = this.workspaceService.removeFileInWorkspace(file);
+    const workspace = this.workspaceService.removeFileInWorkspace(file);
     this.workspaceService.updateWorkspace(workspace);
   }
 
@@ -37,7 +37,7 @@ export class TabsComponent implements OnDestroy {
   }
 
   selectFile(file) {
-    let workspace = this.workspaceService.getWorkspace();
+    const workspace = this.workspaceService.getWorkspace();
     if (file.path) {
       workspace.selectedFileInTree = file;
     }

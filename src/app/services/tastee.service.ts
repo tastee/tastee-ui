@@ -11,6 +11,7 @@ import * as  glob from 'glob';
 import * as fs from 'fs';
 import * as path from 'path';
 import { File } from 'app/models/file';
+import { environment } from '../../environments';
 
 
 @Injectable()
@@ -26,8 +27,8 @@ export class TasteeService {
   }
 
   runTasteeInWorkspace(workspace: Workspace): Promise<any> {
-    let files = glob.sync(path.join(workspace.workspacePath, '**', '*.tee'))
-    let promises = new Array<Promise<string[]>>();
+    const files = glob.sync(path.join(workspace.workspacePath, '**', '*' + environment.tastee_file_ext))
+    const promises = new Array<Promise<string[]>>();
 
     files.forEach(file => {
       promises.push(this.workingByFile(file));
@@ -38,10 +39,9 @@ export class TasteeService {
   }
 
   workingByFile(pathToAnalyse: string): Promise<any> {
-
     this.core.init(new TasteeEngine('firefox'))
     const data = ExtractTasteeCode.extract(pathToAnalyse);
-    const regex = /\/\/savor\ (.*.yaml)/g
+    const regex = environment.keyword_to_include_yaml_file;
     let match;
     while (match = regex.exec(data.join('\n'))) {
       if (path.isAbsolute(match[1])) {
@@ -49,7 +49,6 @@ export class TasteeService {
       } else {
         const pathOfFile = path.join(path.dirname(pathToAnalyse), match[1]);
         if (fs.existsSync(pathOfFile)) {
-          console.log(pathOfFile);
           this.core.addPluginFile(pathOfFile)
         }
       }

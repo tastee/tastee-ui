@@ -7,9 +7,10 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
+  public menuSelected: String = 'home';
+
   constructor(private router: Router) { }
 
-  menuSelected: String = "home";
   ngOnInit() {
     this.router.navigate([this.menuSelected]);
   }

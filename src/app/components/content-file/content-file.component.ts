@@ -15,6 +15,14 @@ import { TasteeService } from 'app/services/tastee.service';
 export class ContentFileComponent implements OnDestroy {
 
 
+
+  public file: File;
+
+  private subWorkspaceUpdated: Subscription;
+  private isTasteeFile: Boolean = false;
+  private isConfigFile: Boolean = false;
+  private isOtherFile: Boolean = false;
+
   constructor(private workspaceService: WorkspaceService,
     private fileService: FileService,
     private tasteeService: TasteeService) {
@@ -24,20 +32,12 @@ export class ContentFileComponent implements OnDestroy {
     this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => this.openFile(workspace));
   }
 
-  public file: File;
-  
-  private subWorkspaceUpdated: Subscription;
-  private isTasteeFile: boolean = false;
-  private isConfigFile: boolean = false;
-
-  ngOnInit() {
-  }
-
   openFile(workspace: Workspace) {
     if (workspace.displayedFile) {
       this.file = new File(workspace.displayedFile.path, workspace.displayedFile.name, workspace.displayedFile.type);
-      this.isTasteeFile=this.fileService.isTasteeFile(this.file);
-      this.isConfigFile=this.fileService.isConfigFile(this.file);
+      this.isTasteeFile = this.fileService.isTasteeFile(this.file);
+      this.isConfigFile = this.fileService.isConfigFile(this.file);
+      this.isOtherFile = !this.isTasteeFile && !this.isConfigFile;
       if (workspace.selectedFileInTree) {
         this.file.directory = this.fileService.getParentDirectory(workspace.selectedFileInTree);
       } else {
@@ -50,10 +50,10 @@ export class ContentFileComponent implements OnDestroy {
       this.file = null;
     }
   }
- 
+
 
   ngOnDestroy() {
     this.subWorkspaceUpdated.unsubscribe();
   }
-  
+
 }

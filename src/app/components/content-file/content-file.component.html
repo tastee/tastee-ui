@@ -4,6 +4,6 @@
 <div *ngIf="isConfigFile">
   <app-yaml-file [file]=file ></app-yaml-file>
 </div>
-<div *ngIf="!isTasteeFile && !isConfigFile">
+<div *ngIf="isOtherFile">
   <h1>Not working in Tastee ...</h1>
 </div>
