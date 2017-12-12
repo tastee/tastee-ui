@@ -12,7 +12,7 @@
     </li>
     <ul class="tree-parent" [ngClass]="{'open': openSubTree }">
       <div *ngFor="let children of child.children">
-        <app-entry [child]=children></app-entry>
+        <app-entry [child]=children [workspace]=workspace></app-entry>
       </div>
     </ul>
   </div>

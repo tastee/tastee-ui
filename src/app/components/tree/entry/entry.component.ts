@@ -1,61 +1,50 @@
-import { Component, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, Input, Output } from '@angular/core';
 import { WorkspaceService } from 'app/services/workspace.service';
-import { Subscription } from 'rxjs/Subscription';
 import { File } from 'app/models/file';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { FileService } from 'app/services/file.service';
+import { Workspace } from 'app/models/workspace';
+import { OnInit, OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss']
 })
-export class EntryComponent implements OnDestroy, OnInit {
+export class EntryComponent implements OnChanges {
 
   @Input() child: any;
   @Input() openSubTree: Boolean = false;
 
-  private subWorkspaceUpdated: Subscription;
+  @Input() public workspace: Workspace;
 
   public childIsSelected: Boolean = false;
-  constructor(private workspaceService: WorkspaceService,
-    private fileService: FileService) {
-    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
-      if (workspace.selectedFileInTree && this.child.path === workspace.selectedFileInTree.path) {
-        this.childIsSelected = true;
-      } else {
-        this.childIsSelected = false;
-      }
-    })
-  }
-  ngOnInit() {
-    const workspace = this.workspaceService.getWorkspace();
-    if (workspace.selectedFileInTree) {
-      if (workspace.selectedFileInTree && this.child.path === workspace.selectedFileInTree.path) {
+
+  constructor(private workspaceService: WorkspaceService, private fileService: FileService) { }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    if (this.workspace && this.workspace.selectedFileInTree) {
+      if (this.workspace.selectedFileInTree && this.child.path === this.workspace.selectedFileInTree.path) {
         this.childIsSelected = true;
       } else {
         this.childIsSelected = false;
       }
     }
-  }
-
-  ngOnDestroy() {
-    this.subWorkspaceUpdated.unsubscribe();
   }
 
   selectedTreeFile(file: File) {
-    const workspace = this.workspaceService.getWorkspace();
-    workspace.selectedFileInTree = file;
-    this.workspaceService.updateWorkspace(workspace);
+    const ws = Workspace.copy(this.workspace);
+    ws.selectedFileInTree = file;
+    this.workspaceService.updateWorkspace(ws);
   }
 
   displayFileInWorkspace(file: File) {
-    const workspace = this.workspaceService.getWorkspace();
-    workspace.displayedFile = file;
-    if (workspace.openedFiles.filter(pathInArray => pathInArray.path === file.path).length === 0) {
-      workspace.openedFiles.push(file);
+    const ws = Workspace.copy(this.workspace);
+    ws.displayedFile = file;
+    if (ws.openedFiles.filter(pathInArray => pathInArray.path === file.path).length === 0) {
+      ws.openedFiles.push(file);
     }
-    this.workspaceService.updateWorkspace(workspace);
+    this.workspaceService.updateWorkspace(ws);
   }
 
   isCodeFile() {

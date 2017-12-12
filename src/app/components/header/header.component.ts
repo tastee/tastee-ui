@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TasteeService } from '../../services/tastee.service';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { Workspace } from 'app/models/workspace';
@@ -14,10 +14,11 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./header.component.scss'],
   providers: [TasteeService, FileService]
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
 
   private subWorkspaceUpdated: Subscription;
 
+  @Input() public workspace: Workspace;
 
   public workspaceIsSelected: Boolean = false;
   public displayTreeAction: Boolean = false;
@@ -31,16 +32,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
-    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
-      this.workspaceIsSelected = workspace !== null;
-      if (workspace.selectedFileInTree) {
-        this.displayTreeAction = true
-      }
-    });
+    this.workspaceIsSelected = this.workspace !== null;
+    if (this.workspace && this.workspace.selectedFileInTree) {
+      this.displayTreeAction = true
+    }
   }
-  ngOnDestroy() {
-    this.subWorkspaceUpdated.unsubscribe();
-  }
+
   runTastee() {
     this.tasteeService.runTasteeInWorkspace(this.workspaceService.getWorkspace()).then(result => this.tasteeService.stopTastee());
   }
@@ -51,7 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   openWorkspace(files: FileList) {
     this.workspaceService.createNewWorkspace(files[0].path);
-    this.router.navigate(['files']);
+    this.updateTreeInWorkspace();
   }
 
   saveWorkspace() {

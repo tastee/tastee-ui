@@ -51,7 +51,7 @@ export class WorkspaceService {
 
 
   public removeFileInWorkspace(file: File): Workspace {
-    const workspace = this.getWorkspace();
+    const workspace = Workspace.copy(this.getWorkspace());
     let index = workspace.openedFiles.findIndex(fileToRemove => fileToRemove.path === file.path);
     workspace.openedFiles = workspace.openedFiles.filter(fileToRemove => fileToRemove.path !== file.path);
     if (index >= workspace.openedFiles.length) {

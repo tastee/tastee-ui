@@ -7,20 +7,8 @@ import { ParametersComponent } from 'app/components/parameters/parameters.compon
 const routes: Routes = [
     {
         path: '',
-        component: WelcomeComponent
-    },
-    {
-        path: 'home',
-        component: WelcomeComponent
-    },
-    {
-        path: 'files',
         component: TreeComponent
-    },
-    {
-        path: 'parameters',
-        component: ParametersComponent
-    },
+    }
 ];
 
 @NgModule({

@@ -1,12 +1,12 @@
-<div class="pane-group">
+<div class="pane-group" *ngIf="workspace">
 
-  <div class="pane-sm sidebar" *ngIf="tree">
+  <div class="pane-sm sidebar">
     <ul class="tree-parent open">
-      <app-entry [child]=tree [openSubTree]=true></app-entry>
+      <app-entry [workspace]=workspace [child]=tree [openSubTree]=true></app-entry>
     </ul>
   </div>
 
   <div class="pane">
-    <app-home></app-home>
+    <app-home [workspace]=workspace></app-home>
   </div>
 </div>

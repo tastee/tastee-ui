@@ -1,10 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input, OnInit, OnChanges } from '@angular/core';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
 import { File } from 'app/models/file';
 import { Workspace } from 'app/models/workspace';
 import { TasteeService } from 'app/services/tastee.service';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-content-file',
@@ -12,13 +13,13 @@ import { TasteeService } from 'app/services/tastee.service';
   styleUrls: ['./content-file.component.scss'],
   providers: [FileService, TasteeService]
 })
-export class ContentFileComponent implements OnDestroy {
+export class ContentFileComponent implements OnChanges {
 
+  @Input() public workspace: Workspace;
 
 
   public file: File;
 
-  private subWorkspaceUpdated: Subscription;
   private isTasteeFile: Boolean = false;
   private isConfigFile: Boolean = false;
   private isOtherFile: Boolean = false;
@@ -26,10 +27,10 @@ export class ContentFileComponent implements OnDestroy {
   constructor(private workspaceService: WorkspaceService,
     private fileService: FileService,
     private tasteeService: TasteeService) {
-    if (workspaceService.getWorkspace().displayedFile) {
-      this.openFile(workspaceService.getWorkspace());
-    }
-    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => this.openFile(workspace));
+  }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    this.openFile(this.workspace);
   }
 
   openFile(workspace: Workspace) {
@@ -49,11 +50,6 @@ export class ContentFileComponent implements OnDestroy {
     } else {
       this.file = null;
     }
-  }
-
-
-  ngOnDestroy() {
-    this.subWorkspaceUpdated.unsubscribe();
   }
 
 }
