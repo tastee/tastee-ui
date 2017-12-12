@@ -1,5 +1,5 @@
 {
-  "productName": "angular-electron",
+  "productName": "tastee-ui",
   "directories": {
     "app": "dist",
     "output": "app-builds"

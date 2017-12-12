@@ -1,12 +1,8 @@
 {
-  "name": "angular-electron",
+  "name": "tastee-ui",
   "version": "2.2.0",
-  "description": "Angular 5 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
-  "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
-  },
+  "description": "UI For TASTEE",
+  "homepage": "https://github.com/tastee/tastee-ui",
   "keywords": [
     "angular",
     "angular 5",
