@@ -32,8 +32,9 @@ export class HeaderComponent implements OnChanges {
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     this._workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
-    this._tasteeFileIsDisplayed = this.fileService.isTasteeFile(this.workspace.displayedFile);
-
+    if (this.workspace) {
+      this._tasteeFileIsDisplayed = this.fileService.isTasteeFile(this.workspace.displayedFile);
+    }
     if (this.workspace && this.workspace.selectedFileInTree) {
       this._displayTreeAction = true
     }
