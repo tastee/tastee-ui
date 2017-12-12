@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
   }
 
   runTastee() {
-    this.tasteeService.runWorkspaceWithTastee(this.workspaceService.getWorkspace());
+    this.tasteeService.runTasteeInWorkspace(this.workspaceService.getWorkspace()).then(result => this.tasteeService.stopTastee());
   }
 
   stopTastee() {

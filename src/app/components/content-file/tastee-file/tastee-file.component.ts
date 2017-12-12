@@ -20,7 +20,7 @@ export class TasteeFileComponent implements OnInit {
     private tasteeService: TasteeService) { }
 
   ngOnInit() {
-    this.instructions = [];    
+    this.instructions = [];
   }
 
   saveData() {
@@ -56,8 +56,9 @@ export class TasteeFileComponent implements OnInit {
   }
   runTastee() {
     this.instructions = [];
-    this.tasteeService.runFileWithTastee(this.file).then(instructions => {
+    this.tasteeService.runTastee(this.file).then(instructions => {
       this.instructions = instructions;
+      this.tasteeService.stopTastee();
     })
   }
 }
