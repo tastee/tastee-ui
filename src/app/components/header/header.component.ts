@@ -1,12 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 import { TasteeService } from '../../services/tastee.service';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { Workspace } from 'app/models/workspace';
 import { Subscription } from 'rxjs/Subscription';
 import { FileService } from 'app/services/file.service';
-import { Router } from '@angular/router';
 import { File } from 'app/models/file';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-header',
@@ -14,32 +14,35 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./header.component.scss'],
   providers: [TasteeService, FileService]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnChanges {
 
   private subWorkspaceUpdated: Subscription;
 
   @Input() public workspace: Workspace;
 
-  public workspaceIsSelected: Boolean = false;
-  public displayTreeAction: Boolean = false;
+  public _workspaceIsSelected: Boolean = false;
+  public _tasteeFileIsDisplayed: Boolean = false;
+  public _displayTreeAction: Boolean = false;
 
   constructor(
     private tasteeService: TasteeService,
     private fileService: FileService,
-    private workspaceService: WorkspaceService,
-    private router: Router) {
+    private workspaceService: WorkspaceService) {
   }
 
-  ngOnInit() {
-    this.workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
-    this.workspaceIsSelected = this.workspace !== null;
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    this._workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
+    this._tasteeFileIsDisplayed = this.workspace.displayedFile !== null && this.fileService.isTasteeFile(this.workspace.displayedFile);
     if (this.workspace && this.workspace.selectedFileInTree) {
-      this.displayTreeAction = true
+      this._displayTreeAction = true
     }
   }
 
   runTastee() {
-    this.tasteeService.runTasteeInWorkspace(this.workspaceService.getWorkspace()).then(result => this.tasteeService.stopTastee());
+    this.tasteeService.runTastee(this.workspace.displayedFile).then(instructions => {
+      console.log(instructions);
+      this.tasteeService.stopTastee();
+    })
   }
 
   stopTastee() {

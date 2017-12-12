@@ -47,16 +47,4 @@ export class TasteeFileComponent implements OnInit {
       this.workspaceService.updateWorkspace(workspace);
     }
   }
-
-  deleteFile() {
-    this.fileService.deleteFile(this.file);
-    this.workspaceService.updateWorkspace(this.workspaceService.removeFileInWorkspace(this.file));
-  }
-  runTastee() {
-    this.instructions = [];
-    this.tasteeService.runTastee(this.file).then(instructions => {
-      this.instructions = instructions;
-      this.tasteeService.stopTastee();
-    })
-  }
 }
