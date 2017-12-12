@@ -12,13 +12,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { File } from 'app/models/file';
 import { environment } from '../../environments';
+import { SessionService } from 'app/services/session.service';
 
 
 @Injectable()
 export class TasteeService {
   core: TasteeCore;
 
-  constructor(private fileService: FileService) {
+  constructor(private fileService: FileService, private sessionService: SessionService) {
     this.core = new TasteeCore(new TasteeAnalyser());
   }
 
@@ -39,7 +40,7 @@ export class TasteeService {
   }
 
   workingByFile(pathToAnalyse: string): Promise<any> {
-    this.core.init(new TasteeEngine('firefox'))
+    this.core.init(new TasteeEngine(this.sessionService.getSession().browser))
     const data = ExtractTasteeCode.extract(pathToAnalyse);
     const regex = environment.keyword_to_include_yaml_file;
     let match;

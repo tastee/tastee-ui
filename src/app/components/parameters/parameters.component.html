@@ -1,0 +1,11 @@
+<form>
+  <div class="form-group">
+    <label>Which browser do you want to use ?</label>
+    <select class="form-control" id="browser" name="browser" required [(ngModel)]="session.browser">
+      <option *ngFor="let browser of browsers" [value]="browser">{{browser}}</option>
+    </select>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-form btn-primary" (click)="save()">OK</button>
+  </div>
+</form>

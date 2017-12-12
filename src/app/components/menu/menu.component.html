@@ -8,4 +8,8 @@
     <span class="icon icon-folder"></span>
     Files
   </span>
+  <span class="nav-group-item" [ngClass]="{'active': menuSelected=='parameters'}" (click)="goto('parameters')">
+    <span class="icon icon-brush"></span>
+    Parameters
+  </span>
 </nav>
