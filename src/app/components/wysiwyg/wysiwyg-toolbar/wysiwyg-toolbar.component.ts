@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {WorkspaceService} from '../../../services/workspace.service';
+import {TasteeService} from '../../../services/tastee.service';
+import {Workspace} from '../../../models/workspace';
 
 @Component({
   selector: 'app-wysiwyg-toolbar',
@@ -7,10 +9,9 @@ import {WorkspaceService} from '../../../services/workspace.service';
 })
 export class WysiwygToolbarComponent  {
 
-  constructor(private _workspaceService: WorkspaceService) {
-  }
+  constructor(private _workspaceService: WorkspaceService) { }
 
-  formatWrite(action: string) {
+  launchAction(action: string) {
     this._workspaceService.launchWysiwygAction(action);
   }
 

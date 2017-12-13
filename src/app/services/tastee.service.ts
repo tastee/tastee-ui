@@ -40,10 +40,38 @@ export class TasteeService {
   }
 
   workingByFile(pathToAnalyse: string): Promise<any> {
+    console.log(pathToAnalyse);
     this.core.init(new TasteeEngine(this.sessionService.getSession().browser))
     const data = ExtractTasteeCode.extract(pathToAnalyse);
+    this._managePlugin(data, pathToAnalyse);
+    return this._runTasteeCode(data, pathToAnalyse);
+  }
+
+
+  stopTastee() {
+    this.core.stop();
+  }
+
+  startTastee() {
+    this.core.init(new TasteeEngine(this.sessionService.getSession().browser))
+  }
+
+  runTasteeLine(line: string, pathToAnalyse: string) {
+    if (!this._managePlugin([line], pathToAnalyse)) {
+      this._runTasteeCode([line], pathToAnalyse);
+    }
+  }
+
+  private _runTasteeCode(data: Array<String>, pathToAnalyse?: string) {
+    return this.core.execute(data.join('\n'), pathToAnalyse).then(result => {
+      return {name: pathToAnalyse, instructions: result}
+    });
+  }
+
+  private _managePlugin(data: Array<String>, pathToAnalyse: string): boolean {
     const regex = environment.keyword_to_include_yaml_file;
     let match;
+    let pluginTreated = false;
     while (match = regex.exec(data.join('\n'))) {
       if (path.isAbsolute(match[1])) {
         this.core.addPluginFile(path)
@@ -53,12 +81,9 @@ export class TasteeService {
           this.core.addPluginFile(pathOfFile)
         }
       }
+      pluginTreated = true;
     }
-    return this.core.execute(data.join('\n'), pathToAnalyse).then(result => { return { name: pathToAnalyse, instructions: result } });
-  }
-
-  stopTastee() {
-    this.core.stop();
+    return pluginTreated;
   }
 
 }

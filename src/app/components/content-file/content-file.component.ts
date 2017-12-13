@@ -25,8 +25,7 @@ export class ContentFileComponent implements OnChanges {
   private isOtherFile: Boolean = false;
 
   constructor(private workspaceService: WorkspaceService,
-    private fileService: FileService,
-    private tasteeService: TasteeService) {
+    private fileService: FileService) {
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {

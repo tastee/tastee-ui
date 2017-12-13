@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { File } from 'app/models/file';
-import { TasteeService } from 'app/services/tastee.service';
-import { FileService } from 'app/services/file.service';
-import { WorkspaceService } from 'app/services/workspace.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {File} from 'app/models/file';
+import {FileService} from 'app/services/file.service';
+import {WorkspaceService} from 'app/services/workspace.service';
 
 @Component({
   selector: 'app-tastee-file',
@@ -15,8 +14,7 @@ export class TasteeFileComponent implements OnInit {
   private instructions: Array<any>;
 
   constructor(private workspaceService: WorkspaceService,
-    private fileService: FileService,
-    private tasteeService: TasteeService) { }
+    private fileService: FileService) { }
 
   ngOnInit() {
     this.instructions = [];
