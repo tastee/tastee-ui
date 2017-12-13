@@ -45,10 +45,12 @@ export class FileService {
   }
 
   deleteFile(file: File) {
+    const directoryPath = this.getParentDirectory(file);
     fs.unlinkSync(file.path.toString());
-    const files = fs.readdirSync(file.directory);
+    console.log(file);
+    const files = fs.readdirSync(directoryPath);
     if (files.length === 0) {
-      fs.rmdirSync(file.directory);
+      fs.rmdirSync(directoryPath);
     }
   }
   getFilesInWorkspace(workspace: Workspace) {

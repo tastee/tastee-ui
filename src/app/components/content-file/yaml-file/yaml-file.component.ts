@@ -43,9 +43,4 @@ export class YamlFileComponent implements OnInit {
       this.workspaceService.updateWorkspace(workspace);
     }
   }
-
-  deleteFile() {
-    this.fileService.deleteFile(this.file);
-    this.workspaceService.updateWorkspace(this.workspaceService.removeFileInWorkspace(this.file));
-  }
 }

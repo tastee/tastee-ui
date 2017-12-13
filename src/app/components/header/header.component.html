@@ -16,6 +16,9 @@
       <button class="btn btn-default" (click)="createNewFileInWorkspace()">
         <span class="icon icon-plus"></span>
       </button>
+      <button class="btn btn-default" *ngIf="_displayTreeAction" (click)="deleteFile()">
+        <span class="icon icon-trash"></span>
+      </button>
       <button class="btn btn-default" (click)="updateTreeInWorkspace()">
         <span class="icon icon-ccw"></span>
       </button>
