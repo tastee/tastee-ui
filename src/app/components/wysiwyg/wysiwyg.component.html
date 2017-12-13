@@ -1,3 +1,4 @@
 <div id="editparent">
   <div id="editor" [class.executable]="isbrowserLaunched" contenteditable="true"  (input)="dataChanged($event.srcElement.innerHTML)" [innerHTML]="file.data"></div>
+  <app-result-toolbar *ngIf="isbrowserLaunched" [message]="message"></app-result-toolbar>
 </div>

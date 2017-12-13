@@ -56,13 +56,14 @@ export class TasteeService {
     this.core.init(new TasteeEngine(this.sessionService.getSession().browser))
   }
 
-  runTasteeLine(line: string, pathToAnalyse: string) {
+  runTasteeLine(line: string, pathToAnalyse: string): any {
     if (!this._managePlugin([line], pathToAnalyse)) {
-      this._runTasteeCode([line], pathToAnalyse);
+      return this._runTasteeCode([line], pathToAnalyse);
     }
+    return 'Plugin Added'
   }
 
-  private _runTasteeCode(data: Array<String>, pathToAnalyse?: string) {
+  private _runTasteeCode(data: Array<String>, pathToAnalyse?: string): any {
     return this.core.execute(data.join('\n'), pathToAnalyse).then(result => {
       return {name: pathToAnalyse, instructions: result}
     });

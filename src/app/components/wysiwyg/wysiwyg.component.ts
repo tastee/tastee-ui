@@ -13,6 +13,7 @@ export class WysiwygComponent implements OnInit {
 
   _clickHandler = this.runTasteeLine.bind(this);
   isbrowserLaunched = false;
+  message: string;
 
   @Input() file: File;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
@@ -27,7 +28,7 @@ export class WysiwygComponent implements OnInit {
 
   runTasteeLine(event) {
     if (this.isbrowserLaunched) {
-      this._tasteeService.runTasteeLine(event.srcElement.innerText, this.file.path);
+      this.message = JSON.stringify(this._tasteeService.runTasteeLine(event.srcElement.innerText, this.file.path));
     }
   }
 
