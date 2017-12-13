@@ -1,0 +1,13 @@
+.right{
+    float: right;  
+}
+.center-right{
+    float: right;  
+    margin-right: -1px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 1px solid #c2c0c2;  
+}
+input{
+    height: 24px;
+}

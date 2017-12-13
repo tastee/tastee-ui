@@ -36,6 +36,26 @@ export class EntryComponent implements OnChanges {
     const ws = Workspace.copy(this.workspace);
     ws.selectedFileInTree = file;
     this.workspaceService.updateWorkspace(ws);
+    this.openSubTree = !this.openSubTree;
+  }
+
+  selectedTreeFolder(file: File) {
+    const ws = Workspace.copy(this.workspace);
+    ws.selectedFileInTree = file;
+    if (ws.openedFolders.filter(folder => folder.path === file.path).length === 0) {
+      ws.openedFolders.push(file);
+    } else {
+      ws.openedFolders.splice(ws.openedFolders.findIndex(folder => folder.path === file.path), 1);
+    }
+    this.workspaceService.updateWorkspace(ws);
+    this.openSubTree = !this.openSubTree;
+  }
+
+  folderIsOpen(file: File) {
+    if (this.workspace.openedFolders) {
+      return this.workspace.openedFolders.filter(folder => folder.path === file.path).length > 0;
+    }
+    return false;
   }
 
   displayFileInWorkspace(file: File) {

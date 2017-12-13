@@ -1,0 +1,20 @@
+<div class="btn-group">
+  <button class="btn btn-default" (click)="updateTreeInWorkspace()">
+    <span class="icon icon-arrows-ccw"></span>
+  </button>
+  <button class="btn btn-default" (click)="deleteFile()">
+    <span class="icon icon-trash"></span>
+  </button>
+  <button class="btn btn-default" (click)="_displayForm=!_displayForm">
+    <span class="icon icon-plus"></span>
+  </button>
+  <input type="text" name="name" [(ngModel)]="_file.name" placeholder="Name" *ngIf="_displayForm">
+
+  <button class="btn btn-default right" (click)="createNewFile('file')" *ngIf="_displayForm">
+    <span class="icon icon-newspaper"></span>
+  </button>
+  <button class="btn btn-default center-right" (click)="createNewFile('directory')" *ngIf="_displayForm">
+    <span class="icon icon-folder"></span>
+  </button>
+
+</div>

@@ -30,32 +30,10 @@ export class HeaderComponent implements OnChanges {
 
   openWorkspace(files: FileList) {
     this.workspaceService.createNewWorkspace(files[0].path);
-    this.updateTreeInWorkspace();
   }
 
   saveWorkspace() {
     this.workspaceService.saveWorkspace(this.workspaceService.getWorkspace());
   }
 
-  createNewFileInWorkspace() {
-    const workspace = this.workspaceService.getWorkspace();
-    const idxNewFile = workspace.openedFiles.findIndex(file => !file.path);
-    if (idxNewFile === -1) {
-      const file = new File(null, 'New File', 'file');
-      workspace.displayedFile = file;
-      workspace.openedFiles.push(file);
-    } else {
-      workspace.displayedFile = workspace.openedFiles[idxNewFile];
-    }
-    this.workspaceService.updateWorkspace(workspace);
-  }
-  updateTreeInWorkspace() {
-    const ws = Workspace.copy(this.workspaceService.getWorkspace());
-    this.workspaceService.updateWorkspace(ws);
-  }
-
-  deleteFile() {
-    this.fileService.deleteFile(this.workspace.selectedFileInTree);
-    this.workspaceService.updateWorkspace(this.workspaceService.removeFileInWorkspace(this.workspace.selectedFileInTree));
-  }
 }

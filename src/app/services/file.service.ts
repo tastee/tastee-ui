@@ -5,7 +5,7 @@ import * as path from 'path';
 import * as tree from 'directory-tree';
 import * as mkdirp from 'mkdirp';
 import * as yaml from 'js-yaml';
-
+import * as rimraf from 'rimraf';
 import { File } from 'app/models/file';
 import { environment } from '../../environments';
 
@@ -20,7 +20,7 @@ export class FileService {
   }
 
   isTasteeFile(file: File) {
-    if (file) {
+    if (file && file.path) {
       return path.extname(file.name) === environment.tastee_file_ext;
     }
     return false;
@@ -28,29 +28,29 @@ export class FileService {
 
 
   isConfigFile(file: File) {
-    return path.extname(file.name) === environment.tastee_config_file_ext;
-  }
-
-  saveFile(file: File, data: string): File {
-    if (!file.path) {
-      file.path = path.join(file.directory, file.name);
-      mkdirp.sync(file.directory);
+    if (file && file.path) {
+      return path.extname(file.name) === environment.tastee_config_file_ext;
     }
-    fs.writeFileSync(path.join(file.directory, file.name), data);
-    return file;
+    return false;
   }
 
-  createFile(file: string) {
-    fs.writeFileSync(file, '');
+  saveFile(file: File, data: string) {
+    fs.writeFileSync(file.path, data);
+  }
+
+  createFile(file: File) {
+    if (file.type === 'directory') {
+      mkdirp.sync(path.join(file.path, file.name));
+    } else {
+      fs.writeFileSync(path.join(file.path, file.name), '');
+    }
   }
 
   deleteFile(file: File) {
-    const directoryPath = this.getParentDirectory(file);
-    fs.unlinkSync(file.path.toString());
-    console.log(file);
-    const files = fs.readdirSync(directoryPath);
-    if (files.length === 0) {
-      fs.rmdirSync(directoryPath);
+    if (file.type === 'file') {
+      fs.unlinkSync(file.path);
+    } else {
+      rimraf.sync(file.path);
     }
   }
   getFilesInWorkspace(workspace: Workspace) {
@@ -58,7 +58,7 @@ export class FileService {
   }
 
   getParentDirectory(file: File): string {
-    return path.dirname(file.path.toString());
+    return path.dirname(file.path);
   }
 
   validateYaml(file: File): string {

@@ -12,19 +12,9 @@
       </button>
     </div>
 
-    <div class="btn-group" *ngIf="_displayTreeAction">
-      <button class="btn btn-default" (click)="createNewFileInWorkspace()">
-        <span class="icon icon-plus"></span>
-      </button>
-      <button class="btn btn-default" *ngIf="_displayTreeAction" (click)="deleteFile()">
-        <span class="icon icon-trash"></span>
-      </button>
-      <button class="btn btn-default" (click)="updateTreeInWorkspace()">
-        <span class="icon icon-arrows-ccw"></span>
-      </button>
-    </div>
+    <app-files-toolbar [workspace]=workspace *ngIf="_displayTreeAction"></app-files-toolbar>
 
-    <app-wysiwyg-toolbar></app-wysiwyg-toolbar>
+    <app-wysiwyg-toolbar class="wysiwyg"></app-wysiwyg-toolbar>
 
   </div>
 </header>
