@@ -7,7 +7,7 @@ html, body {
 }
 
 
-#editor pre.tastee:before {
+.executable pre.tastee:before {
   color : #008000;
   content: '\e897 ';
   font-family: photon-entypo;

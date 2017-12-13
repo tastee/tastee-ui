@@ -9,9 +9,10 @@ import {File} from '../../models/file';
   templateUrl: './wysiwyg.component.html',
   styleUrls: ['./wysiwyg.component.scss']
 })
-export class WysiwygComponent implements OnInit, AfterContentChecked {
+export class WysiwygComponent implements OnInit {
 
   _clickHandler = this.runTasteeLine.bind(this);
+  isbrowserLaunched = false;
 
   @Input() file: File;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
@@ -24,12 +25,10 @@ export class WysiwygComponent implements OnInit, AfterContentChecked {
     this._workspaceService.onWysiwygAction().subscribe(action => this._execute(action))
   }
 
-  ngAfterContentChecked() {
-    this._updateTasteeCodeBoubleClickEvent();
-  }
-
   runTasteeLine(event) {
-    this._tasteeService.runTasteeLine(event.srcElement.innerText, this.file.path);
+    if (this.isbrowserLaunched) {
+      this._tasteeService.runTasteeLine(event.srcElement.innerText, this.file.path);
+    }
   }
 
   dataChanged(innerHTML: string) {
@@ -70,15 +69,6 @@ export class WysiwygComponent implements OnInit, AfterContentChecked {
         notFormattedTasteeCode[i].className += ' tastee';
       }
     }
-
-    this._updateTasteeCodeBoubleClickEvent();
-  }
-
-  private _updateTasteeCodeBoubleClickEvent() {
-    const tasteeCode = document.querySelectorAll('#editor pre.tastee');
-    for (let i = 0; i < tasteeCode.length; ++i) {
-      tasteeCode[i].addEventListener('dblclick', this._clickHandler);
-    }
   }
 
   private _runTastee() {
@@ -89,9 +79,27 @@ export class WysiwygComponent implements OnInit, AfterContentChecked {
 
   private _startTastee() {
     this._tasteeService.startTastee();
+    this.isbrowserLaunched = true;
+    this._updateTasteeCodeBoubleClickEvent();
   }
 
   private _stopTastee() {
     this._tasteeService.stopTastee();
+    this.isbrowserLaunched = false;
+    this._removeTasteeCodeBoubleClickEvent();
+  }
+
+  private _updateTasteeCodeBoubleClickEvent() {
+    const tasteeCode = document.querySelectorAll('#editor pre.tastee');
+    for (let i = 0; i < tasteeCode.length; ++i) {
+      tasteeCode[i].addEventListener('dblclick', this._clickHandler);
+    }
+  }
+
+  private _removeTasteeCodeBoubleClickEvent() {
+    const tasteeCode = document.querySelectorAll('#editor pre.tastee');
+    for (let i = 0; i < tasteeCode.length; ++i) {
+      tasteeCode[i].removeEventListener('dblclick', this._clickHandler);
+    }
   }
 }
