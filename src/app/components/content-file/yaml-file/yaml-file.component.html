@@ -1,2 +1,1 @@
-<app-information-line-bar class="information" [data]="file.data"></app-information-line-bar>
 <textarea *ngIf="file" class="content" name='data' id='data' rows="20" (focusout)="saveData()" [(ngModel)]='file.data'></textarea>

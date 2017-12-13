@@ -28,7 +28,6 @@ import { FileService } from './services/file.service';
 import { TasteeService } from './services/tastee.service';
 import { WysiwygToolbarComponent } from './components/wysiwyg/wysiwyg-toolbar/wysiwyg-toolbar.component';
 import { ContentComponent } from './components/content/content.component';
-import { InformationLineBarComponent } from './components/content-file/information-line-bar/information-line-bar.component';
 import {ResultToolbarComponent} from './components/wysiwyg/result-toolbar/result-toolbar.component';
 
 @NgModule({
@@ -47,7 +46,6 @@ import {ResultToolbarComponent} from './components/wysiwyg/result-toolbar/result
     ParametersComponent,
     WysiwygToolbarComponent,
     ContentComponent,
-    InformationLineBarComponent,
     ResultToolbarComponent
   ],
   imports: [
