@@ -3,20 +3,20 @@
 
   <div class="toolbar-actions">
     <div class="btn-group">
-      <button class="btn btn-default" (click)="fileBtn.click()">
+      <button class="btn btn-large btn-default" (click)="fileBtn.click()">
         <span class="icon icon-folder"></span>
         <input #fileBtn id="fileBtn" type="file" webkitdirectory directory (change)="openWorkspace($event.target.files)">
       </button>
-      <button class="btn btn-default" *ngIf="_workspaceIsSelected" (click)="saveWorkspace()">
+      <button class="btn btn-large btn-default" *ngIf="_workspaceIsSelected" (click)="saveWorkspace()">
         <span class="icon icon-floppy"></span>
       </button>
     </div>
 
     <div class="btn-group" *ngIf="_displayTreeAction">
-      <button class="btn btn-default" (click)="createNewFileInWorkspace()">
+      <button class="btn btn-large btn-default" (click)="createNewFileInWorkspace()">
         <span class="icon icon-plus"></span>
       </button>
-      <button class="btn btn-default" (click)="updateTreeInWorkspace()">
+      <button class="btn btn-large btn-default" (click)="updateTreeInWorkspace()">
         <span class="icon icon-ccw"></span>
       </button>
     </div>
