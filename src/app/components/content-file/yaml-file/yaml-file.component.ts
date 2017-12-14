@@ -30,22 +30,4 @@ export class YamlFileComponent implements OnInit {
       this.fileService.saveFile(this.file, this.file.data);
     }
   }
-
-  saveFile() {
-    const newFile = this.file.path === null;
-    this.file = this.fileService.saveFile(this.file, this.file.data);
-    const workspace = this.workspaceService.getWorkspace();
-    workspace.displayedFile = this.file;
-    workspace.selectedFileInTree = this.file;
-    const idx = workspace.openedFiles.findIndex(file => !file.path);
-    workspace.openedFiles[idx] = this.file;
-    if (newFile) {
-      this.workspaceService.updateWorkspace(workspace);
-    }
-  }
-
-  deleteFile() {
-    this.fileService.deleteFile(this.file);
-    this.workspaceService.updateWorkspace(this.workspaceService.removeFileInWorkspace(this.file));
-  }
 }

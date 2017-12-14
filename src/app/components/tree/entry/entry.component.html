@@ -6,11 +6,11 @@
     </li>
   </div>
   <div *ngIf="child.type==='directory'">
-    <li class="tree-item view" (click)="openSubTree=!openSubTree">
+    <li class="tree-item view" [ngClass]="{'selected': childIsSelected===true }" (click)="selectedTreeFolder(child)">
       <a>
         <i class="icon icon-folder"></i>{{child.name}}</a>
     </li>
-    <ul class="tree-parent" [ngClass]="{'open': openSubTree }">
+    <ul class="tree-parent" [ngClass]="{'open': folderIsOpen(child) }">
       <div *ngFor="let children of child.children">
         <app-entry [child]=children [workspace]=workspace></app-entry>
       </div>

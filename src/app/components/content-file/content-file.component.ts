@@ -34,20 +34,21 @@ export class ContentFileComponent implements OnChanges {
 
   openFile(workspace: Workspace) {
     if (workspace.displayedFile) {
-      this.file = new File(workspace.displayedFile.path, workspace.displayedFile.name, workspace.displayedFile.type);
+      this.file = new File();
+      this.file.path = workspace.displayedFile.path;
+      this.file.name = workspace.displayedFile.name;
+      this.file.type = workspace.displayedFile.type;
       this.isTasteeFile = this.fileService.isTasteeFile(this.file);
       this.isConfigFile = this.fileService.isConfigFile(this.file);
       this.isOtherFile = !this.isTasteeFile && !this.isConfigFile;
-      if (workspace.selectedFileInTree) {
-        this.file.directory = this.fileService.getParentDirectory(workspace.selectedFileInTree);
-      } else {
-        this.file.directory = workspace.treeDisplayed.path;
-      }
       if (this.file.path) {
         this.file.data = this.fileService.readFile(this.file.path.toString());
       }
     } else {
       this.file = null;
+      this.isTasteeFile = false;
+      this.isOtherFile = false;
+      this.isConfigFile = false;
     }
   }
 

@@ -49,6 +49,7 @@
     "js-yaml": "^3.10.0",
     "mkdirp": "^0.5.1",
     "phantomjs-prebuilt": "^2.1.16",
+    "rimraf": "^2.6.2",
     "rxjs": "5.5.2",
     "tastee-core": "git+https://github.com/tastee/tastee-core.git",
     "tastee-html": "git+https://github.com/tastee/tastee-html.git",

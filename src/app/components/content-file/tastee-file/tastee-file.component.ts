@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {File} from 'app/models/file';
-import {FileService} from 'app/services/file.service';
-import {WorkspaceService} from 'app/services/workspace.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { File } from 'app/models/file';
+import { FileService } from 'app/services/file.service';
+import { WorkspaceService } from 'app/services/workspace.service';
 
 @Component({
   selector: 'app-tastee-file',
@@ -31,18 +31,5 @@ export class TasteeFileComponent implements OnInit {
       return this.fileService.isTasteeFile(this.file);
     }
     return false;
-  }
-
-  saveFile() {
-    const newFile = this.file.path === null;
-    this.file = this.fileService.saveFile(this.file, this.file.data);
-    const workspace = this.workspaceService.getWorkspace();
-    workspace.displayedFile = this.file;
-    workspace.selectedFileInTree = this.file;
-    const idx = workspace.openedFiles.findIndex(file => !file.path);
-    workspace.openedFiles[idx] = this.file;
-    if (newFile) {
-      this.workspaceService.updateWorkspace(workspace);
-    }
   }
 }

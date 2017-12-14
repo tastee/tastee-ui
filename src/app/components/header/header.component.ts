@@ -1,9 +1,9 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {WorkspaceService} from 'app/services/workspace.service';
-import {Workspace} from 'app/models/workspace';
-import {FileService} from 'app/services/file.service';
-import {File} from 'app/models/file';
-import {SimpleChange} from '@angular/core/src/change_detection/change_detection_util';
+import { Component, Input, OnChanges } from '@angular/core';
+import { WorkspaceService } from 'app/services/workspace.service';
+import { Workspace } from 'app/models/workspace';
+import { FileService } from 'app/services/file.service';
+import { File } from 'app/models/file';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-header',
@@ -30,26 +30,10 @@ export class HeaderComponent implements OnChanges {
 
   openWorkspace(files: FileList) {
     this.workspaceService.createNewWorkspace(files[0].path);
-    this.updateTreeInWorkspace();
   }
 
   saveWorkspace() {
     this.workspaceService.saveWorkspace(this.workspaceService.getWorkspace());
   }
 
-  createNewFileInWorkspace() {
-    const workspace = this.workspaceService.getWorkspace();
-    const idxNewFile = workspace.openedFiles.findIndex(file => !file.path);
-    if (idxNewFile === -1) {
-      const file = new File(null, 'New File', 'file');
-      workspace.displayedFile = file;
-      workspace.openedFiles.push(file);
-    } else {
-      workspace.displayedFile = workspace.openedFiles[idxNewFile];
-    }
-    this.workspaceService.updateWorkspace(workspace);
-  }
-  updateTreeInWorkspace() {
-    this.workspaceService.updateWorkspace(this.workspaceService.getWorkspace());
-  }
 }

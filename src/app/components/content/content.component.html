@@ -1,6 +1,6 @@
 <div [ngSwitch]="menuSelected">
   <div class="pane-group">
-    <div class="pane-sm sidebar" *ngSwitchCase="'files'">
+    <div class="pane-sm sidebar tree" *ngSwitchCase="'files'">
       <app-tree [workspace]=workspace></app-tree>
     </div>
     <div class="pane">

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { File } from 'app/models/file';
 import { environment } from '../../environments';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class WorkspaceService {
@@ -59,6 +59,7 @@ export class WorkspaceService {
     }
     workspace.displayedFile = workspace.openedFiles[index];
     workspace.selectedFileInTree = workspace.openedFiles[index];
+
     return workspace;
   }
 }

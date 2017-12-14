@@ -40,7 +40,6 @@ export class TasteeService {
   }
 
   workingByFile(pathToAnalyse: string): Promise<any> {
-    console.log(pathToAnalyse);
     this.core.init(new TasteeEngine(this.sessionService.getSession().browser))
     const data = ExtractTasteeCode.extract(pathToAnalyse);
     this._managePlugin(data, pathToAnalyse);
