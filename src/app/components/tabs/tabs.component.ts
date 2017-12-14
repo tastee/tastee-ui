@@ -1,10 +1,8 @@
-import { Component, OnChanges, Input } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { WorkspaceService } from 'app/services/workspace.service';
-import { File } from 'app/models/file';
-import { Workspace } from 'app/models/workspace';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
+import {Component, Input, OnChanges} from '@angular/core';
+import {WorkspaceService} from 'app/services/workspace.service';
+import {File} from 'app/models/file';
+import {Workspace} from 'app/models/workspace';
+import {SimpleChange} from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-tabs',

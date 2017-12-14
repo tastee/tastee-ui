@@ -1,5 +1,4 @@
-import {Component, OnInit, Input, EventEmitter, Output, OnChanges, AfterContentChecked} from '@angular/core';
-import { ElementRef } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {WorkspaceService} from '../../services/workspace.service';
 import {TasteeService} from '../../services/tastee.service';
 import {File} from '../../models/file';
@@ -23,12 +22,14 @@ export class WysiwygComponent implements OnInit {
               private _tasteeService: TasteeService) { }
 
   ngOnInit() {
-    this._workspaceService.onWysiwygAction().subscribe(action => this._execute(action))
+    this._workspaceService.onAction().subscribe(action => this._execute(action))
   }
 
   runTasteeLine(event) {
     if (this.isbrowserLaunched) {
-      this.message = JSON.stringify(this._tasteeService.runTasteeLine(event.srcElement.innerText, this.file.path));
+      this._tasteeService.runTasteeLine(event.srcElement.innerText, this.file.path).then(result => {
+        this._workspaceService.addEvent(result);
+      });
     }
   }
 

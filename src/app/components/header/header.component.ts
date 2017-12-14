@@ -1,9 +1,8 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { WorkspaceService } from 'app/services/workspace.service';
-import { Workspace } from 'app/models/workspace';
-import { FileService } from 'app/services/file.service';
-import { File } from 'app/models/file';
-import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
+import {Component, Input, OnChanges} from '@angular/core';
+import {WorkspaceService} from 'app/services/workspace.service';
+import {Workspace} from 'app/models/workspace';
+import {FileService} from 'app/services/file.service';
+import {SimpleChange} from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-header',

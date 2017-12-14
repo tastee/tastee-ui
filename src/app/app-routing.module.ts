@@ -1,8 +1,6 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { TreeComponent } from 'app/components/tree/tree.component';
-import { WelcomeComponent } from 'app/components/welcome/welcome.component';
-import { ParametersComponent } from 'app/components/parameters/parameters.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {TreeComponent} from 'app/components/tree/tree.component';
 
 const routes: Routes = [
     {

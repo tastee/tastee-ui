@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { Session } from 'app/models/session';
-import { SessionService } from 'app/services/session.service';
-import { environment } from '../../../environments';
+import {Component} from '@angular/core';
+import {Session} from 'app/models/session';
+import {SessionService} from 'app/services/session.service';
+import {environment} from '../../../environments';
 
 @Component({
   selector: 'app-parameters',

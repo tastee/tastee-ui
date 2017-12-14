@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Workspace } from 'app/models/workspace';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Workspace} from 'app/models/workspace';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import { File } from 'app/models/file';
-import { environment } from '../../environments';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {File} from 'app/models/file';
+import {environment} from '../../environments';
+import {WkpEvent} from '../models/wkpEvent';
 
 @Injectable()
 export class WorkspaceService {
 
   private workspace = new Subject<Workspace>();
-  private _wysiwigActions = new Subject<string>();
+  private _actions = new Subject<string>();
+  private _events = new Subject<WkpEvent>();
 
 
   constructor() {
@@ -41,12 +42,20 @@ export class WorkspaceService {
     localStorage.setItem(environment.local_storage_worskpace_name, JSON.stringify(workspace));
   }
 
-  launchWysiwygAction(action: string) {
-    this._wysiwigActions.next(action)
+  launchAction(action: string) {
+    this._actions.next(action)
   }
 
-  onWysiwygAction(): Observable<string> {
-    return this._wysiwigActions.asObservable();
+  onAction(): Observable<string> {
+    return this._actions.asObservable();
+  }
+
+  addEvent(event: WkpEvent) {
+    this._events.next(event)
+  }
+
+  onEvent(): Observable<WkpEvent> {
+    return this._events.asObservable();
   }
 
 

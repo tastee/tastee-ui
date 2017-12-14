@@ -1,17 +1,15 @@
-import { Component, OnDestroy, Input, OnInit, OnChanges } from '@angular/core';
-import { WorkspaceService } from 'app/services/workspace.service';
-import { Subscription } from 'rxjs/Subscription';
-import { FileService } from 'app/services/file.service';
-import { File } from 'app/models/file';
-import { Workspace } from 'app/models/workspace';
-import { TasteeService } from 'app/services/tastee.service';
-import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
+import {Component, Input, OnChanges} from '@angular/core';
+import {WorkspaceService} from 'app/services/workspace.service';
+import {FileService} from 'app/services/file.service';
+import {File} from 'app/models/file';
+import {Workspace} from 'app/models/workspace';
+import {TasteeService} from 'app/services/tastee.service';
+import {SimpleChange} from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-content-file',
   templateUrl: './content-file.component.html',
-  styleUrls: ['./content-file.component.scss'],
-  providers: [FileService, TasteeService]
+  styleUrls: ['./content-file.component.scss']
 })
 export class ContentFileComponent implements OnChanges {
 
@@ -23,13 +21,16 @@ export class ContentFileComponent implements OnChanges {
   private isTasteeFile: Boolean = false;
   private isConfigFile: Boolean = false;
   private isOtherFile: Boolean = false;
+  isbrowserLaunched = false;
 
-  constructor(private workspaceService: WorkspaceService,
+  constructor(private _workspaceService: WorkspaceService,
     private fileService: FileService) {
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     this.openFile(this.workspace);
+
+    this._workspaceService.onAction().subscribe(action => this._execute(action))
   }
 
   openFile(workspace: Workspace) {
@@ -49,6 +50,20 @@ export class ContentFileComponent implements OnChanges {
       this.isTasteeFile = false;
       this.isOtherFile = false;
       this.isConfigFile = false;
+    }
+  }
+
+  private _execute(role) {
+    switch (role) {
+      case 'startTastee':
+        this.isbrowserLaunched = true;
+        break;
+      case 'stopTastee':
+        this.isbrowserLaunched = false;
+        this._workspaceService.addEvent(null);
+        break;
+      default:
+        break;
     }
   }
 

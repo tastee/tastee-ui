@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { File } from 'app/models/file';
-import { FileService } from 'app/services/file.service';
-import { WorkspaceService } from 'app/services/workspace.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {File} from 'app/models/file';
+import {FileService} from 'app/services/file.service';
+import {WorkspaceService} from 'app/services/workspace.service';
 
 
 @Component({

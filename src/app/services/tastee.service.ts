@@ -1,18 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { TasteeCore } from 'tastee-core';
-import { TasteeReporter } from 'tastee-core';
-import { TasteeEngine } from 'tastee-core';
-import { TasteeAnalyser } from 'tastee-core';
-import { ExtractTasteeCode } from 'tastee-html';
-import { Workspace } from 'app/models/workspace';
-import { FileService } from 'app/services/file.service';
+import {TasteeAnalyser, TasteeCore, TasteeEngine, TasteeReporter} from 'tastee-core';
+import {ExtractTasteeCode} from 'tastee-html';
+import {Workspace} from 'app/models/workspace';
+import {FileService} from 'app/services/file.service';
 import * as  glob from 'glob';
 import * as fs from 'fs';
 import * as path from 'path';
-import { File } from 'app/models/file';
-import { environment } from '../../environments';
-import { SessionService } from 'app/services/session.service';
+import {File} from 'app/models/file';
+import {environment} from '../../environments';
+import {SessionService} from 'app/services/session.service';
+import {WkpEvent} from '../models/wkpEvent';
 
 
 @Injectable()
@@ -52,20 +50,26 @@ export class TasteeService {
   }
 
   startTastee() {
-    this.core.init(new TasteeEngine(this.sessionService.getSession().browser))
+    this.core.init(new TasteeEngine(this.sessionService.getSession().browser));
   }
 
-  runTasteeLine(line: string, pathToAnalyse: string): any {
+  runTasteeLine(line: string, pathToAnalyse: string): Promise<WkpEvent> {
+    const event = new WkpEvent();
+    event.title = line;
     if (!this._managePlugin([line], pathToAnalyse)) {
-      return this._runTasteeCode([line], pathToAnalyse);
+      return this._runTasteeCode([line], pathToAnalyse).then(result => {
+        event.message = result[0].valid ? 'OK' : result[0].errorMessage;
+        event.imgURL = result[0].valid ? './assets/tastee.png' : './assets/fail.png';
+        return event;
+      })
     }
-    return 'Plugin Added'
+    event.message =  'Plugin Added';
+    event.imgURL = './assets/tastee.png';
+    return Promise.resolve(event);
   }
 
   private _runTasteeCode(data: Array<String>, pathToAnalyse?: string): any {
-    return this.core.execute(data.join('\n'), pathToAnalyse).then(result => {
-      return {name: pathToAnalyse, instructions: result}
-    });
+    return this.core.execute(data.join('\n'), pathToAnalyse);
   }
 
   private _managePlugin(data: Array<String>, pathToAnalyse: string): boolean {
