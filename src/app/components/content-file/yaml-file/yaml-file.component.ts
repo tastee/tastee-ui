@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {File} from 'app/models/file';
-import {FileService} from 'app/services/file.service';
-import {WorkspaceService} from 'app/services/workspace.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { File } from 'app/models/file';
+import { FileService } from 'app/services/file.service';
+import { WorkspaceService } from 'app/services/workspace.service';
+import { WkpEvent } from 'app/models/wkpEvent';
 
 
 @Component({
@@ -12,9 +13,7 @@ import {WorkspaceService} from 'app/services/workspace.service';
 export class YamlFileComponent implements OnInit {
   @Input() file: File;
 
-  public isValidYamlFile: Boolean = false;
-  public errorMessage: string;
-  constructor(private workspaceService: WorkspaceService,
+  constructor(private _workspaceService: WorkspaceService,
     private fileService: FileService) { }
 
   ngOnInit() {
@@ -22,7 +21,13 @@ export class YamlFileComponent implements OnInit {
   }
 
   validateFile() {
-    this.errorMessage = this.fileService.validateYaml(this.file);
+    const errorMessage = this.fileService.validateYaml(this.file);
+    const event = new WkpEvent();
+    event.title = 'YAML Validator';
+    event.isError = errorMessage ? true : false;
+    event.message = !event.isError ? 'Your file is good' : errorMessage;
+    event.imgURL = !event.isError ? './assets/tastee.png' : './assets/fail.png';
+    this._workspaceService.addEvent(event);
   }
   saveData() {
     this.validateFile();
