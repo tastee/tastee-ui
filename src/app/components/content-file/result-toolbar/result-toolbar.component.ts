@@ -4,7 +4,8 @@ import {WkpEvent} from '../../../models/wkpEvent';
 
 @Component({
   selector: 'app-result-toolbar',
-  templateUrl: './result-toolbar.component.html'
+  templateUrl: './result-toolbar.component.html',
+  styleUrls: ['./result-toolbar.component.scss']
 })
 export class ResultToolbarComponent implements OnInit {
 

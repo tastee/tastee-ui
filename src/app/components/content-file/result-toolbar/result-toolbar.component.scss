@@ -1,0 +1,20 @@
+footer.results {
+  max-height: 25vh;
+  min-height: 25vh;
+}
+.eventList{
+  overflow-y: auto;
+  max-height: 25vh;
+  min-height: 25vh;
+}
+.event {
+  text-align: left;
+  margin-left: 20px;
+}
+.green{
+  color : #008000;
+}
+
+.red{
+  color : #FF0000;
+}

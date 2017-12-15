@@ -58,8 +58,9 @@ export class TasteeService {
     event.title = line;
     if (!this._managePlugin([line], pathToAnalyse)) {
       return this._runTasteeCode([line], pathToAnalyse).then(result => {
-        event.message = result[0].valid ? 'OK' : result[0].errorMessage;
-        event.imgURL = result[0].valid ? './assets/tastee.png' : './assets/fail.png';
+        event.isError =  !result[0].valid;
+        event.message =  !event.isError ? 'OK' : result[0].errorMessage;
+        event.imgURL =  !event.isError ? './assets/tastee.png' : './assets/fail.png';
         return event;
       })
     }
