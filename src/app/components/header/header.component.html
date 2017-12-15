@@ -7,12 +7,12 @@
         <span class="icon icon-folder"></span>
         <input #fileBtn id="fileBtn" type="file" webkitdirectory directory (change)="openWorkspace($event.target.files)">
       </button>
-      <button class="btn btn-large btn-default" *ngIf="_workspaceIsSelected" (click)="saveWorkspace()">
+      <button class="btn btn-large btn-default" *ngIf="workspaceIsSelected" (click)="saveWorkspace()">
         <span class="icon icon-floppy"></span>
       </button>
     </div>
 
-    <app-files-toolbar [workspace]=workspace *ngIf="_displayTreeAction"></app-files-toolbar>
+    <app-files-toolbar [workspace]=workspace *ngIf="displayTreeAction"></app-files-toolbar>
 
     <app-wysiwyg-toolbar *ngIf="this.isEditingTastee" class="wysiwyg"></app-wysiwyg-toolbar>
 
