@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {TasteeAnalyser, TasteeCore, TasteeEngine, TasteeReporter} from 'tastee-core';
-import {ExtractTasteeCode} from 'tastee-html';
-import {Workspace} from 'app/models/workspace';
-import {FileService} from 'app/services/file.service';
+import { TasteeAnalyser, TasteeCore, TasteeEngine, TasteeReporter } from 'tastee-core';
+import { ExtractTasteeCode } from 'tastee-html';
+import { Workspace } from 'app/models/workspace';
+import { FileService } from 'app/services/file.service';
 import * as  glob from 'glob';
 import * as fs from 'fs';
 import * as path from 'path';
-import {File} from 'app/models/file';
-import {environment} from '../../environments';
-import {SessionService} from 'app/services/session.service';
-import {WkpEvent} from '../models/wkpEvent';
+import { File } from 'app/models/file';
+import { environment } from '../../environments';
+import { SessionService } from 'app/services/session.service';
+import { WkpEvent } from '../models/wkpEvent';
 
 
 @Injectable()
@@ -58,13 +58,13 @@ export class TasteeService {
     event.title = line;
     if (!this._managePlugin([line], pathToAnalyse)) {
       return this._runTasteeCode([line], pathToAnalyse).then(result => {
-        event.isError =  !result[0].valid;
-        event.message =  !event.isError ? 'OK' : result[0].errorMessage;
-        event.imgURL =  !event.isError ? './assets/tastee.png' : './assets/fail.png';
+        event.isError = !result[0].valid;
+        event.message = !event.isError ? 'OK' : result[0].errorMessage;
+        event.imgURL = !event.isError ? './assets/tastee.png' : './assets/fail.png';
         return event;
       })
     }
-    event.message =  'Plugin Added';
+    event.message = 'Plugin Added';
     event.imgURL = './assets/tastee.png';
     return Promise.resolve(event);
   }
@@ -78,17 +78,27 @@ export class TasteeService {
     let match;
     let pluginTreated = false;
     while (match = regex.exec(data.join('\n'))) {
-      if (path.isAbsolute(match[1])) {
-        this.core.addPluginFile(path)
-      } else {
-        const pathOfFile = path.join(path.dirname(pathToAnalyse), match[1]);
-        if (fs.existsSync(pathOfFile)) {
-          this.core.addPluginFile(pathOfFile)
-        }
+      switch (path.extname(match[1])) {
+        case environment.tastee_config_file_ext:
+          this.core.addPluginFile(this._getPathOfFile(pathToAnalyse, match[1]));
+          pluginTreated = true;
+          break;
+        case environment.tastee_properties_file_ext:
+          this.core.addParamFile(this._getPathOfFile(pathToAnalyse, match[1]));
+          break;
       }
-      pluginTreated = true;
     }
     return pluginTreated;
   }
 
+  _getPathOfFile(pathToAnalyse: string, pathFile: string): string {
+    if (path.isAbsolute(pathFile)) {
+      return pathFile;
+    } else {
+      const pathOfFile = path.join(path.dirname(pathToAnalyse), pathFile);
+      if (fs.existsSync(pathOfFile)) {
+        return pathOfFile;
+      }
+    }
+  }
 }

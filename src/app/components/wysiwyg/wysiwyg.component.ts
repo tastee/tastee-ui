@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {WorkspaceService} from '../../services/workspace.service';
-import {TasteeService} from '../../services/tastee.service';
-import {File} from '../../models/file';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { WorkspaceService } from '../../services/workspace.service';
+import { TasteeService } from '../../services/tastee.service';
+import { File } from '../../models/file';
 
 @Component({
   selector: 'app-wysiwyg',
@@ -19,7 +19,7 @@ export class WysiwygComponent implements OnInit {
 
 
   constructor(private _workspaceService: WorkspaceService,
-              private _tasteeService: TasteeService) { }
+    private _tasteeService: TasteeService) { }
 
   ngOnInit() {
     this._workspaceService.onAction().subscribe(action => this._execute(action))
