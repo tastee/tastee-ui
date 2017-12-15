@@ -1,9 +1,9 @@
 <div class="btn-group">
 
-  <button class="btn btn-large btn-positive" (click)="launchTasteeAction('startTastee')">
+  <button class="btn btn-large btn-positive" [class.active]="this.isbrowserLaunched" (click)="launchTasteeAction('startTastee')">
     <span class="icon icon-play"></span>
   </button>
-  <button class="btn btn-large btn-negative" (click)="launchTasteeAction('stopTastee')">
+  <button class="btn btn-large btn-negative" [class.active]="!this.isbrowserLaunched" (click)="launchTasteeAction('stopTastee')">
     <span class="icon icon-stop"></span>
   </button>
   <button class="btn btn-large btn-default" (click)="launchTasteeAction('runTastee')">

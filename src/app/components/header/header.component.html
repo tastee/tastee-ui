@@ -14,7 +14,7 @@
 
     <app-files-toolbar [workspace]=workspace *ngIf="_displayTreeAction"></app-files-toolbar>
 
-    <app-wysiwyg-toolbar class="wysiwyg"></app-wysiwyg-toolbar>
+    <app-wysiwyg-toolbar *ngIf="this.isEditingTastee" class="wysiwyg"></app-wysiwyg-toolbar>
 
     <app-tastee-toolbar class="pull-right"></app-tastee-toolbar>
 

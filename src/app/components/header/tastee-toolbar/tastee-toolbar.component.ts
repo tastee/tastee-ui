@@ -7,15 +7,23 @@ import {WorkspaceService} from '../../../services/workspace.service';
 })
 export class TasteeToolbarComponent  {
 
+  isbrowserLaunched = false;
+
   constructor(private _workspaceService: WorkspaceService) { }
 
   launchTasteeAction(action: string) {
     switch (action) {
       case 'startTastee':
-        this._workspaceService.launchAction(action);
+        if (!this.isbrowserLaunched) {
+          this._workspaceService.launchAction(action);
+          this.isbrowserLaunched = true;
+        }
         break;
       case 'stopTastee':
-        this._workspaceService.launchAction(action);
+        if (this.isbrowserLaunched) {
+          this._workspaceService.launchAction(action);
+          this.isbrowserLaunched = false;
+        }
         break;
       default:
         this._workspaceService.launchAction(action);

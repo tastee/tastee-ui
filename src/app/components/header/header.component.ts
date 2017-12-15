@@ -12,8 +12,9 @@ import {SimpleChange} from '@angular/core/src/change_detection/change_detection_
 export class HeaderComponent implements OnChanges {
   @Input() public workspace: Workspace;
 
-  public _workspaceIsSelected: Boolean = false;
-  public _displayTreeAction: Boolean = false;
+  public workspaceIsSelected = false;
+  public displayTreeAction = false;
+  public isEditingTastee = false;
 
   constructor(
     private fileService: FileService,
@@ -21,9 +22,12 @@ export class HeaderComponent implements OnChanges {
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    this._workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
+    this.workspaceIsSelected = this.workspaceService.getWorkspace() !== null;
     if (this.workspace && this.workspace.selectedFileInTree) {
-      this._displayTreeAction = true
+      this.displayTreeAction = true
+    }
+    if (this.workspace && this.workspace.displayedFile) {
+      this.isEditingTastee = this.fileService.isTasteeFile(this.workspace.displayedFile);
     }
   }
 
