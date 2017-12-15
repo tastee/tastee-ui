@@ -1,6 +1,6 @@
 {
   "name": "tastee-ui",
-  "version": "2.2.0",
+  "version": "0.9.0",
   "description": "UI For TASTEE",
   "homepage": "https://github.com/tastee/tastee-ui",
   "keywords": [
@@ -8,7 +8,9 @@
     "angular 5",
     "electron",
     "typescript",
-    "sass"
+    "sass",
+    "test",
+    "tastee"
   ],
   "main": "main.js",
   "private": true,
@@ -51,8 +53,8 @@
     "phantomjs-prebuilt": "^2.1.16",
     "rimraf": "^2.6.2",
     "rxjs": "5.5.2",
-    "tastee-core": "git+https://github.com/tastee/tastee-core.git",
-    "tastee-html": "git+https://github.com/tastee/tastee-html.git",
+    "tastee-core": "0.9.0",
+    "tastee-html": "0.9.0",
     "zone.js": "0.8.17"
   },
   "devDependencies": {
