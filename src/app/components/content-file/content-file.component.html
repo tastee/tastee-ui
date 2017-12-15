@@ -1,10 +1,10 @@
-<div *ngIf="isTasteeFile">
+<div *ngIf="_isTasteeFile">
   <app-tastee-file [file]=file></app-tastee-file>
 </div>
-<div *ngIf="isConfigFile">
-  <app-yaml-file [file]=file></app-yaml-file>
+<div *ngIf="_isYamlFile || _isPropertiesFile">
+  <app-config-file [file]=file [isYamlFile]=_isYamlFile></app-config-file>
 </div>
-<div *ngIf="isOtherFile">
+<div *ngIf="_isOtherFile">
   <h1>Not working in Tastee ...</h1>
 </div>
-<app-result-toolbar class="toolbar" *ngIf="isbrowserLaunched && isTasteeFile"></app-result-toolbar>
+<app-result-toolbar class="toolbar" *ngIf="_isbrowserLaunched && _isTasteeFile"></app-result-toolbar>

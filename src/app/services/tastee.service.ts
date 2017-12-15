@@ -84,6 +84,7 @@ export class TasteeService {
           pluginTreated = true;
           break;
         case environment.tastee_properties_file_ext:
+          console.log(this._getPathOfFile(pathToAnalyse, match[1]));
           this.core.addParamFile(this._getPathOfFile(pathToAnalyse, match[1]));
           break;
       }

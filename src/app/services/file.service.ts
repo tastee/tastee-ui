@@ -1,13 +1,13 @@
-import {Injectable} from '@angular/core';
-import {Workspace} from 'app/models/workspace';
+import { Injectable } from '@angular/core';
+import { Workspace } from 'app/models/workspace';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as tree from 'directory-tree';
 import * as mkdirp from 'mkdirp';
 import * as yaml from 'js-yaml';
 import * as rimraf from 'rimraf';
-import {File} from 'app/models/file';
-import {environment} from '../../environments';
+import { File } from 'app/models/file';
+import { environment } from '../../environments';
 
 
 @Injectable()
@@ -34,6 +34,12 @@ export class FileService {
     return false;
   }
 
+  isPropertiesFile(file: File) {
+    if (file && file.path) {
+      return path.extname(file.name) === environment.tastee_properties_file_ext;
+    }
+    return false;
+  }
   saveFile(file: File, data: string) {
     fs.writeFileSync(file.path, data);
   }

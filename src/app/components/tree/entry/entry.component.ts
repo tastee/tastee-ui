@@ -1,10 +1,10 @@
-import {Component, Input} from '@angular/core';
-import {WorkspaceService} from 'app/services/workspace.service';
-import {File} from 'app/models/file';
-import {FileService} from 'app/services/file.service';
-import {Workspace} from 'app/models/workspace';
-import {OnChanges} from '@angular/core/src/metadata/lifecycle_hooks';
-import {SimpleChange} from '@angular/core/src/change_detection/change_detection_util';
+import { Component, Input } from '@angular/core';
+import { WorkspaceService } from 'app/services/workspace.service';
+import { File } from 'app/models/file';
+import { FileService } from 'app/services/file.service';
+import { Workspace } from 'app/models/workspace';
+import { OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-entry',
@@ -73,5 +73,9 @@ export class EntryComponent implements OnChanges {
 
   isYamlFile() {
     return this.fileService.isConfigFile(this.child);
+  }
+
+  isPropertiesFile() {
+    return this.fileService.isPropertiesFile(this.child);
   }
 }
