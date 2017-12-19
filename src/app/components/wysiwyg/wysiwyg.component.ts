@@ -11,8 +11,11 @@ import { File } from '../../models/file';
 export class WysiwygComponent implements OnInit {
 
   _clickHandler = this.runTasteeLine.bind(this);
+
   isbrowserLaunched = false;
-  message: string;
+  textOverlay : string = null;
+  overlayRole= "";
+  overlayValue= "";
 
   @Input() file: File;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
@@ -37,28 +40,36 @@ export class WysiwygComponent implements OnInit {
     this.onChange.emit(innerHTML);
   }
 
-  private _execute(role) {
-    switch (role) {
-      case 'h1':
-      case 'h2':
-      case 'p':
-        document.execCommand('formatBlock', false, role);
-        break;
-      case 'pre':
-        this._formatTasteeCode();
-        break;
-      case 'startTastee':
-        this._startTastee();
-        break;
-      case 'stopTastee':
-        this._stopTastee();
-        break;
-      case 'runTastee':
-        this._runTastee();
-        break;
-      default:
-        document.execCommand(role, false, null);
-        break;
+  private _execute(role: string) {
+    let val = '';
+
+    if(role.startsWith('foreColor-')){
+      document.execCommand('foreColor', false, role.replace('foreColor-', ''));
+    } else {
+
+      switch (role) {
+        case 'h1':
+        case 'h2':
+        case 'p':
+        case 'div':
+          document.execCommand('formatBlock', false, role);
+          break;
+        case 'pre':
+          this._formatTasteeCode();
+          break;
+        case 'startTastee':
+          this._startTastee();
+          break;
+        case 'stopTastee':
+          this._stopTastee();
+          break;
+        case 'runTastee':
+          this._runTastee();
+          break;
+        default:
+          document.execCommand(role, false, null);
+          break;
+      }
     }
   }
 
