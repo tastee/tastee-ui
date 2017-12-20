@@ -60,7 +60,7 @@ export class WorkspaceService {
 
 
   public removeFileInWorkspace(file: File): Workspace {
-    const workspace = Workspace.copy(this.getWorkspace());
+    const workspace = this.getWorkspace();
     let index = workspace.openedFiles.findIndex(fileToRemove => fileToRemove.path === file.path);
     workspace.openedFiles = workspace.openedFiles.filter(fileToRemove => fileToRemove.path !== file.path);
     if (index >= workspace.openedFiles.length) {
@@ -68,7 +68,6 @@ export class WorkspaceService {
     }
     workspace.displayedFile = workspace.openedFiles[index];
     workspace.selectedFileInTree = workspace.openedFiles[index];
-
     return workspace;
   }
 }

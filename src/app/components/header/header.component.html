@@ -16,7 +16,7 @@
 
     <app-wysiwyg-toolbar *ngIf="this.isEditingTastee" class="wysiwyg"></app-wysiwyg-toolbar>
 
-    <app-tastee-toolbar class="pull-right"></app-tastee-toolbar>
+    <app-tastee-toolbar *ngIf="this.isEditingTastee" class="pull-right"></app-tastee-toolbar>
 
   </div>
 </header>

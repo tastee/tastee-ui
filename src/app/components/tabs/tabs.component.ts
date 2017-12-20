@@ -1,8 +1,8 @@
-import {Component, Input, OnChanges} from '@angular/core';
-import {WorkspaceService} from 'app/services/workspace.service';
-import {File} from 'app/models/file';
-import {Workspace} from 'app/models/workspace';
-import {SimpleChange} from '@angular/core/src/change_detection/change_detection_util';
+import { Component, Input, OnChanges } from '@angular/core';
+import { WorkspaceService } from 'app/services/workspace.service';
+import { File } from 'app/models/file';
+import { Workspace } from 'app/models/workspace';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-tabs',
@@ -23,7 +23,7 @@ export class TabsComponent implements OnChanges {
   }
   removeFile(file) {
     const workspace = this.workspaceService.removeFileInWorkspace(file);
-    this.workspaceService.updateWorkspace(workspace);
+    this.workspaceService.updateWorkspace(Workspace.copy(workspace));
   }
 
   activeThisTab(file) {
