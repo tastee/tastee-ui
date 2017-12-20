@@ -17,7 +17,7 @@
     ]
   },
   "linux": {
-    "icon": "dist/assets/icons/png/64x64.png",
+    "icon": "dist/assets/icons/png",
     "target": [
       "AppImage"
     ]
