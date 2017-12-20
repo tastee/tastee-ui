@@ -1,16 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { WorkspaceService } from '../../services/workspace.service';
 import { TasteeService } from '../../services/tastee.service';
 import { File } from '../../models/file';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-wysiwyg',
   templateUrl: './wysiwyg.component.html',
   styleUrls: ['./wysiwyg.component.scss']
 })
-export class WysiwygComponent implements OnInit {
+export class WysiwygComponent implements OnInit, OnDestroy {
 
   _clickHandler = this.runTasteeLine.bind(this);
+
+  subscription : Subscription;
 
   isbrowserLaunched = false;
   textOverlay : string = null;
@@ -25,7 +28,13 @@ export class WysiwygComponent implements OnInit {
     private _tasteeService: TasteeService) { }
 
   ngOnInit() {
-    this._workspaceService.onAction().subscribe(action => this._execute(action))
+    this.subscription = this._workspaceService.onAction().subscribe(action => this._execute(action))
+  }
+
+  ngOnDestroy() {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 
   runTasteeLine(event) {

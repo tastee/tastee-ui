@@ -50,6 +50,7 @@ export class TasteeService {
   }
 
   startTastee() {
+    console.log('STARTING Tastee ....');
     this.core.init(new TasteeEngine(this.sessionService.getSession().browser));
   }
 
