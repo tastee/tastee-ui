@@ -10,6 +10,7 @@ import { FileService } from 'app/services/file.service';
 export class TasteeFileComponent {
 
   @Input() file: File;
+  @Input() isbrowserLaunched=false;
 
   constructor(private fileService: FileService) { }
 

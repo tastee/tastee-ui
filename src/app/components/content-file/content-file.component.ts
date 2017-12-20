@@ -15,14 +15,13 @@ export class ContentFileComponent implements OnChanges {
 
   @Input() public workspace: Workspace;
 
-
-  public file: File;
+  file: File;
+  isbrowserLaunched: Boolean = false;
 
   private _isTasteeFile: Boolean = false;
   private _isYamlFile: Boolean = false;
   private _isPropertiesFile: Boolean = false;
   private _isOtherFile: Boolean = false;
-  private _isbrowserLaunched: Boolean = false;
 
   constructor(private _workspaceService: WorkspaceService,
     private _fileService: FileService) {
@@ -58,10 +57,10 @@ export class ContentFileComponent implements OnChanges {
   private _execute(role) {
     switch (role) {
       case 'startTastee':
-        this._isbrowserLaunched = true;
+        this.isbrowserLaunched = true;
         break;
       case 'stopTastee':
-        this._isbrowserLaunched = false;
+        this.isbrowserLaunched = false;
         this._workspaceService.addEvent(null);
         break;
       default:

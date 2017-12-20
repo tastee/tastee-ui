@@ -14,7 +14,7 @@ export class AppComponent implements OnDestroy {
   private subWorkspaceUpdated: Subscription;
   public workspace: Workspace;
 
-  constructor(public electronService: ElectronService, public workspaceService: WorkspaceService) {
+  constructor(public electronService: ElectronService, private _workspaceService: WorkspaceService) {
 
     if (electronService.isElectron()) {
       console.log('Mode electron');
@@ -25,9 +25,9 @@ export class AppComponent implements OnDestroy {
     } else {
       console.log('Mode web');
     }
-    this.workspace = this.workspaceService.getWorkspace();
-    this.subWorkspaceUpdated = this.workspaceService.workspaceUpdated().subscribe(workspace => {
-      this.workspace = workspace
+    this.workspace = this._workspaceService.getWorkspace();
+    this.subWorkspaceUpdated = this._workspaceService.workspaceUpdated().subscribe(workspace => {
+      this.workspace = workspace;
     });
   }
   openDocumentation() {

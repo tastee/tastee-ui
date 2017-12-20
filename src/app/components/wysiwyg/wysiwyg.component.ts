@@ -15,7 +15,8 @@ export class WysiwygComponent implements OnInit, OnDestroy {
 
   subscription : Subscription;
 
-  isbrowserLaunched = false;
+  @Input() isbrowserLaunched = false;
+
   textOverlay : string = null;
   overlayRole= "";
   overlayValue= "";
@@ -28,7 +29,8 @@ export class WysiwygComponent implements OnInit, OnDestroy {
     private _tasteeService: TasteeService) { }
 
   ngOnInit() {
-    this.subscription = this._workspaceService.onAction().subscribe(action => this._execute(action))
+    this.subscription = this._workspaceService.onAction().subscribe(action => this._execute(action));
+
   }
 
   ngOnDestroy() {
@@ -102,23 +104,24 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   private _startTastee() {
     this._tasteeService.startTastee();
     this.isbrowserLaunched = true;
-    this._updateTasteeCodeBoubleClickEvent();
+    this._updateTasteeCodeDoubleClickEvent();
   }
 
   private _stopTastee() {
     this._tasteeService.stopTastee();
     this.isbrowserLaunched = false;
-    this._removeTasteeCodeBoubleClickEvent();
+    this._removeTasteeCodeDoubleClickEvent();
   }
 
-  private _updateTasteeCodeBoubleClickEvent() {
+  private _updateTasteeCodeDoubleClickEvent() {
     const tasteeCode = document.querySelectorAll('#editor pre.tastee');
+    console.log("event : "+ tasteeCode.length);
     for (let i = 0; i < tasteeCode.length; ++i) {
       tasteeCode[i].addEventListener('dblclick', this._clickHandler);
     }
   }
 
-  private _removeTasteeCodeBoubleClickEvent() {
+  private _removeTasteeCodeDoubleClickEvent() {
     const tasteeCode = document.querySelectorAll('#editor pre.tastee');
     for (let i = 0; i < tasteeCode.length; ++i) {
       tasteeCode[i].removeEventListener('dblclick', this._clickHandler);

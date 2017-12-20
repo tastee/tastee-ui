@@ -15,15 +15,15 @@ export class TabsComponent implements OnChanges {
 
   @Input() public workspace: Workspace;
 
-  constructor(private workspaceService: WorkspaceService) {
+  constructor(private _workspaceService: WorkspaceService) {
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     this.files = this.workspace.openedFiles;
   }
   removeFile(file) {
-    const workspace = this.workspaceService.removeFileInWorkspace(file);
-    this.workspaceService.updateWorkspace(Workspace.copy(workspace));
+    const workspace = this._workspaceService.removeFileInWorkspace(file);
+    this._workspaceService.updateWorkspace(Workspace.copy(workspace));
   }
 
   activeThisTab(file) {
@@ -39,7 +39,7 @@ export class TabsComponent implements OnChanges {
       workspace.selectedFileInTree = file;
     }
     workspace.displayedFile = file;
-    this.workspaceService.updateWorkspace(workspace);
+    this._workspaceService.updateWorkspace(workspace);
   }
 
 }
