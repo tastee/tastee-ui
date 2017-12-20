@@ -1,3 +1,2 @@
 <textarea *ngIf="file" [ngClass]="{'yamlContent': isYamlFile, 'propertiesContent': !isYamlFile}" name='data' id='data' rows="20"
     (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
-<app-result-toolbar class="toolbar" *ngIf="isYamlFile"></app-result-toolbar>
