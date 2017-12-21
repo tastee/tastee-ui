@@ -243,8 +243,13 @@ module.exports = {
     "electron": "require('electron')",
     "buffer": "require('buffer')",
     "child_process": "require('child_process')",
+    "process": "require('process')",
     "crypto": "require('crypto')",
     "events": "require('events')",
+    "constants": "require('constants')",
+    "node-constants": "require('node-constants')",
+    "node-process": "require('node-process')",
+    "node-libs-browser":"require('node-libs-browser')",
     "fs": "require('fs')",
     "http": "require('http')",
     "https": "require('https')",
@@ -263,11 +268,11 @@ module.exports = {
     "zlib": "require('zlib')",
     "selenium-webdriver": "require('selenium-webdriver')",
     "rxjs": "require('rxjs')",
-    "directory-tree" : "require('directory-tree')",
-    "chromedriver" : "require('chromedriver')",
-    "geckodriver" : "require('geckodriver')",
-    "chrome": "require('selenium-webdriver/chrome')",
-    "firefox": "require('selenium-webdriver/firefox')"
+    "directory-tree": "require('directory-tree')",
+    "chromedriver": "require('chromedriver')",
+    "geckodriver": "require('geckodriver')",
+    "selenium-webdriver/chrome": "require('selenium-webdriver/chrome')",
+    "selenium-webdriver/firefox": "require('selenium-webdriver/firefox')"
   },
   "resolve": {
     "extensions": [
