@@ -31,7 +31,7 @@
     "electron:windows": "npm run build:prod && npx electron-builder build --windows",
     "electron:mac": "npm run build:prod && npx electron-builder build --mac",
     "test": "karma start ./karma.conf.js",
-    "pree2e": "webdriver-manager update --standalone false --gecko false --quiet && npm run build",
+    "pree2e": "webdriver-manager update --standalone false --gecko true --quiet && npm run build",
     "e2e": "protractor ./protractor.conf.js"
   },
   "dependencies": {
@@ -55,7 +55,8 @@
     "rxjs": "5.5.2",
     "tastee-core": "tastee/tastee-core",
     "tastee-html": "0.9.2",
-    "zone.js": "0.8.17"
+    "zone.js": "0.8.17",
+    "webdriver-manager": "12.0.6"
   },
   "devDependencies": {
     "@angular/cli": "1.5.3",
@@ -109,7 +110,6 @@
     "typescript": "2.4.2",
     "uglifyjs-webpack-plugin": "1.0.0",
     "url-loader": "0.6.2",
-    "webdriver-manager": "12.0.6",
     "webpack": "3.8.1",
     "webpack-concat-plugin": "1.4.0",
     "webpack-dev-server": "2.9.3"

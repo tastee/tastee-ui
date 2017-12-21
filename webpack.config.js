@@ -263,7 +263,11 @@ module.exports = {
     "zlib": "require('zlib')",
     "selenium-webdriver": "require('selenium-webdriver')",
     "rxjs": "require('rxjs')",
-    "directory-tree" : "require('directory-tree')"
+    "directory-tree" : "require('directory-tree')",
+    "chromedriver" : "require('chromedriver')",
+    "geckodriver" : "require('geckodriver')",
+    "chrome": "require('selenium-webdriver/chrome')",
+    "firefox": "require('selenium-webdriver/firefox')"
   },
   "resolve": {
     "extensions": [
