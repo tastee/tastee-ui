@@ -272,7 +272,8 @@ module.exports = {
     "chromedriver": "require('chromedriver')",
     "geckodriver": "require('geckodriver')",
     "selenium-webdriver/chrome": "require('selenium-webdriver/chrome')",
-    "selenium-webdriver/firefox": "require('selenium-webdriver/firefox')"
+    "selenium-webdriver/firefox": "require('selenium-webdriver/firefox')",
+    "fix-path":"require('fix-path')"
   },
   "resolve": {
     "extensions": [

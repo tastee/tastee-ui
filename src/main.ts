@@ -3,8 +3,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from 'environments';
+const fixPath = require('fix-path');
 
 if (environment.production) {
+  fixPath();
   enableProdMode();
 }
 
