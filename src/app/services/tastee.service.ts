@@ -18,6 +18,7 @@ export class TasteeService {
   core: TasteeCore;
 
   constructor(private fileService: FileService, private sessionService: SessionService) {
+    process.env['PATH'] = process.env['PATH'] + ':/usr/local/bin';
     this.core = new TasteeCore(new TasteeAnalyser());
   }
 
