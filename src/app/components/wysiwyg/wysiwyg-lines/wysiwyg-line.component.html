@@ -1,0 +1,5 @@
+<div *ngFor="let line of _lineToRun" class="lineToRun" [style.top.px]="line.top" (click)="runTasteeLine($event)">
+  <span class="hiddenLine" [innerHTML]="line.html">
+    
+  </span>
+</div>

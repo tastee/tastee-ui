@@ -1,3 +1,4 @@
 <div id="editparent">
+  <app-wysiwyg-line id="editorLines" [isbrowserLaunched]="isbrowserLaunched" [file]="file"></app-wysiwyg-line>
   <div id="editor" [class.executable]="isbrowserLaunched" contenteditable="true"  (input)="dataChanged($event.srcElement.innerHTML)" [innerHTML]="file.data"></div>
 </div>

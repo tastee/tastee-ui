@@ -31,6 +31,7 @@ import { ContentComponent } from './components/content/content.component';
 import { FilesToolbarComponent } from './components/header/files-toolbar/files-toolbar.component';
 import { ResultToolbarComponent } from './components/content-file/result-toolbar/result-toolbar.component';
 import { TasteeToolbarComponent } from './components/header/tastee-toolbar/tastee-toolbar.component';
+import { WysiwygLineComponent } from 'app/components/wysiwyg/wysiwyg-lines/wysiwyg-line.component';
 
 @NgModule({
   declarations: [
@@ -43,14 +44,15 @@ import { TasteeToolbarComponent } from './components/header/tastee-toolbar/taste
     ContentFileComponent,
     EntryComponent,
     WysiwygComponent,
+    WysiwygLineComponent,
+    WysiwygToolbarComponent,
     ConfigFileComponent,
     TasteeFileComponent,
     ParametersComponent,
-    WysiwygToolbarComponent,
     ContentComponent,
     ResultToolbarComponent,
     FilesToolbarComponent,
-    TasteeToolbarComponent
+    TasteeToolbarComponent,
   ],
   imports: [
     BrowserModule,

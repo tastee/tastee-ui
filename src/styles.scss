@@ -6,14 +6,6 @@ html, body {
   height: 100%;
 }
 
-.executable pre.tastee:before {
-  color : #008000;
-  content: '\e897 ';
-  font-family: photon-entypo;
-  font-size: 20px;
-  cursor: pointer;
-}
-
 #editor pre.tastee {
   margin-top: 0;
   margin-bottom: 0;

@@ -46,6 +46,7 @@ export class TasteeService {
 
 
   stopTastee() {
+    console.log('STOPING Tastee ....');
     this.core.stop();
   }
 

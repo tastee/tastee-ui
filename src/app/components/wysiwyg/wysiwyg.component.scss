@@ -1,10 +1,10 @@
-.content {
-    margin: 50px auto 0;
+#editparent {
+    display: flex;
+    flex-direction: row;
+    overflow:auto;
 }
 
 #editor {
-    resize:vertical;
-    overflow:auto;
     border:1px solid silver;
     border-radius:5px;
     min-height:100px;
@@ -12,11 +12,11 @@
     padding:1em;
     background: white;
     margin: 0 auto;
-    height: 89vh;
-    max-height: 89vh;
+    width:100%;
 }
 
-#editor.executable {
-  height: 60vh;
-  max-height: 60vh;
+#editorLines{
+    width: 20px;
+    background-color: #d1cfd1
 }
+

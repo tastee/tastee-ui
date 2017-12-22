@@ -32,6 +32,7 @@ export class WorkspaceService {
 
   updateWorkspace(workspace: Workspace) {
     this.workspace.next(workspace);
+    this.launchAction('stopTastee');
   }
 
   getWorkspace(): Workspace {
