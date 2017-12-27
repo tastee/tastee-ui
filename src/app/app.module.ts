@@ -32,6 +32,7 @@ import { FilesToolbarComponent } from './components/header/files-toolbar/files-t
 import { ResultToolbarComponent } from './components/content-file/result-toolbar/result-toolbar.component';
 import { TasteeToolbarComponent } from './components/header/tastee-toolbar/tastee-toolbar.component';
 import { WysiwygLineComponent } from 'app/components/wysiwyg/wysiwyg-lines/wysiwyg-line.component';
+import { ReversePipe } from 'app/providers/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { WysiwygLineComponent } from 'app/components/wysiwyg/wysiwyg-lines/wysiw
     ResultToolbarComponent,
     FilesToolbarComponent,
     TasteeToolbarComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
