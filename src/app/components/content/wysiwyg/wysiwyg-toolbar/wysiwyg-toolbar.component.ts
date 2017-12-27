@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {WorkspaceService} from '../../../services/workspace.service';
+import {WorkspaceService} from 'app/services/workspace.service';
 
 @Component({
   selector: 'app-wysiwyg-toolbar',

@@ -10,5 +10,8 @@
       <app-content-file *ngSwitchCase="'files'" [workspace]=workspace></app-content-file>
       <app-welcome *ngSwitchDefault></app-welcome>
     </div>
+    <div class="pane-sm sidebar" *ngIf="displayResults">
+      <app-result-toolbar></app-result-toolbar>
+    </div>
   </div>
 </div>

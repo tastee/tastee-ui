@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, OnDestroy, SimpleChanges, SimpleChange} from '@angular/core';
-import { WorkspaceService } from '../../../services/workspace.service';
+import { WorkspaceService } from 'app/services/workspace.service';
 import { Subscription } from 'rxjs/Subscription';
-import { TasteeService } from '../../../services/tastee.service';
-import { File } from '../../../models/file';
+import { TasteeService } from 'app/services/tastee.service';
+import { File } from 'app/models/file';
 
 @Component({
   selector: 'app-wysiwyg-line',

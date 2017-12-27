@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {WorkspaceService} from '../../../services/workspace.service';
-import {WkpEvent} from '../../../models/wkpEvent';
+import {WorkspaceService} from 'app/services/workspace.service';
+import {WkpEvent} from 'app/models/wkpEvent';
 
 @Component({
   selector: 'app-result-toolbar',

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
-import { WorkspaceService } from '../../services/workspace.service';
-import { File } from '../../models/file';
+import { WorkspaceService } from 'app/services/workspace.service';
+import { File } from 'app/models/file';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -10,9 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class WysiwygComponent implements OnInit, OnDestroy {
 
-  subscription : Subscription;
-
-  @Input() isbrowserLaunched = false;
+  isbrowserLaunched = false;
 
   textOverlay : string = null;
   overlayRole= "";
@@ -21,20 +19,19 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   @Input() file: File;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
+  private _subscription : Subscription;
 
   constructor(private _workspaceService: WorkspaceService) { }
 
   ngOnInit() {
-    this.subscription = this._workspaceService.onAction().subscribe(action => this._execute(action));
-
+    this._subscription = this._workspaceService.onAction().subscribe(action => this._execute(action));
   }
 
   ngOnDestroy() {
-    if(this.subscription){
-      this.subscription.unsubscribe();
+    if(this._subscription){
+      this._subscription.unsubscribe();
     }
   }
-
 
   dataChanged(innerHTML: string) {
     this.onChange.emit(innerHTML);
@@ -58,7 +55,12 @@ export class WysiwygComponent implements OnInit, OnDestroy {
           this._formatTasteeCode();
           break;
         case 'startTastee':
+          this.isbrowserLaunched = true;
+          break;
         case 'stopTastee':
+          this.isbrowserLaunched = false;
+          this._workspaceService.addEvent(null);
+          break;
         case 'runTastee':
         default:
           document.execCommand(role, false, null);

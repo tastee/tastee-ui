@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { WorkspaceService } from 'app/services/workspace.service';
 import { FileService } from 'app/services/file.service';
 import { File } from 'app/models/file';
 import { Workspace } from 'app/models/workspace';
@@ -16,20 +15,17 @@ export class ContentFileComponent implements OnChanges {
   @Input() public workspace: Workspace;
 
   file: File;
-  isbrowserLaunched: Boolean = false;
 
   private _isTasteeFile: Boolean = false;
   private _isYamlFile: Boolean = false;
   private _isPropertiesFile: Boolean = false;
   private _isOtherFile: Boolean = false;
 
-  constructor(private _workspaceService: WorkspaceService,
-    private _fileService: FileService) {
+  constructor(private _fileService: FileService) {
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     this._openFile(this.workspace);
-    this._workspaceService.onAction().subscribe(action => this._execute(action))
   }
 
   _openFile(workspace: Workspace) {
@@ -51,20 +47,6 @@ export class ContentFileComponent implements OnChanges {
       this._isOtherFile = false;
       this._isYamlFile = false;
       this._isPropertiesFile = false;
-    }
-  }
-
-  private _execute(role) {
-    switch (role) {
-      case 'startTastee':
-        this.isbrowserLaunched = true;
-        break;
-      case 'stopTastee':
-        this.isbrowserLaunched = false;
-        this._workspaceService.addEvent(null);
-        break;
-      default:
-        break;
     }
   }
 

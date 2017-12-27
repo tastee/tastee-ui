@@ -7,31 +7,31 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { TabsComponent } from './components/tabs/tabs.component';
+import { TabsComponent } from './components/content/tabs/tabs.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { ElectronService } from './providers/electron.service';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { TreeComponent } from './components/tree/tree.component';
+import { TreeComponent } from './components/content/tree/tree.component';
 import { WorkspaceService } from 'app/services/workspace.service';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { ContentFileComponent } from './components/content-file/content-file.component';
-import { EntryComponent } from './components/tree/entry/entry.component';
-import { WysiwygComponent } from './components/wysiwyg/wysiwyg.component';
-import { ConfigFileComponent } from './components/content-file/config-file/config-file.component';
-import { TasteeFileComponent } from './components/content-file/tastee-file/tastee-file.component';
-import { ParametersComponent } from './components/parameters/parameters.component';
+import { ContentFileComponent } from './components/content/content-file/content-file.component';
+import { EntryComponent } from './components/content/tree/entry/entry.component';
+import { WysiwygComponent } from './components/content/wysiwyg/wysiwyg.component';
+import { ConfigFileComponent } from './components/content/content-file/config-file/config-file.component';
+import { TasteeFileComponent } from './components/content/content-file/tastee-file/tastee-file.component';
+import { ParametersComponent } from './components/content/parameters/parameters.component';
 import { SessionService } from 'app/services/session.service';
 import { FileService } from './services/file.service';
 import { TasteeService } from './services/tastee.service';
-import { WysiwygToolbarComponent } from './components/wysiwyg/wysiwyg-toolbar/wysiwyg-toolbar.component';
+import { WysiwygToolbarComponent } from './components/content/wysiwyg/wysiwyg-toolbar/wysiwyg-toolbar.component';
 import { ContentComponent } from './components/content/content.component';
 import { FilesToolbarComponent } from './components/header/files-toolbar/files-toolbar.component';
-import { ResultToolbarComponent } from './components/content-file/result-toolbar/result-toolbar.component';
+import { ResultToolbarComponent } from './components/content/result-toolbar/result-toolbar.component';
 import { TasteeToolbarComponent } from './components/header/tastee-toolbar/tastee-toolbar.component';
-import { WysiwygLineComponent } from 'app/components/wysiwyg/wysiwyg-lines/wysiwyg-line.component';
+import { WysiwygLineComponent } from 'app/components/content/wysiwyg/wysiwyg-lines/wysiwyg-line.component';
 import { ReversePipe } from 'app/providers/reverse.pipe';
 
 @NgModule({

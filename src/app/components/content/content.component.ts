@@ -1,24 +1,45 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit, OnChanges, SimpleChange} from '@angular/core';
 import {Workspace} from 'app/models/workspace';
-import {OnChanges} from '@angular/core/src/metadata/lifecycle_hooks';
-import {SimpleChange} from '@angular/core/src/change_detection/change_detection_util';
+import { Subscription } from 'rxjs/Subscription';
+import { WorkspaceService } from 'app/services/workspace.service';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnChanges {
+export class ContentComponent implements OnInit, OnChanges {
 
   @Input() public workspace: Workspace;
-  public menuSelected: string = 'home';
+  menuSelected: string = 'home';
+  displayResults = false;
 
-  constructor() { }
+  private _subscription : Subscription;
 
-  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+  constructor(private _workspaceService: WorkspaceService) { }
+
+  ngOnInit(): void {
+    this._subscription = this._workspaceService.onAction().subscribe(action => this._toggleResults(action));
+  }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }): void  {
     if (this.workspace && this.workspace.menu) {
       this.menuSelected = this.workspace.menu;
     }
   }
 
+  ngOnDestroy(): void  {
+    if(this._subscription){
+      this._subscription.unsubscribe();
+    }
+  }
+
+  private _toggleResults(action: string): void {
+
+    if(this.displayResults){
+      this.displayResults = (action != 'stopTastee');
+    } else {
+      this.displayResults = (action == 'startTastee');
+    }
+  }
 }
