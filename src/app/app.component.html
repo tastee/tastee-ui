@@ -1,0 +1,25 @@
+<div class="window">
+  <app-header [workspace]=workspace></app-header>
+  <div class="window-content" *ngIf="workspace;else welcome">
+    <div class="pane-group">
+      <div class="pane-sm sidebar">
+        <app-menu [workspace]=workspace></app-menu>
+      </div>
+      <app-content class="pane main-content" [workspace]=workspace></app-content>
+    </div>
+  </div>
+  <footer class="toolbar toolbar-footer">
+
+  </footer>
+</div>
+
+<ng-template #welcome>
+  <img src='../assets/tastee.png'>
+  <div class="desc">
+    <h1> Welcome to Tastee !</h1>
+    <h3> 1. To start tasting, open new folder !</h3>
+    <h3> 2. If you need documentation, go to :
+      <a (click)="openDocumentation()">https://github.com/tastee/tastee-doc</a>
+    </h3>
+  </div>
+</ng-template>

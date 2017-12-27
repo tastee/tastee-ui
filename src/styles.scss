@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+}
+
+#editor pre.tastee {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  margin-left: 10px;
+  padding: 0;
+  line-height: 1.2em;
+}
+
+header .btn .icon {
+  font-size: 16px;
+}
+
+header .btn-large {
+  padding-top: 7px;
+  padding-bottom: 8px;
+}
+
+header .btn-centerlabel {
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+header .btn-centerlabelicon {
+  padding-top: 9px;
+  padding-bottom: 6px;
+}

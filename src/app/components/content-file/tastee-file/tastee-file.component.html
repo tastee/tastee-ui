@@ -1,0 +1,3 @@
+<div *ngIf="file" class="tasteeFile">
+  <app-wysiwyg [file]="file" [isbrowserLaunched]=isbrowserLaunched (onChange)="saveData($event)"></app-wysiwyg>
+</div>
