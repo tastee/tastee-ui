@@ -83,6 +83,7 @@
     "cross-env": "5.1.2",
     "css-loader": "0.28.7",
     "cssnano": "3.10.0",
+    "devtron": "^1.4.0",
     "electron": "1.7.10",
     "electron-builder": "19.49.0",
     "electron-reload": "1.2.2",
