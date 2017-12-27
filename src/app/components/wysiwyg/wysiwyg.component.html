@@ -2,4 +2,4 @@
     <app-wysiwyg-line id="editorLines" [isbrowserLaunched]="isbrowserLaunched" [file]="file"></app-wysiwyg-line>
     <div *ngIf="isbrowserLaunched" id="editor" class="executable" [innerHTML]="file.data"></div>
     <div *ngIf="!isbrowserLaunched" id="editor" contenteditable="true"  (input)="dataChanged($event.srcElement.innerHTML)" [innerHTML]="file.data"></div>
-  </div>
+</div>
