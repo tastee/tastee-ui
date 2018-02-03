@@ -61,9 +61,6 @@ export class EntryComponent implements OnChanges {
   displayFileInWorkspace(file: File) {
     const ws = Workspace.copy(this.workspace);
     ws.displayedFile = file;
-    if (ws.openedFiles.filter(pathInArray => pathInArray.path === file.path).length === 0) {
-      ws.openedFiles.push(file);
-    }
     this.workspaceService.updateWorkspace(ws);
   }
 

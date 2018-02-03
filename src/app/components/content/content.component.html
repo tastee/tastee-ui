@@ -5,8 +5,6 @@
     </div>
     <div class="pane">
       <app-parameters *ngSwitchCase="'parameters'"></app-parameters>
-
-      <app-tabs  *ngSwitchCase="'files'" [workspace]=workspace></app-tabs>      
       <app-content-file *ngSwitchCase="'files'" [workspace]=workspace></app-content-file>
       <app-welcome *ngSwitchDefault></app-welcome>
     </div>

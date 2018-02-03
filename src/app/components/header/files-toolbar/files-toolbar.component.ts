@@ -41,6 +41,5 @@ export class FilesToolbarComponent implements OnInit {
 
   deleteFile() {
     this.fileService.deleteFile(this.workspace.selectedFileInTree);
-    this.workspaceService.updateWorkspace(this.workspaceService.removeFileInWorkspace(this.workspace.selectedFileInTree));
   }
 }

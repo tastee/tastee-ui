@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnChanges, SimpleChange} from '@angular/core';
+import {Component, Input, OnInit, OnChanges, SimpleChange, OnDestroy} from '@angular/core';
 import {Workspace} from 'app/models/workspace';
 import { Subscription } from 'rxjs/Subscription';
 import { WorkspaceService } from 'app/services/workspace.service';
@@ -8,10 +8,10 @@ import { WorkspaceService } from 'app/services/workspace.service';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit, OnChanges {
+export class ContentComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() public workspace: Workspace;
-  menuSelected: string = 'home';
+  menuSelected = 'home';
   displayResults = false;
 
   private _subscription : Subscription;
@@ -37,9 +37,9 @@ export class ContentComponent implements OnInit, OnChanges {
   private _toggleResults(action: string): void {
 
     if(this.displayResults){
-      this.displayResults = (action != 'stopTastee');
+      this.displayResults = (action !== 'stopTastee');
     } else {
-      this.displayResults = (action == 'startTastee');
+      this.displayResults = (action === 'startTastee');
     }
   }
 }

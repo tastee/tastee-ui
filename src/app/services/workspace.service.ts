@@ -58,17 +58,4 @@ export class WorkspaceService {
   onEvent(): Observable<WkpEvent> {
     return this._events.asObservable();
   }
-
-
-  public removeFileInWorkspace(file: File): Workspace {
-    const workspace = this.getWorkspace();
-    let index = workspace.openedFiles.findIndex(fileToRemove => fileToRemove.path === file.path);
-    workspace.openedFiles = workspace.openedFiles.filter(fileToRemove => fileToRemove.path !== file.path);
-    if (index >= workspace.openedFiles.length) {
-      --index;
-    }
-    workspace.displayedFile = workspace.openedFiles[index];
-    workspace.selectedFileInTree = workspace.openedFiles[index];
-    return workspace;
-  }
 }
