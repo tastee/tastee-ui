@@ -62,6 +62,7 @@ export class EntryComponent implements OnChanges {
     const ws = Workspace.copy(this.workspace);
     ws.displayedFile = file;
     this.workspaceService.updateWorkspace(ws);
+    this.workspaceService.addEvent(null);
   }
 
   isCodeFile() {

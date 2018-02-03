@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
 import {FileService} from 'app/services/file.service';
 import {File} from 'app/models/file';
 import {Workspace} from 'app/models/workspace';
@@ -9,9 +9,9 @@ import {WorkspaceService} from '../../../services/workspace.service';
   templateUrl: './content-file.component.html',
   styleUrls: ['./content-file.component.scss']
 })
-export class ContentFileComponent implements OnInit {
+export class ContentFileComponent implements OnChanges {
 
-  workspace: Workspace;
+  @Input() workspace: Workspace;
 
   file: File;
 
@@ -20,14 +20,11 @@ export class ContentFileComponent implements OnInit {
   private _isPropertiesFile = false;
   private _isOtherFile = false;
 
-  constructor(private _fileService: FileService, private _workspaceService: WorkspaceService) {
+  constructor(private _fileService: FileService) {
   }
 
-  ngOnInit() {
-    this._workspaceService.workspaceUpdated().subscribe(workspace => {
-      this.workspace = workspace;
-      this._openFile();
-    });
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }): void  {
+    this._openFile();
   }
 
   saveData(event) {

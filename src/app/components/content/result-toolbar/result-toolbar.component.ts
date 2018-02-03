@@ -20,7 +20,7 @@ export class ResultToolbarComponent implements OnInit {
   private _manage(event: WkpEvent) {
     if (event) {
       this.events.push(event);
-    }else {
+    } else {
       this.events = [];
     }
   }
