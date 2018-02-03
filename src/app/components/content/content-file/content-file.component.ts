@@ -1,39 +1,47 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { FileService } from 'app/services/file.service';
-import { File } from 'app/models/file';
-import { Workspace } from 'app/models/workspace';
-import { TasteeService } from 'app/services/tastee.service';
-import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
+import {Component, OnInit} from '@angular/core';
+import {FileService} from 'app/services/file.service';
+import {File} from 'app/models/file';
+import {Workspace} from 'app/models/workspace';
+import {WorkspaceService} from '../../../services/workspace.service';
 
 @Component({
   selector: 'app-content-file',
   templateUrl: './content-file.component.html',
   styleUrls: ['./content-file.component.scss']
 })
-export class ContentFileComponent implements OnChanges {
+export class ContentFileComponent implements OnInit {
 
-  @Input() public workspace: Workspace;
+  workspace: Workspace;
 
   file: File;
 
-  private _isTasteeFile: Boolean = false;
-  private _isYamlFile: Boolean = false;
-  private _isPropertiesFile: Boolean = false;
-  private _isOtherFile: Boolean = false;
+  private _isTasteeFile = false;
+  private _isYamlFile = false;
+  private _isPropertiesFile = false;
+  private _isOtherFile = false;
 
-  constructor(private _fileService: FileService) {
+  constructor(private _fileService: FileService, private _workspaceService: WorkspaceService) {
   }
 
-  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    this._openFile(this.workspace);
+  ngOnInit() {
+    this._workspaceService.workspaceUpdated().subscribe(workspace => {
+      this.workspace = workspace;
+      this._openFile();
+    });
   }
 
-  _openFile(workspace: Workspace) {
-    if (workspace.displayedFile) {
+  saveData(event) {
+    if (this.file.path) {
+      this._fileService.saveFile(this.file, event);
+    }
+  }
+
+  _openFile() {
+    if (this.workspace.displayedFile) {
       this.file = new File();
-      this.file.path = workspace.displayedFile.path;
-      this.file.name = workspace.displayedFile.name;
-      this.file.type = workspace.displayedFile.type;
+      this.file.path = this.workspace.displayedFile.path;
+      this.file.name = this.workspace.displayedFile.name;
+      this.file.type = this.workspace.displayedFile.type;
       this._isTasteeFile = this._fileService.isTasteeFile(this.file);
       this._isYamlFile = this._fileService.isConfigFile(this.file);
       this._isPropertiesFile = this._fileService.isPropertiesFile(this.file);

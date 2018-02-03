@@ -14,7 +14,7 @@ export class ContentComponent implements OnInit, OnChanges, OnDestroy {
   menuSelected = 'home';
   displayResults = false;
 
-  private _subscription : Subscription;
+  private _subscription: Subscription;
 
   constructor(private _workspaceService: WorkspaceService) { }
 
@@ -29,14 +29,14 @@ export class ContentComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void  {
-    if(this._subscription){
+    if (this._subscription){
       this._subscription.unsubscribe();
     }
   }
 
   private _toggleResults(action: string): void {
 
-    if(this.displayResults){
+    if (this.displayResults){
       this.displayResults = (action !== 'stopTastee');
     } else {
       this.displayResults = (action === 'startTastee');

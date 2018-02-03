@@ -12,14 +12,10 @@ export class WysiwygComponent implements OnInit, OnDestroy {
 
   isbrowserLaunched = false;
 
-  textOverlay : string = null;
-  overlayRole= "";
-  overlayValue= "";
-
   @Input() file: File;
-  @Output() onChange: EventEmitter<any> = new EventEmitter();
+  @Output() onChange: EventEmitter<string> = new EventEmitter();
 
-  private _subscription : Subscription;
+  private _subscription: Subscription;
 
   constructor(private _workspaceService: WorkspaceService) { }
 
@@ -28,7 +24,7 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this._subscription){
+    if (this._subscription){
       this._subscription.unsubscribe();
     }
   }
@@ -38,9 +34,8 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   }
 
   private _execute(role: string) {
-    let val = '';
 
-    if(role.startsWith('foreColor-')){
+    if (role.startsWith('foreColor-')){
       document.execCommand('foreColor', false, role.replace('foreColor-', ''));
     } else {
 

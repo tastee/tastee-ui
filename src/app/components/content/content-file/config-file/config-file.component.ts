@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { File } from 'app/models/file';
 import { FileService } from 'app/services/file.service';
 import { WorkspaceService } from 'app/services/workspace.service';
@@ -13,6 +13,7 @@ import { WkpEvent } from 'app/models/wkpEvent';
 export class ConfigFileComponent implements OnInit {
   @Input() file: File;
   @Input() isYamlFile: Boolean;
+  @Output() onChange: EventEmitter<string> = new EventEmitter();
 
   constructor(private _workspaceService: WorkspaceService,
     private fileService: FileService) { }
@@ -34,8 +35,6 @@ export class ConfigFileComponent implements OnInit {
   }
   saveData() {
     this.validateFile();
-    if (this.file.path) {
-      this.fileService.saveFile(this.file, this.file.data);
-    }
+    this.onChange.emit(this.file.data);
   }
 }

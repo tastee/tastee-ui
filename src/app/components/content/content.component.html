@@ -5,7 +5,7 @@
     </div>
     <div class="pane">
       <app-parameters *ngSwitchCase="'parameters'"></app-parameters>
-      <app-content-file *ngSwitchCase="'files'" [workspace]=workspace></app-content-file>
+      <app-content-file *ngSwitchCase="'files'"></app-content-file>
       <app-welcome *ngSwitchDefault></app-welcome>
     </div>
     <div class="pane-sm sidebar" *ngIf="displayResults">

@@ -1,8 +1,8 @@
 <div *ngIf="_isTasteeFile">
-  <app-tastee-file [file]=file></app-tastee-file>
+  <app-tastee-file [file]=file (onChange)="saveData($event)"></app-tastee-file>
 </div>
 <div *ngIf="_isYamlFile || _isPropertiesFile" class="configEditor">
-  <app-config-file [file]=file [isYamlFile]=_isYamlFile></app-config-file>
+  <app-config-file [file]=file [isYamlFile]=_isYamlFile (onChange)="saveData($event)"></app-config-file>
 </div>
 <div *ngIf="_isOtherFile">
   <h1>Not supported in Tastee ...</h1>

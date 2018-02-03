@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { File } from 'app/models/file';
-import { FileService } from 'app/services/file.service';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {File} from 'app/models/file';
 
 @Component({
   selector: 'app-tastee-file',
@@ -10,12 +9,11 @@ import { FileService } from 'app/services/file.service';
 export class TasteeFileComponent {
 
   @Input() file: File;
+  @Output() onChange: EventEmitter<string> = new EventEmitter();
 
-  constructor(private fileService: FileService) { }
+  constructor() { }
 
   saveData(event) {
-    if (this.file.path) {
-      this.fileService.saveFile(this.file, event);
-    }
+    this.onChange.emit(event);
   }
 }
