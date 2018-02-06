@@ -64,11 +64,11 @@ export class WysiwygLineComponent implements OnInit, OnDestroy  {
   private _updateTasteeCodeDoubleClickEvent() {
     const tasteeCode = document.querySelectorAll('#editor pre.tastee');
     const editor = document.querySelector('#editor').getBoundingClientRect().top;
-    
+
     for (let i = 0; i < tasteeCode.length; ++i) {
-      let line = new LineToRun();
+      const line = new LineToRun();
       line.html = tasteeCode[i].innerHTML;
-      line.top = tasteeCode[i].getBoundingClientRect().top - (editor - 25);
+      line.top = tasteeCode[i].getBoundingClientRect().top - (editor);
       this._lineToRun.push(line);
     }
 
