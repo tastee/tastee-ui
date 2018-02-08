@@ -35,7 +35,7 @@ export class WysiwygComponent implements OnInit, OnDestroy {
 
   private _execute(role: string) {
 
-    if (role.startsWith('foreColor-')){
+    if (role.startsWith('foreColor-')) {
       document.execCommand('foreColor', false, role.replace('foreColor-', ''));
     } else {
 
@@ -62,6 +62,9 @@ export class WysiwygComponent implements OnInit, OnDestroy {
           break;
       }
     }
+
+    // returning focus to editor
+    document.getElementById('editor').focus();
   }
 
   private _formatTasteeCode() {
