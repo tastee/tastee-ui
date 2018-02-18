@@ -63,9 +63,7 @@ export class TasteeService {
       return this._runTasteeCode([line], pathToAnalyse).then(result => {
         event.isError = !result[0].valid;
         event.message = !event.isError ? 'OK' : result[0].errorMessage;
-        event.details = 'Trying to run resulting js command :<br/>' + result[0].command.split(';').join(';<br/>');
         event.imgURL = !event.isError ? './assets/tastee.png' : './assets/fail.png';
-        event.command = result[0].command;
         return event;
       })
     }

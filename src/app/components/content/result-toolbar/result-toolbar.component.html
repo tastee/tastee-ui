@@ -1,6 +1,4 @@
-<div class="pane sidebar" [class.pane-sm]="!fullwidth" [class.fullwidth]="fullwidth" *ngIf="events.length > 0">
-  <span class="icon icon-address" (click)="toggleFullwidth()" title="Toggle display"></span>
-  <span class="icon icon-code" (click)="getJavascriptContent()" title="Get Selenium Js code"></span>
+<div class="pane pane-sm sidebar" *ngIf="events.length > 0">
   <footer class="results">
 
     <ul class="list-group title eventList">
@@ -9,7 +7,6 @@
         <div class="media-body">
           <strong *ngIf="event.title" [title]="event.title" [class.green]="!event.isError" [class.red]="event.isError">{{event.title}}</strong>
           <p *ngIf="event.message" [title]="event.message" >{{event.message}}</p>
-          <p *ngIf="event.details" [title]="event.details" [innerHTML]="event.details"></p>
         </div>
       </li>
     </ul>

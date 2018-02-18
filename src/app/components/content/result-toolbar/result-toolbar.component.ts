@@ -1,4 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WorkspaceService} from 'app/services/workspace.service';
 import {WkpEvent} from 'app/models/wkpEvent';
 
@@ -11,26 +11,10 @@ export class ResultToolbarComponent implements OnInit {
 
   events: WkpEvent[] = [];
 
-  @HostBinding('class.fullwidth')  fullwidth = false;
-
   constructor(private _workspaceService: WorkspaceService) { }
 
   ngOnInit() {
     this._workspaceService.onEvent().subscribe(event => this._manage(event));
-  }
-
-  toggleFullwidth() {
-    this.fullwidth = !this.fullwidth;
-  }
-
-  getJavascriptContent(){
-    let content = '';
-    this.events.forEach(event => {
-      if (event.command) {
-        content = content + '\n' + event.command.split(';').join(';\n');
-      }
-    });
-    alert(content);
   }
 
   private _manage(event: WkpEvent) {
@@ -38,7 +22,6 @@ export class ResultToolbarComponent implements OnInit {
       this.events.push(event);
     } else {
       this.events = [];
-      this.fullwidth = false;
     }
   }
 }
