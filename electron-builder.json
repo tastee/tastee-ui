@@ -20,6 +20,7 @@
     "icon": "dist/assets/icons/png",
     "target": [
       "AppImage"
-    ]
+    ],
+    "category" : "Development"
   }
 }
