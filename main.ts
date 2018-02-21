@@ -1,7 +1,6 @@
 import { app, BrowserWindow, screen, remote } from 'electron';
 import * as path from 'path';
 
-require('electron-debug')({enabled: true, showDevTools: false});
 
 let win, serve;
 const args = process.argv.slice(1);

@@ -1,26 +1,26 @@
 {
-  "productName": "tastee-ui",
+  "productName": "angular-electron",
   "directories": {
     "app": "dist",
     "output": "app-builds"
   },
   "win": {
-    "icon": "dist/assets/icons/win/icon.ico",
+    "icon": "dist/favicon",
     "target": [
       "portable"
     ]
   },
   "mac": {
-    "icon": "dist/assets/icons/mac/icon.icns",
+    "icon": "dist/favicon",
     "target": [
       "dmg"
     ]
   },
   "linux": {
-    "icon": "dist/assets/icons/png",
+    "icon": "dist",
     "target": [
       "AppImage"
-    ],
-    "category" : "Development"
+    ]
   }
 }
+

@@ -1,7 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
 import {ElectronService} from './providers/electron.service';
-import {WorkspaceService} from 'app/services/workspace.service';
-import {Workspace} from 'app/models/workspace';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
@@ -9,12 +7,12 @@ import {Subscription} from 'rxjs/Subscription';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent /*implements OnDestroy*/ {
 
-  private subWorkspaceUpdated: Subscription;
-  public workspace: Workspace;
+  /*private subWorkspaceUpdated: Subscription;
+  public workspace: Workspace;*/
 
-  constructor(public electronService: ElectronService, private _workspaceService: WorkspaceService) {
+  constructor(public electronService: ElectronService/*, private _workspaceService: WorkspaceService*/) {
 
     if (electronService.isElectron()) {
       console.log('Mode electron');
@@ -25,15 +23,15 @@ export class AppComponent implements OnDestroy {
     } else {
       console.log('Mode web');
     }
-    this.workspace = this._workspaceService.getWorkspace();
+    /*this.workspace = this._workspaceService.getWorkspace();
     this.subWorkspaceUpdated = this._workspaceService.workspaceUpdated().subscribe(workspace => {
       this.workspace = workspace;
-    });
+    });*/
   }
-  openDocumentation() {
+  /*openDocumentation() {
     window.open('https://github.com/tastee/tastee-doc');
   }
   ngOnDestroy() {
     this.subWorkspaceUpdated.unsubscribe();
-  }
+  }*/
 }

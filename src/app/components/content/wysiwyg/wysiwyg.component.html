@@ -1,4 +1,0 @@
-<div id="editparent">
-    <app-wysiwyg-line id="editorLines" [isbrowserLaunched]="isbrowserLaunched" [file]="file"></app-wysiwyg-line>
-    <div [class.executable]="isbrowserLaunched" id="editor" [attr.contenteditable]="!isbrowserLaunched"  (input)="dataChanged($event.srcElement.innerHTML)" [innerHTML]="file.data"></div>
-</div>
