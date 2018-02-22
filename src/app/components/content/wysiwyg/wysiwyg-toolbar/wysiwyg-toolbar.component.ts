@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {WorkspaceService} from 'app/services/workspace.service';
+import {WorkspaceService} from '../../../../services/workspace.service';
 
 @Component({
   selector: 'app-wysiwyg-toolbar',
@@ -8,10 +8,10 @@ import {WorkspaceService} from 'app/services/workspace.service';
 })
 export class WysiwygToolbarComponent  {
 
-  foregroundColor = '#00000'; 
-  
-  @ViewChild('foregroundColorPicker') 
-  private foregroundColorPicker : ElementRef; 
+  foregroundColor = '#00000';
+
+  @ViewChild('foregroundColorPicker')
+  private foregroundColorPicker: ElementRef;
 
   constructor(private _workspaceService: WorkspaceService) { }
 
@@ -19,11 +19,11 @@ export class WysiwygToolbarComponent  {
     this._workspaceService.launchAction(action);
   }
 
-  openColorPicker(){
+  openColorPicker() {
     this.foregroundColorPicker.nativeElement.click();
   }
 
-  changeForeColor(){
+  changeForeColor() {
     this._workspaceService.launchAction(`foreColor-${this.foregroundColor}`);
   }
 

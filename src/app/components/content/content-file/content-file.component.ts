@@ -1,8 +1,7 @@
-import {Component, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
-import {FileService} from 'app/services/file.service';
-import {File} from 'app/models/file';
-import {Workspace} from 'app/models/workspace';
-import {WorkspaceService} from '../../../services/workspace.service';
+import {Component, Input, OnChanges, SimpleChange} from '@angular/core';
+import {FileService} from '../../../services/file.service';
+import {File} from '../../../models/file';
+import {Workspace} from '../../../models/workspace';
 
 @Component({
   selector: 'app-content-file',

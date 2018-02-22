@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments';
-import {Session} from 'app/models/session';
+import {Session} from '../models/session';
 
 @Injectable()
 export class SessionService {

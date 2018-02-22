@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { WorkspaceService } from 'app/services/workspace.service';
-import { Workspace } from 'app/models/workspace';
-import { FileService } from 'app/services/file.service';
+import { WorkspaceService } from '../../services/workspace.service';
+import { Workspace } from '../../models/workspace';
+import { FileService } from '../../services/file.service';
 import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({

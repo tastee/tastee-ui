@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {ElectronService} from './providers/electron.service';
-import {WorkspaceService} from 'app/services/workspace.service';
-import {Workspace} from 'app/models/workspace';
+import {WorkspaceService} from './services/workspace.service';
+import {Workspace} from './models/workspace';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({

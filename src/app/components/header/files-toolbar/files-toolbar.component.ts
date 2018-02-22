@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Workspace} from 'app/models/workspace';
-import {WorkspaceService} from 'app/services/workspace.service';
-import {File} from 'app/models/file';
-import {FileService} from 'app/services/file.service';
+import {Workspace} from '../../../models/workspace';
+import {WorkspaceService} from '../../../services/workspace.service';
+import {File} from '../../../models/file';
+import {FileService} from '../../../services/file.service';
 
 @Component({
   selector: 'app-files-toolbar',

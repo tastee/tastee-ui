@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
-import { WorkspaceService } from 'app/services/workspace.service';
-import { File } from 'app/models/file';
+import { WorkspaceService } from '../../../services/workspace.service';
+import { File } from '../../../models/file';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

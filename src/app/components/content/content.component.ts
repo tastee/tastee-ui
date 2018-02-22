@@ -1,7 +1,5 @@
-import {Component, Input, OnInit, OnChanges, SimpleChange, OnDestroy} from '@angular/core';
-import {Workspace} from 'app/models/workspace';
-import { Subscription } from 'rxjs/Subscription';
-import { WorkspaceService } from 'app/services/workspace.service';
+import {Component, Input, OnChanges, SimpleChange} from '@angular/core';
+import {Workspace} from '../../models/workspace';
 
 @Component({
   selector: 'app-content',

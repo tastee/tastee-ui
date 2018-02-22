@@ -1,4 +1,4 @@
-import {File} from 'app/models/file';
+import {File} from './file';
 
 export class Workspace {
     public workspacePath: string;

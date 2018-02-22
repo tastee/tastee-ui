@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Workspace} from 'app/models/workspace';
+import {Workspace} from '../models/workspace';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import {File} from 'app/models/file';
+import {File} from '../models/file';
 import {environment} from '../../environments';
 import {WkpEvent} from '../models/wkpEvent';
 

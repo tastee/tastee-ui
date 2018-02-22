@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Workspace } from 'app/models/workspace';
+import { Workspace } from '../models/workspace';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as tree from 'directory-tree';
 import * as mkdirp from 'mkdirp';
 import * as yaml from 'js-yaml';
 import * as rimraf from 'rimraf';
-import { File } from 'app/models/file';
+import { File } from '../models/file';
 import { environment } from '../../environments';
 
 

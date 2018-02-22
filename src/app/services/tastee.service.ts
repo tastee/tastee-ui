@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 
 import { TasteeAnalyser, TasteeCore, TasteeEngine, TasteeReporter } from 'tastee-core';
 import { ExtractTasteeCode } from 'tastee-html';
-import { Workspace } from 'app/models/workspace';
-import { FileService } from 'app/services/file.service';
+import { Workspace } from '../models/workspace';
+import { FileService } from '../services/file.service';
 import * as  glob from 'glob';
 import * as fs from 'fs';
 import * as path from 'path';
-import { File } from 'app/models/file';
+import { File } from '../models/file';
 import { environment } from '../../environments';
-import { SessionService } from 'app/services/session.service';
+import { SessionService } from '../services/session.service';
 import { WkpEvent } from '../models/wkpEvent';
 
 

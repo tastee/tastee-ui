@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {File} from 'app/models/file';
+import {File} from '../../../../models/file';
 
 @Component({
   selector: 'app-tastee-file',

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { File } from 'app/models/file';
-import { FileService } from 'app/services/file.service';
-import { WorkspaceService } from 'app/services/workspace.service';
-import { WkpEvent } from 'app/models/wkpEvent';
+import { File } from '../../../../models/file';
+import { FileService } from '../../../../services/file.service';
+import { WorkspaceService } from '../../../../services/workspace.service';
+import { WkpEvent } from '../../../../models/wkpEvent';
 
 
 @Component({
