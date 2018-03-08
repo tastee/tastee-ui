@@ -36,6 +36,7 @@
     "e2e": "protractor ./protractor.conf.js"
   },
   "dependencies": {
+    "@ngtools/webpack": "^1.10.1",
     "browser": "0.2.6",
     "chromedriver": "2.34.0",
     "constants": "0.0.2",
