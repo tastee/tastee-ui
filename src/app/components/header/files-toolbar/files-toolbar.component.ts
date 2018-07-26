@@ -12,7 +12,7 @@ import {FileService} from '../../../services/file.service';
 export class FilesToolbarComponent implements OnInit {
 
   @Input() private workspace: Workspace;
-  private _displayForm: Boolean = false;
+  _displayForm: Boolean = false;
   private _file: File;
   constructor(
     private workspaceService: WorkspaceService,

@@ -2,11 +2,9 @@ import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
-import { environment } from 'environments';
-const fixPath = require('fix-path');
+import { AppConfig } from './environments/environment';
 
-if (environment.production) {
-  fixPath();
+if (AppConfig.production) {
   enableProdMode();
 }
 

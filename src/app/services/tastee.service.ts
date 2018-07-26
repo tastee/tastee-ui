@@ -8,7 +8,7 @@ import * as  glob from 'glob';
 import * as fs from 'fs';
 import * as path from 'path';
 import { File } from '../models/file';
-import { environment } from '../../environments';
+import { AppConfig } from '../../environments/environment';
 import { SessionService } from '../services/session.service';
 import { WkpEvent } from '../models/wkpEvent';
 
@@ -27,7 +27,7 @@ export class TasteeService {
   }
 
   runTasteeInWorkspace(workspace: Workspace): Promise<any> {
-    const files = glob.sync(path.join(workspace.workspacePath, '**', '*' + environment.tastee_file_ext))
+    const files = glob.sync(path.join(workspace.workspacePath, '**', '*' + AppConfig.tastee_file_ext))
     const promises = new Array<Promise<string[]>>();
 
     files.forEach(file => {
@@ -79,16 +79,16 @@ export class TasteeService {
   }
 
   private _managePlugin(data: Array<String>, pathToAnalyse: string): boolean {
-    const regex = environment.keyword_to_include_yaml_file;
+    const regex = AppConfig.keyword_to_include_yaml_file;
     let match;
     let pluginTreated = false;
     while (match = regex.exec(data.join('\n'))) {
       switch (path.extname(match[1])) {
-        case environment.tastee_config_file_ext:
+        case AppConfig.tastee_config_file_ext:
           this.core.addPluginFile(this._getPathOfFile(pathToAnalyse, match[1]));
           pluginTreated = true;
           break;
-        case environment.tastee_properties_file_ext:
+        case AppConfig.tastee_properties_file_ext:
           console.log(this._getPathOfFile(pathToAnalyse, match[1]));
           this.core.addParamFile(this._getPathOfFile(pathToAnalyse, match[1]));
           break;

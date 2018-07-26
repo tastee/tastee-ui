@@ -1,10 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Workspace} from '../models/workspace';
-import {Subject} from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/Rx';
-import {File} from '../models/file';
-import {environment} from '../../environments';
+import {Observable, Subject} from 'rxjs';
+import {AppConfig} from '../../environments/environment';
 import {WkpEvent} from '../models/wkpEvent';
 
 @Injectable()
@@ -16,7 +13,7 @@ export class WorkspaceService {
 
 
   constructor() {
-    this.workspace.next(JSON.parse(localStorage.getItem(environment.local_storage_worskpace_name)));
+    this.workspace.next(JSON.parse(localStorage.getItem(AppConfig.local_storage_worskpace_name)));
     this.workspaceUpdated().subscribe(workspace => this.saveWorkspace(workspace));
   }
 
@@ -36,11 +33,11 @@ export class WorkspaceService {
   }
 
   getWorkspace(): Workspace {
-    return JSON.parse(localStorage.getItem(environment.local_storage_worskpace_name));
+    return JSON.parse(localStorage.getItem(AppConfig.local_storage_worskpace_name));
   }
 
   saveWorkspace(workspace: Workspace) {
-    localStorage.setItem(environment.local_storage_worskpace_name, JSON.stringify(workspace));
+    localStorage.setItem(AppConfig.local_storage_worskpace_name, JSON.stringify(workspace));
   }
 
   launchAction(action: string) {

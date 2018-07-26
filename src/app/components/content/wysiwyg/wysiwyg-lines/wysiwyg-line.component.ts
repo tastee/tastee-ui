@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {WorkspaceService} from '../../../../services/workspace.service';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 import {TasteeService} from '../../../../services/tastee.service';
 import {File} from '../../../../models/file';
 
@@ -14,7 +14,7 @@ export class WysiwygLineComponent implements OnInit, OnDestroy  {
   @Input() isbrowserLaunched = false;
   @Input() file: File;
 
-  private _lineToRun : LineToRun[] = [];
+  _lineToRun : LineToRun[] = [];
   private _subscription : Subscription;
 
   constructor(private _workspaceService: WorkspaceService,

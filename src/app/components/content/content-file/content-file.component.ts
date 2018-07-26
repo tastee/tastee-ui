@@ -14,10 +14,10 @@ export class ContentFileComponent implements OnChanges {
 
   file: File;
 
-  private _isTasteeFile = false;
-  private _isYamlFile = false;
-  private _isPropertiesFile = false;
-  private _isOtherFile = false;
+  _isTasteeFile = false;
+  _isYamlFile = false;
+  _isPropertiesFile = false;
+  _isOtherFile = false;
 
   constructor(private _fileService: FileService) {
   }

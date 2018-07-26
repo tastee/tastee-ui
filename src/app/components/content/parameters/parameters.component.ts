@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Session} from '../../../models/session';
 import {SessionService} from '../../../services/session.service';
-import {environment} from 'environments';
+import {AppConfig} from 'environments/environment';
 
 @Component({
   selector: 'app-parameters',
@@ -14,7 +14,7 @@ export class ParametersComponent {
   public session: Session;
   public browsers: Array<string>;
   constructor(private sessionService: SessionService) {
-    this.browsers = environment.browsers;
+    this.browsers = AppConfig.browsers;
     this.session = this.sessionService.getSession();
   }
 

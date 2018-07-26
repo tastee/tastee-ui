@@ -7,7 +7,7 @@ import * as mkdirp from 'mkdirp';
 import * as yaml from 'js-yaml';
 import * as rimraf from 'rimraf';
 import { File } from '../models/file';
-import { environment } from '../../environments';
+import { AppConfig } from '../../environments/environment';
 
 
 @Injectable()
@@ -21,7 +21,7 @@ export class FileService {
 
   isTasteeFile(file: File) {
     if (file && file.path) {
-      return path.extname(file.name) === environment.tastee_file_ext;
+      return path.extname(file.name) === AppConfig.tastee_file_ext;
     }
     return false;
   }
@@ -29,14 +29,14 @@ export class FileService {
 
   isConfigFile(file: File) {
     if (file && file.path) {
-      return path.extname(file.name) === environment.tastee_config_file_ext;
+      return path.extname(file.name) === AppConfig.tastee_config_file_ext;
     }
     return false;
   }
 
   isPropertiesFile(file: File) {
     if (file && file.path) {
-      return path.extname(file.name) === environment.tastee_properties_file_ext;
+      return path.extname(file.name) === AppConfig.tastee_properties_file_ext;
     }
     return false;
   }

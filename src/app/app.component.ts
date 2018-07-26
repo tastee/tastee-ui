@@ -2,7 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {ElectronService} from './providers/electron.service';
 import {WorkspaceService} from './services/workspace.service';
 import {Workspace} from './models/workspace';
-import {Subscription} from 'rxjs/Subscription';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-root',
