@@ -8,6 +8,6 @@ export const AppConfig = {
   tastee_config_file_ext: '.yaml',
   tastee_properties_file_ext: '.properties',
   keyword_to_include_yaml_file: /\/\/savor\ (.*(.yaml|.properties))/g,
-  default_browser: 'firefox',
-  browsers: ['firefox', 'chrome']
+  default_browser: 'chrome',
+  browsers: ['chrome']
 };
