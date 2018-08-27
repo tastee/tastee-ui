@@ -2,9 +2,11 @@
   <app-header [workspace]=workspace></app-header>
   <div class="window-content" *ngIf="workspace;else welcome">
     <div class="pane-group">
+    <!--
       <div class="pane-sm sidebar">
         <app-menu [workspace]=workspace></app-menu>
       </div>
+    -->
       <app-content class="pane main-content" [workspace]=workspace></app-content>
     </div>
   </div>

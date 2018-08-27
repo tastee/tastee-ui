@@ -14,6 +14,7 @@ export class FilesToolbarComponent implements OnInit {
   @Input() private workspace: Workspace;
   _displayForm: Boolean = false;
   private _file: File;
+
   constructor(
     private workspaceService: WorkspaceService,
     private fileService: FileService) {
@@ -30,7 +31,7 @@ export class FilesToolbarComponent implements OnInit {
     } else {
       this._file.path = this.fileService.getParentDirectory(this.workspace.selectedFileInTree);
     }
-    this.fileService.createFile(this._file)
+    this.fileService.createFile(this._file);
     this.workspaceService.updateWorkspace(Workspace.copy(this.workspace));
   }
 

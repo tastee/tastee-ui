@@ -20,6 +20,7 @@ export class WorkspaceService {
   createNewWorkspace(path: string) {
     const workspace = new Workspace();
     workspace.workspacePath = path;
+    workspace.menu = 'files';
     this.workspace.next(workspace);
   }
 
@@ -41,7 +42,7 @@ export class WorkspaceService {
   }
 
   launchAction(action: string) {
-    this._actions.next(action)
+    this._actions.next(action);
   }
 
   onAction(): Observable<string> {
@@ -49,7 +50,7 @@ export class WorkspaceService {
   }
 
   addEvent(event: WkpEvent) {
-    this._events.next(event)
+    this._events.next(event);
   }
 
   onEvent(): Observable<WkpEvent> {
