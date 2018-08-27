@@ -1,2 +1,2 @@
 <textarea *ngIf="file" [ngClass]="{'yamlContent': isYamlFile, 'propertiesContent': !isYamlFile}" name='data' id='data' rows="20"
-    (focusout)="saveData()" [(ngModel)]='file.data'></textarea>
+    (focusout)="saveData()" [(ngModel)]='file.data' (keydown.Tab)="onTab($event);false"></textarea>

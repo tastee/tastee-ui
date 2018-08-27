@@ -22,6 +22,12 @@ export class ConfigFileComponent implements OnInit {
     this.validateFile();
   }
 
+  onTab(tabEvent) {
+    tabEvent.target.value = tabEvent.target.value.substring(0, tabEvent.target.selectionStart)
+      + '    ' + tabEvent.target.value.substring(tabEvent.target.selectionEnd, tabEvent.target.value.length);
+    tabEvent.target.setSelectionRange(tabEvent.target.selectionEnd, tabEvent.target.selectionEnd);
+  }
+
   validateFile() {
     if (this.isYamlFile) {
       const errorMessage = this.fileService.validateYaml(this.file);
