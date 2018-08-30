@@ -24,10 +24,10 @@ function createWindow() {
 
   if (serve) {
     require('electron-reload')(__dirname, {
-     electron: require(`${__dirname}/node_modules/electron`)});
+      electron: require(`${__dirname}/node_modules/electron`)
+    });
     win.loadURL('http://localhost:4200');
-
-  } else {
+  }  else {
     win.loadURL(url.format({
       pathname: path.join(__dirname, 'dist/index.html'),
       protocol: 'file:',
@@ -42,6 +42,7 @@ function createWindow() {
     // when you should delete the corresponding element.
     win = null;
   });
+
 }
 
 try {
