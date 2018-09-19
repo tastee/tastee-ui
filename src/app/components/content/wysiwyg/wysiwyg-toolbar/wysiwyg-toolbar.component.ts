@@ -27,4 +27,17 @@ export class WysiwygToolbarComponent  {
     this._workspaceService.launchAction(`foreColor-${this.foregroundColor}`);
   }
 
+  openImageChooser(files) {
+
+    if (files && files[0]) {
+      const reader = new FileReader();
+      const ws = this._workspaceService;
+
+      reader.onload = function (e) {
+        ws.launchAction(`insertimage-${reader.result}`);
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  }
+
 }

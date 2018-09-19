@@ -60,7 +60,7 @@ export class FileService {
     }
   }
   getFilesInWorkspace(workspace: Workspace) {
-    return tree(workspace.workspacePath)
+    return tree(workspace.workspacePath);
   }
 
   getParentDirectory(file: File): string {

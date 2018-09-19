@@ -37,6 +37,8 @@ export class WysiwygComponent implements OnInit, OnDestroy {
 
     if (role.startsWith('foreColor-')) {
       document.execCommand('foreColor', false, role.replace('foreColor-', ''));
+    } else if (role.startsWith('insertimage-')) {
+      document.execCommand('insertimage', false, role.replace('insertimage-', ''));
     } else {
 
       switch (role) {

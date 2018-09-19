@@ -42,6 +42,10 @@
 </div>
 <div class='btn-group'>
   <button class='btn btn-default btn-large' (click)="launchAction('insertHorizontalRule')"><i class='fas fa-minus'></i></button>
+  <button class="btn btn-large btn-default" (click)="imageBtn.click()">
+    <span class="fas fa-image"></span>
+    <input #imageBtn id="imageBtn" type="file" accept="image/gif, image/jpeg, image/png" (change)="openImageChooser($event.target.files)">
+  </button>
 </div>
 <div class='btn-group'>
   <button class="btn btn-default btn-large" (click)="launchAction('h1')">
@@ -52,7 +56,7 @@
     <sup>2</sup>
   </button>
   <button class="btn btn-default btn-large" (click)="launchAction('div')">p</button>
-  
+
   <button class="btn btn-default btn-large" (click)="launchAction('pre')">
     <span class="icon icon-code"></span>&nbsp;Tastee
   </button>
